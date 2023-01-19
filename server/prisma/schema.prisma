@@ -10,22 +10,22 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model companyuser {
-    id         Int      @default(autoincrement())
-    userId     String   @id
-    password   String
-    nickname   String   @unique
-    resistItem String[]
+model user {
+    id        Int            @unique @default(autoincrement())
+    userId    String         @id
+    password  String
+    nickname  String         @unique
+    Items     String[]
+    isCompany Boolean
+    Cart      shopping_bag[]
 }
 
-model personal_user {
-    id          Int      @default(autoincrement())
-    userId      String   @id
-    password    String
-    nickname    String   @unique
-    tokenAmount String
-    address     String
-    myItem      String[]
+model shopping_bag {
+    id        Int    @unique @default(autoincrement())
+    image_url String
+    price     Int
+    owner     user   @relation(fields: [userId], references: [id])
+    userId    Int
 }
 
 model luxury_goods {
@@ -57,12 +57,6 @@ model resell_selling {
     id        Int    @unique @default(autoincrement())
     image_url String
     content   String
-    price     Int
-}
-
-model shopping_bag {
-    id        Int    @unique @default(autoincrement())
-    image_url String
     price     Int
 }
 

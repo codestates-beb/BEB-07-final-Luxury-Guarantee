@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { adminSignUp } = require('../controller/adminSignUp');
+const { companySignUp, userSignUp } = require('../controller/signUp');
 
 const { wpost } = require("../controller/wpost");
 const { postlist } = require("../controller/postlist");
@@ -15,6 +15,7 @@ router.post("/wpost", wpost);
 router.get("/postlist", postlist);
 router.get("/postdetail/:id", postdetail);
 router.get("/luxurydetail/:goodsId", luxurydetail);
-router.post("/newadmin", adminSignUp);
+router.post("/newcompany", companySignUp);
+router.post("/newuser", userSignUp)
 
 module.exports = router;
