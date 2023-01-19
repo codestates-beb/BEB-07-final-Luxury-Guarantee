@@ -22,7 +22,7 @@ const isNicknameExist = async (nickname) => {
 };
 
 module.exports = {
-    adminSignUp: async (req, res) => {
+    companySignUp: async (req, res) => {
         const { userId, password, nickname } = req.body;
 
         if (await isUserIdExist(userId)) {
@@ -40,19 +40,57 @@ module.exports = {
                     message: 'same nickname exist'
                 });
         }
-        const newAdminUser = await prisma.user.create({
+
+        const newCompanyUser = await prisma.user.create({
             data: {
                 userId: userId,
                 password: password,
                 nickname: nickname,
+                isCompany: true,
             },
         });
         return res.status(201).send({
             status: 'success',
             message: {
-                userId: newAdminUser.userId,
-                nickname: newAdminUser.nickname,
+                userId: newCompanyUser.userId,
+                nickname: newCompanyUser.nickname,
             }
         });
     },
+
+    userSignUp: async (req, res) => {
+        const { userId, password, nickname } = req.body;
+
+        if (await isUserIdExist(userId)) {
+            return res
+                .status(200)
+                .send({
+                    status: 'fail',
+                    message: 'same id exist'
+                });
+        } else if (await isNicknameExist(nickname)) {
+            return res
+                .status(200)
+                .send({
+                    status: 'fail',
+                    message: 'same nickname exist'
+                });
+        }
+
+        const newNomalUser = await prisma.user.create({
+            data: {
+                userId: userId,
+                password: password,
+                nickname: nickname,
+                isCompany: false,
+            },
+        });
+        return res.status(201).send({
+            status: 'success',
+            message: {
+                userId: newNomalUser.userId,
+                nickname: newNomalUser.nickname,
+            }
+        });
+    }
 };
