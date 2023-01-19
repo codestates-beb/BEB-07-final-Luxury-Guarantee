@@ -1,8 +1,8 @@
-const prisma = require("../prisma");
+const prisma = require("../prisma/prisma");
 
 module.exports = {
     postlist: async (req, res) => {
-        if(!req) return res.status(400).send("not request");
+        if (!req) return res.status(400).send("not request");
 
         const post = await prisma.posts.findMany({
 
