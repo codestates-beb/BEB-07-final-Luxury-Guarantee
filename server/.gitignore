@@ -1,4 +1,4 @@
 node_modules
-dev.db
 .DS_Store
 .env
+/prisma
