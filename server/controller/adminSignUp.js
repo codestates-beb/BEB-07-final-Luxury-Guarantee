@@ -1,7 +1,7 @@
 const prisma = require("../prisma/prisma");
 
 const isUserIdExist = async (userId) => {
-    const user = await prisma.companyuser.findMany({
+    const user = await prisma.user.findMany({
         where: {
             userId: userId,
         },
@@ -12,7 +12,7 @@ const isUserIdExist = async (userId) => {
 };
 
 const isNicknameExist = async (nickname) => {
-    const user = await prisma.companyuser.findMany({
+    const user = await prisma.user.findMany({
         where: {
             nickname: nickname,
         },
@@ -40,7 +40,7 @@ module.exports = {
                     message: 'same nickname exist'
                 });
         }
-        const newAdminUser = await prisma.companyuser.create({
+        const newAdminUser = await prisma.user.create({
             data: {
                 userId: userId,
                 password: password,
