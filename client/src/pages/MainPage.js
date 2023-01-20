@@ -6,7 +6,7 @@ const MainPage = () => {
     return (
         <div className='h-[808px] w-[1920px]'>
         
-        <img src={mainIMG} class="img-fluid" alt="none"/>
+        <img className='h-[808px] w-[1920px]' src={mainIMG}  alt="none"/>
         
         </div>
     );
