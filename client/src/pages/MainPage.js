@@ -1,10 +1,15 @@
 import React from 'react';
+import mainIMG from './img/main.jpg';
 
-const MainPage = () => {
+const MainPage = () => { 
 
     return (
-        <h1>메인 페이지</h1>
-    )
-}
+        <div className='h-[808px] w-[1920px]'>
+        
+        <img src={mainIMG} class="img-fluid" alt="none"/>
+        
+        </div>
+    );
+};
 
 export default MainPage;
