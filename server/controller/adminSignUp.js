@@ -23,7 +23,7 @@ const isNicknameExist = async (nickname) => {
 
 module.exports = {
     adminSignUp: async (req, res) => {
-        const { userId, password, nickname } = req.body;
+        const { userId, password, nickname, isCompany} = req.body;
 
         if (await isUserIdExist(userId)) {
             return res
@@ -45,6 +45,7 @@ module.exports = {
                 userId: userId,
                 password: password,
                 nickname: nickname,
+                isCompany: isCompany
             },
         });
         return res.status(201).send({
