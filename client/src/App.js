@@ -1,4 +1,4 @@
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import MainPage from './pages/MainPage';
 import NotFound from './components/NotFound';
 import AddToCart from "./pages/AddToCart";
@@ -20,7 +20,7 @@ import Footer from "./components/Footer"
 
 function App() {
   return (
-    <BrowserRouter>
+
     <div className="App min-w-[1300px]">
       <Header />
       <Routes>
@@ -41,9 +41,9 @@ function App() {
         <Route path='/signupmain' element={<SignupMain />}></Route>
         <Route path='/signupuser' element={<SignupUser />}></Route>
       </Routes>
-  <Footer />
+      <Footer />
     </div>
-    </BrowserRouter>
+
   );
 }
 
