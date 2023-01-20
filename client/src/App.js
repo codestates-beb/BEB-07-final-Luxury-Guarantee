@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import MainPage from './pages/MainPage';
 import NotFound from './components/NotFound';
 import AddToCart from "./pages/AddToCart";
@@ -15,10 +15,14 @@ import Recell from "./pages/Recell";
 import SignupCompany from "./pages/SignupCompany";
 import SignupUser from "./pages/SignupUser";
 import SignupMain from "./pages/SignupMain";
+import Header from "./components/Header";
+import Footer from "./components/Footer"
 
 function App() {
   return (
-    <div className="App">
+    <BrowserRouter>
+    <div className="App min-w-[1300px]">
+      <Header />
       <Routes>
         <Route path='/' element={<MainPage />}></Route>
         <Route path='/*' element={<NotFound />}></Route>
@@ -37,8 +41,9 @@ function App() {
         <Route path='/signupmain' element={<SignupMain />}></Route>
         <Route path='/signupuser' element={<SignupUser />}></Route>
       </Routes>
-
+  <Footer />
     </div>
+    </BrowserRouter>
   );
 }
 

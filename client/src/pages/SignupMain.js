@@ -3,8 +3,8 @@ import React from 'react';
 const SignupMain = () => {
 
     return (
-        <h1>SignupMain</h1>
-    )
-}
+        <div className='h-[280px]'></div>
+    );
+};
 
 export default SignupMain;
