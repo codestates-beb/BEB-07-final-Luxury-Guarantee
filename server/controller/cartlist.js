@@ -5,11 +5,14 @@ module.exports = {
         if(!req.params.id) {
             return res.status(400).send("no id");
         }
-        const users = await prisma.cart.findMany({
+        const users = await prisma.user.findUnique({
             where: {
-                userId:Number(req.params.id)
-            }
+                id:Number(req.params.id)
+            },
+            include: {
+                Cart: true
+            },
         })
-        return res.status(200).send(users);
+        return res.status(200).send(users.Cart);
     }
 }

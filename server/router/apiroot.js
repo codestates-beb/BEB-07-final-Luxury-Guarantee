@@ -11,6 +11,7 @@ const { resellsellingdetail } = require("../controller/resellsellingdetail");
 const { cart_add } = require("../controller/cart_add");
 const { cartlist } = require("../controller/cartlist");
 
+
 router.get("/", function (req, res) {
     return res.status(200).send("index router, hello world");
 });
