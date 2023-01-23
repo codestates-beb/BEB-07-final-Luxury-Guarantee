@@ -15,16 +15,11 @@ model user {
     userId    String   @id
     password  String
     nickname  String   @unique
-    Items     String[]
-    isCompany Boolean
+    tokenAmount Int
     address   String
-}
-
-model cart {
-    id        Int    @unique @default(autoincrement())
-    userId    Int
-    image_url String
-    price     Int
+    isCompany Boolean
+    Items     String[]
+    Cart      cart[]
 }
 
 model luxury_goods {
@@ -43,6 +38,9 @@ model luxury_goods {
     price       Int
     image_url   String
     description String
+    isResell    Boolean?   @default(false)
+    isSelling   Boolean?   @default(false)
+    incart      Boolean?   @default(false)
     owner       user      @relation(fields: [userId], references: [id])
     userId      Int
 }
