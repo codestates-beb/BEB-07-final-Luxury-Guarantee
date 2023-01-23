@@ -11,15 +11,20 @@ datasource db {
 }
 
 model user {
-    id           Int            @unique @default(autoincrement())
-    userId       String         @id
-    password     String
-    nickname     String         @unique
-    tokenAmount  Int
-    address      String
-    isCompany    Boolean
-    Items        luxury_goods[]
-    mypost       posts[]
+    id        Int      @unique @default(autoincrement())
+    userId    String   @id
+    password  String
+    nickname  String   @unique
+    Items     String[]
+    isCompany Boolean
+    address   String
+}
+
+model cart {
+    id        Int    @unique @default(autoincrement())
+    userId    Int
+    image_url String
+    price     Int
 }
 
 model luxury_goods {
