@@ -11,23 +11,19 @@ datasource db {
 }
 
 model user {
-    id        Int            @unique @default(autoincrement())
-    userId    String         @id
-    password  String
-    nickname  String         @unique
-    Items     String[]
-    isCompany Boolean
-}
-
-model cart {
-    id        Int    @unique @default(autoincrement())
-    userId    Int
-    image_url String
-    price     Int
+    id           Int            @unique @default(autoincrement())
+    userId       String         @id
+    password     String
+    nickname     String         @unique
+    tokenAmount  Int
+    address      String
+    isCompany    Boolean
+    Items        luxury_goods[]
+    mypost       posts[]
 }
 
 model luxury_goods {
-    id          Int    @unique @default(autoincrement())
+    id          Int       @unique @default(autoincrement())
     name        String
     serial      String
     brand       String
@@ -42,26 +38,16 @@ model luxury_goods {
     price       Int
     image_url   String
     description String
-}
-
-model luxury_selling {
-    id        Int    @unique @default(autoincrement())
-    image_url String
-    content   String
-    price     Int
-}
-
-model resell_selling {
-    id        Int    @unique @default(autoincrement())
-    image_url String
-    content   String
-    price     Int
+    owner       user      @relation(fields: [userId], references: [id])
+    userId      Int
 }
 
 model posts {
-    id        Int      @unique @default(autoincrement())
-    userId    String
+    id        Int        @unique @default(autoincrement())
+    cagetory  String
     title     String
     content   String
-    createdAt DateTime @default(now())
+    createdAt DateTime   @default(now())
+    userId    Int
+    owner     user       @relation(fields: [userId], references: [id])
 }
