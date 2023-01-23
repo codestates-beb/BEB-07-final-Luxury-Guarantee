@@ -18,8 +18,8 @@ model user {
     tokenAmount Int
     address   String
     isCompany Boolean
-    Items     String[]
-    Cart      cart[]
+    Items     luxury_goods[]
+    post      posts[]
 }
 
 model luxury_goods {
