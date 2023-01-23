@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { companySignUp, userSignUp } = require('../controller/signUp');
+const { signIn } = require('../controller/signIn');
 
 const { wpost } = require("../controller/wpost");
 const { postlist } = require("../controller/postlist");
@@ -26,5 +27,6 @@ router.post("/cart", cart_add);
 router.post("/newcompany", companySignUp);
 router.post("/newuser", userSignUp)
 router.post("/luxury_register", luxury_register);
+router.post('/signin', signIn);
 
 module.exports = router;
