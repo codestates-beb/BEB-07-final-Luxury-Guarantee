@@ -11,12 +11,13 @@ datasource db {
 }
 
 model user {
-    id        Int            @unique @default(autoincrement())
-    userId    String         @id
+    id        Int      @unique @default(autoincrement())
+    userId    String   @id
     password  String
-    nickname  String         @unique
+    nickname  String   @unique
     Items     String[]
     isCompany Boolean
+    address   String
 }
 
 model cart {
