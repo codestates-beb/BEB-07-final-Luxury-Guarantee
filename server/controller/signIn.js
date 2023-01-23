@@ -7,7 +7,6 @@ module.exports = {
                 userId: req.body.userId,
             },
         })
-        console.log(user)
         if (user.length === 0 || user[0].userId != req.body.userId) {
             return res
                 .status(200)
