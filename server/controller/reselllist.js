@@ -5,9 +5,10 @@ module.exports = {
         if (!req) {
             return res.status(400).send("no request");
         }
-        const resellgoods = await prisma.luxury_selling.findMany({
+        const resellgoods = await prisma.luxury_goods.findMany({
             where: {
-                isResell : true
+                isResell : true,
+                isSelling : true
             }
         })
         return res.status(200).send(resellgoods);

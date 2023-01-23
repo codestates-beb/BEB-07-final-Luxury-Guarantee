@@ -5,27 +5,30 @@ module.exports = {
         if(!req.body.name || !req.body.serial || !req.body.brand || !req.body.category || 
             !req.body.material || !req.body.designer || !req.body.madeCountry || !req.body.factory ||
             !req.body.totalSupply || !req.body.created_at || !req.body.season || !req.body.price ||
-            !req.body.image_url || !req.body.description) {
+            !req.body.image_url || !req.body.description || !req.body.userId) {
             return res.status(400).send("not enough entity");
         }
-        const item = await prisma.luxury_goods.create({
+        const item = await prisma.user.update({
+            where: { id: req.body.userId },
             data: {
-                name: req.body.name,
-                serial: req.body.serial,
-                brand: req.body.brand,
-                category: req.body.category,
-                material: req.body.material,
-                designer: req.body.designer,
-                madeCountry: req.body.madeCountry,
-                factory: req.body.factory,
-                totalSupply: req.body.totalSupply,
-                created_at: req.body.created_at,
-                owner: req.body.name,
-                season: req.body.season,
-                price: req.body.price,
-                image_url: req.body.image_url,
-                description: req.body.description
-
+                Items: {
+                    create: {
+                        name: req.body.name,
+                        serial: req.body.serial,
+                        brand: req.body.brand,
+                        category: req.body.category,
+                        material: req.body.material,
+                        designer: req.body.designer,
+                        madeCountry: req.body.madeCountry,
+                        factory: req.body.factory,
+                        totalSupply: req.body.totalSupply,
+                        created_at: req.body.created_at,
+                        season: req.body.season,
+                        price: req.body.price,
+                        image_url: req.body.image_url,
+                        description: req.body.description
+                    }
+                }
             }
         })
         return res.status(200).send("luxury register success");
