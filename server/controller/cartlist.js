@@ -13,6 +13,6 @@ module.exports = {
                 Cart: true
             },
         })
-        return res.status(200).send(users.Cart);
+        return res.status(200).send({items : users.Cart});
     }
 }

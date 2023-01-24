@@ -11,15 +11,25 @@ datasource db {
 }
 
 model user {
-    id        Int      @unique @default(autoincrement())
-    userId    String   @id
-    password  String
-    nickname  String   @unique
+    id          Int      @unique @default(autoincrement())
+    userId      String   @id
+    password    String
+    nickname    String   @unique
     tokenAmount Int
-    address   String
-    isCompany Boolean
-    Items     luxury_goods[]
-    post      posts[]
+    address     String
+    isCompany   Boolean
+    Items       luxury_goods[]
+    post        posts[]
+    Cart        cart[]
+}
+
+model cart {
+    id              Int      @unique @default(autoincrement())
+    goodsId         Int      @unique
+    image_url       String
+    price           Int
+    cartowner       user     @relation(fields: [userId], references: [id])
+    userId          Int
 }
 
 model luxury_goods {
@@ -40,7 +50,6 @@ model luxury_goods {
     description String
     isResell    Boolean?   @default(false)
     isSelling   Boolean?   @default(false)
-    incart      Boolean?   @default(false)
     owner       user      @relation(fields: [userId], references: [id])
     userId      Int
 }
