@@ -11,11 +11,11 @@ datasource db {
 }
 
 model user {
-    id          Int      @unique @default(autoincrement())
-    userId      String   @id
+    id          Int            @unique @default(autoincrement())
+    userId      String         @id @unique
     password    String
-    nickname    String   @unique
-    tokenAmount Int
+    nickname    String         @unique
+    tokenAmount Int?
     address     String
     isCompany   Boolean
     Items       luxury_goods[]
@@ -33,7 +33,7 @@ model cart {
 }
 
 model luxury_goods {
-    id          Int       @unique @default(autoincrement())
+    id          Int      @unique @default(autoincrement())
     name        String
     serial      String
     brand       String
@@ -50,16 +50,16 @@ model luxury_goods {
     description String
     isResell    Boolean?   @default(false)
     isSelling   Boolean?   @default(false)
-    owner       user      @relation(fields: [userId], references: [id])
+    owner       user       @relation(fields: [userId], references: [id])
     userId      Int
 }
 
 model posts {
-    id        Int        @unique @default(autoincrement())
+    id        Int      @unique @default(autoincrement())
     category  String
     title     String
     content   String
-    createdAt DateTime   @default(now())
+    createdAt DateTime @default(now())
     userId    Int
-    owner     user       @relation(fields: [userId], references: [id])
+    owner     user     @relation(fields: [userId], references: [id])
 }
