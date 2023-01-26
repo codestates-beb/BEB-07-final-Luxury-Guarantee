@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Category from '../pages/Category';
 
 const Header = () => {
   return (
@@ -21,9 +22,7 @@ const Header = () => {
       <ul className="category flex w-full justify-center whitespace-nowrap first-line: ">
   
         <li>
-          <Link to="/luxuryGallery" className="category-item text-white p-[30px] text-[30px]">
-            Brand
-          </Link>
+         <Category />
         </li>
        
        
