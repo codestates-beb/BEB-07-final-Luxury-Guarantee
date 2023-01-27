@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import MainPage from './pages/MainPage';
 import NotFound from './components/NotFound';
 import AddToCart from "./pages/AddToCart";
-import Category from "./pages/Category";
+import Category from "./components/Category";
 import Login from "./pages/Login";
 import LuxuryDetail from "./pages/LuxuryDetail";
 import LuxuryGallery from "./pages/LuxuryGallery";
