@@ -16,8 +16,7 @@ const Category = () => {
           </MenuHandler>
           <MenuList>
             <MenuItem className=" text-black text-[30px] mt-5 mb-5"><Link to="/LuxuryGallery">남성</Link></MenuItem>
-            <MenuItem className=" text-black text-[30px] mt-5 mb-5"><Link to="/LuxuryGallery">여성</Link></MenuItem>
-            <MenuItem className=" text-black text-[30px] mt-5 mb-5"><Link to="/LuxuryGallery">악세서리</Link></MenuItem>
+            <MenuItem className=" text-black text-[30px] mt-10 mb-5"><Link to="/LuxuryGallery">여성</Link></MenuItem>
           </MenuList>
         </Menu>
       );
