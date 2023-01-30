@@ -4,17 +4,25 @@ import { Link } from 'react-router-dom';
 const SignupMain = () => {
 
     return (
-        <div className='h-[200px] flex items-center gap-8 justify-center'>
+        <div className='h-[200px] flex items-center gap-8 justify-center mb-44 mt-32'>
             <div className='inline-flex items-center'>
             <Link to="/signupcompany">
-            <button type="button" class="py-4 px-6   text-black w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-full">
+
+            
+
+            <button type="button" class="py-10 px-12  bg-black hover:bg-black focus:ring-black focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-full">
+
                 Corporate Member
             </button>
             </Link>
             </div>
             <div className='inline-flex items-center'>
             <Link to="/signupuser">
-            <button type="button" class="py-4 px-6  bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-black w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-full">
+
+            
+
+            <button type="button" class="py-10 px-12  bg-black hover:bg-black focus:ring-black focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-full">
+
                 General Member
             </button>
             </Link>

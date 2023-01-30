@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const SignupCompany = () => {
 
     return (
-        <div className='flex justify-center mb-10'>
+        <div className='flex justify-center mb-10 mt-10'>
 
 <div class="flex flex-col max-w-md px-4 py-8 bg-white rounded-lg shadow dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10">
     <div class="self-center mb-2 text-xl font-light text-gray-800 sm:text-2xl dark:text-white">
@@ -22,21 +22,21 @@ const SignupCompany = () => {
         <form action="#">
             <div class="flex flex-col mb-2">
                 <div class=" relative ">
-                    <input type="text" id="create-account-companyname" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" name="CompanyName" placeholder="Company Name"/>
+                    <input type="text" id="create-account-companyname" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" name="CompanyName" placeholder="Company Name"/>
                     </div>
                     <div class=" relative mt-2">
-                        <input type="text" id="create-account-companynumber" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" name="CompanyNumber" placeholder="Company Number"/>
+                        <input type="text" id="create-account-companynumber" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" name="CompanyNumber" placeholder="Company Number"/>
                     </div>
                 </div>
                 <div class="flex gap-4 mb-2">
                     <div class=" relative ">
-                        <input type="email" id="create-account-email" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Email"/>
+                        <input type="email" id="create-account-email" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" placeholder="Email"/>
                         </div>
                        
                         </div>
                         <div class="flex flex-col mb-2">
                             <div class=" relative ">
-                                <input type="password" id="create-account-password" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="PassWord"/>
+                                <input type="password" id="create-account-password" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" placeholder="PassWord"/>
                                 </div>
                             </div>
                             <div class="flex w-full my-4">
