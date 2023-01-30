@@ -8,9 +8,13 @@ const SignupMain = () => {
             <div className='inline-flex items-center'>
             <Link to="/signupcompany">
 
+
             
 
             <button type="button" class="py-10 px-12  bg-black hover:bg-black focus:ring-black focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-full">
+
+
+            
 
                 Corporate Member
             </button>
@@ -19,9 +23,12 @@ const SignupMain = () => {
             <div className='inline-flex items-center'>
             <Link to="/signupuser">
 
+
             
 
             <button type="button" class="py-10 px-12  bg-black hover:bg-black focus:ring-black focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-full">
+
+            
 
                 General Member
             </button>

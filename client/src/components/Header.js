@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Category from '../pages/Category';
+import Category from './Category';
 
 const Header = () => {
   return (
