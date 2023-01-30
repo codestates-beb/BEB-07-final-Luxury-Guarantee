@@ -1,4 +1,6 @@
 const prisma = require("../prisma/prisma");
+const { createWallet } = require("../utils/wallet");
+
 
 const isUserIdExist = async (userId) => {
     const user = await prisma.user.findMany({
@@ -21,6 +23,8 @@ const isNicknameExist = async (nickname) => {
     return true;
 };
 
+
+
 module.exports = {
     companySignUp: async (req, res) => {
         const { userId, password, nickname } = req.body;
@@ -41,12 +45,14 @@ module.exports = {
                 });
         }
 
+        const address = await createWallet(password);
         const newCompanyUser = await prisma.user.create({
             data: {
                 userId: userId,
                 password: password,
                 nickname: nickname,
                 isCompany: true,
+                address: address,
             },
         });
         return res.status(201).send({
@@ -77,12 +83,14 @@ module.exports = {
                 });
         }
 
+        const address = await createWallet(password);
         const newNomalUser = await prisma.user.create({
             data: {
                 userId: userId,
                 password: password,
                 nickname: nickname,
                 isCompany: false,
+                address: address,
             },
         });
         return res.status(201).send({

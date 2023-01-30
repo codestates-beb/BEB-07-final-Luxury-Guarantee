@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Category from './Category';
 
 const Header = () => {
   return (
@@ -23,25 +24,23 @@ const Header = () => {
       <ul className="category flex w-full justify-center whitespace-nowrap first-line: ">
   
         <li>
-          <Link to="/post" className="category-item text-white p-[30px] text-[30px]">
-            Brand
-          </Link>
+         <Category />
         </li>
        
        
         <li>
-          <Link to="/market" className="category-item text-white p-[30px] text-[30px]">
+          <Link to="/Recell" className="category-item text-white p-[30px] text-[30px]">
             Resell
           </Link>
         </li>
     
         <li>
-          <Link to="/mypage" className="category-item text-white p-[30px] text-[30px]">
+          <Link to="/login" className="category-item text-white p-[30px] text-[30px]">
             Login
           </Link>
         </li>
         <li>
-          <Link to="/login" className="category-item text-white p-[30px] text-[30px]">
+          <Link to="/signupmain" className="category-item text-white p-[30px] text-[30px]">
             Membership
           </Link>
         </li>
