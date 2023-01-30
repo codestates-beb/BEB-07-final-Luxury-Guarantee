@@ -5,7 +5,7 @@ import Category from './Category';
 
 const Header = () => {
   return (
-    <div classNase="header relative h-[271px] w-[1920px] pt-[80px] bg-black">
+    <div className="header relative h-[271px] w-[1920px] pt-[80px] bg-black">
     <div className="logo absolute top-[30.27%] left-[4.84%] h-[119px] w-[153px] text-5xl font-normal text-white">
       <Link to="/">Luxury Guarantee</Link>
     </div>
@@ -18,9 +18,7 @@ const Header = () => {
         <span className="material-symbols-outlined absolute inset-y-0 my-auto h-9 text-4xl hover:cursor-pointer">
           search
         </span>
-        <Link rel="stylesheet" type='text/css' href='<FontAwesomeIcon icon="fa-thin fa-magnifying-glass'></Link>
       </div>
-      
       <ul className="category flex w-full justify-center whitespace-nowrap first-line: ">
   
         <li>
