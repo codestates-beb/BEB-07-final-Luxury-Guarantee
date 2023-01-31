@@ -12,6 +12,9 @@ const { cartadd } = require("../controller/cartadd");
 const { cartlist } = require("../controller/cartlist");
 const { reselllist } = require("../controller/reselllist");
 const { buy } = require("../controller/buy")
+const { mypage } = require("../controller/mypage");
+const { luxurylist } = require("../controller/luxurylist");
+const { addsell } = require("../controller/addsell");
 
 
 router.get("/", function (req, res) {
@@ -23,6 +26,8 @@ router.get("/postdetail/:id", postdetail);
 router.get("/luxurydetail/:goodsId", luxurydetail);
 router.get("/cart/:id", cartlist);
 router.get("/reselllist", reselllist);
+router.get("/mypage/:id", mypage);
+router.get("/luxurylist", luxurylist);
 router.post("/wpost", wpost);
 router.post("/cart", cartadd);
 router.post("/newcompany", companySignUp);
@@ -30,5 +35,6 @@ router.post("/newuser", userSignUp)
 router.post("/luxury_register", luxury_register);
 router.post("/buy",buy);
 router.post('/signin', signIn);
+router.post("/addsell", addsell);
 
 module.exports = router;
