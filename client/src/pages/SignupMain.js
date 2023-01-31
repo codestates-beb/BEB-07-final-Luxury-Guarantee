@@ -11,7 +11,7 @@ const SignupMain = () => {
 
             
 
-            <button type="button" class="py-10 px-12  bg-black hover:bg-black focus:ring-black focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-full">
+            <button type="button" className="py-10 px-12  bg-black hover:bg-black focus:ring-black focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-full">
 
 
             
@@ -26,7 +26,7 @@ const SignupMain = () => {
 
             
 
-            <button type="button" class="py-10 px-12  bg-black hover:bg-black focus:ring-black focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-full">
+            <button type="button" className="py-10 px-12  bg-black hover:bg-black focus:ring-black focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-full">
 
             
 
