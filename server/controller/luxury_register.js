@@ -11,6 +11,13 @@ module.exports = {
             !req.body.image_url || !req.body.description || !req.body.userId) {
             return res.status(400).send("not enough entity");
         }
+
+        const userss = await prisma.user.findUnique({
+            where: {id:req.body.userId}
+        });
+        let resell = false;
+        if(userss.isCompany == false) resell = true; 
+
         const item = await prisma.user.update({
             where: { id: req.body.userId },
             data: {
@@ -29,7 +36,8 @@ module.exports = {
                         season: req.body.season,
                         price: req.body.price,
                         image_url: req.body.image_url,
-                        description: req.body.description
+                        description: req.body.description,
+                        isResell: resell
                     }
                 }
             }
