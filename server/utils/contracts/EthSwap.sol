@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 contract EthSwap {
     ERC20 public token;
 
-    uint256 public rate = 100;
+    uint256 public rate = 10000;
 
     constructor(ERC20 _token) {
         token = _token;
