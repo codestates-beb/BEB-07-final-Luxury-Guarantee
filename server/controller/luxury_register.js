@@ -1,4 +1,7 @@
 const prisma = require("../prisma/prisma");
+const axios = require('axios');
+require("dotenv").config();
+const JWT = process.env.JWT;
 
 module.exports = {
     luxury_register: async (req, res) => {
@@ -31,6 +34,43 @@ module.exports = {
                 }
             }
         })
+
+        const data = JSON.stringify({
+            "pinataOptions": {
+                "cidVersion":1
+            },
+            "pinataMetadata": {
+                "name": req.body.serial
+            },
+            "pinataContent": {
+                "name" : req.body.name,
+                "brand" : req.body.brand,
+                "category" : req.body.category,
+                "material" : req.body.material,
+                "designer" : req.body.designer,
+                "madeCountry" : req.body.madeCountry,
+                "factory" : req.body.factory,
+                "totalSupply" : req.body.totalSupply,
+                "created_at" : req.body.created_at,
+                "season" : req.body.season,
+                "price" : req.body.price,
+                "image_url" : req.body.image_url,
+                "description" : req.body.description
+            }
+        });
+        const config = {
+            method: 'post',
+            url: 'https://api.pinata.cloud/pinning/pinJSONToIPFS',
+            headers: {
+                'Content-Type': 'application/json', 
+                'Authorization': JWT
+            },
+            data: data
+        };
+        const addconfig = await axios(config);
+        const url = `https://gateway.pinata.cloud/ipfs/${addconfig.data.IpfsHash}`;
+        console.log(url);
+
         return res.status(200).send("luxury register success");
     }
 }
