@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 contract LuxToken is ERC20 {
     string public _name = "LuxToken";
     string public _symbol = "LUX";
-    uint256 public _totalSupply = 5000 * (10**decimals());
+    uint256 public _totalSupply = 50000000000 * (10**decimals());
 
     constructor() ERC20(_name, _symbol) {
         _mint(msg.sender, _totalSupply);
