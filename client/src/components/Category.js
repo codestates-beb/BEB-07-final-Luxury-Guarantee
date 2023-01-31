@@ -12,12 +12,12 @@ const Category = () => {
     return (
         <Menu>
           <MenuHandler>
-            <Button variant="gradient" className=" text-white mr-6 text-[30px]">Brand</Button>
+            <Button variant="gradient" className=" text-white text-[30px]">Brand</Button>
           </MenuHandler>
           <MenuList>
-            <MenuItem className=" text-black text-[30px] mt-5 mb-5"><Link to="/LuxuryGallery">남성</Link></MenuItem>
-            <MenuItem className=" text-black text-[30px] mt-5 mb-5"><Link to="/LuxuryGallery">여성</Link></MenuItem>
-            <MenuItem className=" text-black text-[30px] mt-5 mb-5"><Link to="/LuxuryGallery">악세서리</Link></MenuItem>
+            <MenuItem className=" text-black text-[30px] mt-5 mb-5"><Link to="/LuxuryGallery">MAN</Link></MenuItem>
+            <MenuItem className=" text-black text-[30px] mt-5 mb-5"><Link to="/LuxuryGallery">WOMEN</Link></MenuItem>
+            <MenuItem className=" text-black text-[30px] mt-5 mb-5"><Link to="/LuxuryGallery">ACC</Link></MenuItem>
           </MenuList>
         </Menu>
       );
