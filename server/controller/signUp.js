@@ -1,5 +1,5 @@
 const prisma = require("../prisma/prisma");
-const { createWallet } = require("../utils/wallet");
+const { createWallet } = require("../utils/web3");
 
 
 const isUserIdExist = async (userId) => {
