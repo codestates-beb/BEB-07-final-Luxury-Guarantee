@@ -1,29 +1,18 @@
 import { BrowserRouter } from "react-router-dom";
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { Provider } from 'react-redux';
-import { applyMiddleware, legacy_createStore as createStore } from 'redux';
-import promiseMiddleware from 'redux-promise';
-import ReduxThunk from 'redux-thunk';
-import Reducer from './_reducers';
+import { RecoilRoot } from "recoil";
 
-const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore);
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
-ReactDOM.render(
-  <React.StrictMode>
-    <Provider 
-      store={createStoreWithMiddleware(Reducer, 
-          window.__REDUX_DEVTOOLS_EXTENSION__ &&
-          window.__REDUX_DEVTOOLS_EXTENSION__()
-        )}>
-      <BrowserRouter>    
+root.render(
+  <RecoilRoot>
+    <BrowserRouter>
       <App />
-      </BrowserRouter>
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
+    </BrowserRouter>
+  </RecoilRoot>
 );
 
 // If you want to start measuring performance in your app, pass a function
