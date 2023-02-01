@@ -7,5 +7,6 @@ export const status = atom({
     isSigned: false,
     address: '',
     userName: '',
+    isCompany: false
   }
 })

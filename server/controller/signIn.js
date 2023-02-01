@@ -22,6 +22,7 @@ module.exports = {
                 userId: user[0].userId,
                 nickname: user[0].nickname,
                 address: user[0].address,
+                isCompany: user[0].isCompany,
             }
         });
     },

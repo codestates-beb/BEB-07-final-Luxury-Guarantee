@@ -28,7 +28,7 @@ const Login = () => {
             .then(res => {
                 if (res.data.status === "failed") {
                     setAlertMessage('아이디 또는 패스워드를 잘못 입력하셨습니다.');
-                    console.log(res)
+
                 } else {
                     const signData = res.data.message;
                     signData['isSigned'] = true
