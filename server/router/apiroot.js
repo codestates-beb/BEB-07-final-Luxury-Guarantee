@@ -16,6 +16,7 @@ const { mypage } = require("../controller/mypage");
 const { luxurylist } = require("../controller/luxurylist");
 const { addsell } = require("../controller/addsell");
 
+const { getAccounts } = require('../utils/web3');
 
 router.get("/", function (req, res) {
     return res.status(200).send("index router, hello world");
@@ -28,12 +29,13 @@ router.get("/cart/:id", cartlist);
 router.get("/reselllist", reselllist);
 router.get("/mypage/:id", mypage);
 router.get("/luxurylist", luxurylist);
+router.get('/accounts', getAccounts);
 router.post("/wpost", wpost);
 router.post("/cart", cartadd);
 router.post("/newcompany", companySignUp);
 router.post("/newuser", userSignUp)
 router.post("/luxury_register", luxury_register);
-router.post("/buy",buy);
+router.post("/buy", buy);
 router.post('/signin', signIn);
 router.post("/addsell", addsell);
 
