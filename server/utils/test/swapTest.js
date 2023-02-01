@@ -18,7 +18,7 @@ contract('EthSwap', ([deployer, account1, account2]) => {
         });
         it('토큰 배포자의 기본 초기값 확인', async () => {
             const balance = await token.balanceOf(deployer);
-            assert.equal(balance.toString(), '5000000000000000000000');
+            assert.equal(balance.toString(), '50000000000000000000000000000');
 
             console.log('deployer EOA 토큰 밸런스 : ', balance.toString() / 10 ** 18);
         });
@@ -59,7 +59,7 @@ contract('EthSwap', ([deployer, account1, account2]) => {
             // token.transfer(to, 1000)
             // JwToken에 있는 transfer() 함수 실행해서 토큰 전송
             // 1 token == 1 wei (단위 맞춰줌)
-            await token.transfer(ethSwap.address, toEther('1000'));
+            await token.transfer(ethSwap.address, toEther('100000'));
             const balance = await token.balanceOf(ethSwap.address);
             const ownerBal = await token.balanceOf(deployer);
 
