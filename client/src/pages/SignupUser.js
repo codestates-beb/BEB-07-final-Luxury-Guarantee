@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useRecoilState } from 'recoil';
+import { status } from '../app/store';
+import axios from 'axios';
+import apiUrl from '../utils/api';
 //개인용 회원가입 페이지
-const SignupUser = (props) => {
-
-    const dispatch = useDispatch();
+const SignupUser = () => {
 
     const [Email, setEmail] = useState("");
     const [Name, setName] = useState("");
     const [Password, setPassword] = useState("");
     const [ConfirmPassword, setConfirmPassword] = useState("");
+    const [Signup, setSignup] = useRecoilState(status)
 
     const onEmailHandler = (event) => {
         setEmail(event.currentTarget.value);
@@ -23,29 +25,30 @@ const SignupUser = (props) => {
     const onConfirmPasswordHandler = (event) => {
         setConfirmPassword(event.currentTarget.value);
     }
-    const onSubmitHandler = (event) => {
-        event.preventDefault();
-
-        if (Password !== ConfirmPassword) {
-            return alert('비밀번호와 비밀번호 확인이 같지 않습니다.')
+    const onSubmitHandler = () => {
+        if(Password !== ConfirmPassword){
+            return alert("비밀번호가 다릅니다.")
         }
 
-        let body = {
-            email: Email,
-            name: Name,
-            password: Password,
-            confirmPassword: ConfirmPassword,
-        }
-
-        // dispatch(signupUser(body))
-        //     .then(response => {
-        //         if (response.payload.success) {
-        //             console.log(body)
-        //             props.history.push('/login')
-        //         } else {
-        //             alert('Error')
-        //         }
-        //     })
+        axios.post(`${apiUrl}/newuser`,{
+            userId: Email,
+            nickname: Name,
+            password: Password
+            
+        })
+            .then(res => {
+                console.log(res.data)
+                const signData = {
+                    userId: res.data.message.userId,
+                    address: res.data.message.address,
+                    nickname: res.data.message.nickname,
+                    isCompany: res.data.message.isCompany,
+                    isSigned: true
+                }
+                setSignup(() => signData)
+               sessionStorage.setItem('signData', JSON.stringify(signData))
+                document.location.href = '/'
+            })
     }
 
 
@@ -63,7 +66,6 @@ const SignupUser = (props) => {
                     </Link>
                 </span>
                 <div className="p-6 mt-2">
-                    <form onSubmit={onSubmitHandler}>
                         <div className="flex flex-col mb-2">
                             <div className=" relative ">
                                 <input type="text" value={Name} onChange={onNameHandler} id="create-account-username" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" name="username" placeholder="NickName" />
@@ -87,11 +89,10 @@ const SignupUser = (props) => {
                             </div>
                         </div>
                         <div className="flex w-full my-4">
-                            <button formAction='' type="submit" className="py-2 px-4  bg-black hover:bg-black focus:ring-black focus:ring-offset-black text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+                            <button onClick={onSubmitHandler} className="py-2 px-4  bg-black hover:bg-black focus:ring-black focus:ring-offset-black text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
                                 Login
                             </button>
                         </div>
-                    </form>
 
                 </div>
             </div>

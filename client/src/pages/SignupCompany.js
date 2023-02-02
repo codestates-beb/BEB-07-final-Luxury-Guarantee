@@ -1,9 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useRecoilState } from 'recoil';
+import apiUrl from '../utils/api';
 //기업용 회원가입 페이지
 
 //모달창으로 법적고지 설명하기 UI작업 종료후 기능구현때 구현하기.
 const SignupCompany = () => {
+
+    const [Email, setEmail] = useState("");
+    const [Name, setName] = useState("");
+    const [Password, setPassword] = useState("");
+    const [ConfirmPassword, setConfirmPassword] = useState("");
+    const [userSignup, setUserSignup] = useRecoilState(userSignup)
+
+    const onEmailHandler = (event) => {
+        setEmail(event.currentTarget.value);
+    }
+    const onNameHandler = (event) => {
+        setName(event.currentTarget.value);
+    }
+    const onPasswordHandler = (event) => {
+        setPassword(event.currentTarget.value);
+    }
+    const onConfirmPasswordHandler = (event) => {
+        setConfirmPassword(event.currentTarget.value);
+    }
+    const onSubmitHandler = () => {
+        if(Password !== ConfirmPassword){
+            return alert("비밀번호가 다릅니다.")
+        }
+
+        axios.post(`${apiUrl}/newuser`,{
+            userId: Email,
+            nickname: Name,
+            password: Password
+            
+        })
+            .then(res => {
+                console.log(res.data)
+               setUserSignup(() => userSignup)
+               sessionStorage.setItem('userSignup', JSON.stringify(userSignup))
+                document.location.href = '/'
+            })
+    }
 
     return (
         <div className='flex justify-center mb-10 mt-10'>
