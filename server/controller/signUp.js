@@ -1,6 +1,5 @@
 const prisma = require("../prisma/prisma");
-const { createWallet } = require("../utils/web3");
-
+const {LuxTokenContract, web3} = require("../web3s/web3");
 
 const isUserIdExist = async (userId) => {
     const user = await prisma.user.findMany({
@@ -23,8 +22,6 @@ const isNicknameExist = async (nickname) => {
     return true;
 };
 
-
-
 module.exports = {
     companySignUp: async (req, res) => {
         const { userId, password, nickname } = req.body;
@@ -45,7 +42,10 @@ module.exports = {
                 });
         }
 
-        const address = await createWallet(password);
+        const address = await web3.eth.personal.newAccount(password);
+        const ethers = web3.utils.fromWei(await web3.eth.getBalance(address), 'ether');
+        const tokens = await LuxTokenContract.methods.balanceOf(address).call();
+
         const newCompanyUser = await prisma.user.create({
             data: {
                 userId: userId,
@@ -53,6 +53,8 @@ module.exports = {
                 nickname: nickname,
                 isCompany: true,
                 address: address,
+                tokenAmount: tokens,
+                ethAmount: ethers
             },
         });
         return res.status(201).send({
@@ -85,7 +87,10 @@ module.exports = {
                 });
         }
 
-        const address = await createWallet(password);
+        const address = await web3.eth.personal.newAccount(password);
+        const ethers = web3.utils.fromWei(await web3.eth.getBalance(address), 'ether');
+        const tokens = await LuxTokenContract.methods.balanceOf(address).call();
+
         const newNomalUser = await prisma.user.create({
             data: {
                 userId: userId,
@@ -93,6 +98,8 @@ module.exports = {
                 nickname: nickname,
                 isCompany: false,
                 address: address,
+                tokenAmount: tokens,
+                ethAmount: ethers
             },
         });
         return res.status(201).send({
