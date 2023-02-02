@@ -60,6 +60,8 @@ module.exports = {
             message: {
                 userId: newCompanyUser.userId,
                 nickname: newCompanyUser.nickname,
+                address: newCompanyUser.address,
+                isCompany: newCompanyUser.isCompany,
             }
         });
     },
@@ -98,6 +100,8 @@ module.exports = {
             message: {
                 userId: newNomalUser.userId,
                 nickname: newNomalUser.nickname,
+                address: newNomalUser.address,
+                isCompany: newNomalUser.isCompany,
             }
         });
     }
