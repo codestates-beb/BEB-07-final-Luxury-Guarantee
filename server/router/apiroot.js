@@ -16,6 +16,7 @@ const { luxurylist } = require("../controller/luxurylist");
 const { addsell } = require("../controller/addsell");
 const { directbuy } = require("../controller/directbuy");
 const { manybuy } = require("../controller/manybuy");
+const { cartdelete } = require("../controller/cartdelete");
 
 const { getAccounts } = require('../utils/web3');
 
@@ -40,5 +41,6 @@ router.post('/signin', signIn);
 router.post("/addsell", addsell);
 router.post("/directbuy", directbuy);
 router.post("/manybuy", manybuy);
+router.post("/cartdelete", cartdelete);
 
 module.exports = router;
