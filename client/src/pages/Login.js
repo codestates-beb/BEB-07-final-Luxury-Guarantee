@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import apiUrl from "../utils/api";
 import axios from 'axios';
-import { useRecoilState } from 'recoil';
-import { status } from "../app/store";
 
 //로그인
 const Login = () => {
@@ -11,7 +9,6 @@ const Login = () => {
     const [userId, setUserId] = useState("");
     const [password, setPassword] = useState("");
     const [alertMessage, setAlertMessage] = useState("");
-    const [signStatus, setSignStatus] = useRecoilState(status);
 
     const onIdHandler = (event) => {
         setUserId(event.currentTarget.value);
@@ -32,7 +29,6 @@ const Login = () => {
                 } else {
                     const signData = res.data.message;
                     signData['isSigned'] = true
-                    setSignStatus(() => signData)
                     sessionStorage.setItem('signData', JSON.stringify(signData))
                     document.location.href = '/'
                 }
