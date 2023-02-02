@@ -1,4 +1,6 @@
 const prisma = require("../prisma/prisma");
+const {MyLuxuryContract, LuxTokenContract, web3} = require("../web3s/web3");
+require("dotenv").config();
 
 module.exports = {
     addsell: async (req, res) => {
@@ -14,6 +16,36 @@ module.exports = {
                 isSelling: true
             }
         })
+
+        const users = await prisma.user.findUnique({
+            where: {id:goods.userId}
+        })
+
+        const accounts = await web3.eth.getAccounts();
+        const serverAd = accounts[0];
+        // await LuxTokenContract.methods.transfer(users.address, 1000).send({from:serverAd});
+
+        await web3.eth.personal.unlockAccount(users.address, users.password, 600);
+        await LuxTokenContract.methods.transfer(serverAd, goods.price*0.05).send({from:users.address});
+
+        const user_token = await LuxTokenContract.methods.balanceOf(users.address).call();
+        const user_ether = web3.utils.fromWei(await web3.eth.getBalance(users.address), 'ether')
+        await prisma.user.update({
+            where: {id:users.id},
+            data: {
+                tokenAmount: user_token,
+                ethAmount: user_ether
+            }
+        });
+
+        const mint = await MyLuxuryContract.methods.mintNFT(goods.ipfsurl, users.address).call();
+        const goods2 = await prisma.luxury_goods.update({
+            where: {id: req.body.id},
+            data: {
+                tokenId: Number(mint)
+            }
+        })
+
         return res.status(200).send("addsell success");
     }
 }

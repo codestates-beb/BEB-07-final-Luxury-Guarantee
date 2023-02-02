@@ -12,37 +12,6 @@ module.exports = {
             return res.status(400).send("not enough entity");
         }
 
-        const userss = await prisma.user.findUnique({
-            where: {id:req.body.userId}
-        });
-        let resell = false;
-        if(userss.isCompany == false) resell = true; 
-
-        const item = await prisma.user.update({
-            where: { id: req.body.userId },
-            data: {
-                Items: {
-                    create: {
-                        name: req.body.name,
-                        serial: req.body.serial,
-                        brand: req.body.brand,
-                        category: req.body.category,
-                        material: req.body.material,
-                        designer: req.body.designer,
-                        madeCountry: req.body.madeCountry,
-                        factory: req.body.factory,
-                        totalSupply: req.body.totalSupply,
-                        created_at: req.body.created_at,
-                        season: req.body.season,
-                        price: req.body.price,
-                        image_url: req.body.image_url,
-                        description: req.body.description,
-                        isResell: resell
-                    }
-                }
-            }
-        })
-
         const data = JSON.stringify({
             "pinataOptions": {
                 "cidVersion":1
@@ -77,7 +46,42 @@ module.exports = {
         };
         const addconfig = await axios(config);
         const url = `https://gateway.pinata.cloud/ipfs/${addconfig.data.IpfsHash}`;
+
         console.log(url);
+
+        const userss = await prisma.user.findUnique({
+            where: {id:req.body.userId}
+        });
+        let resell = false;
+        if(userss.isCompany === false) resell = true; 
+
+        const item = await prisma.user.update({
+            where: { id: req.body.userId },
+            data: {
+                Items: {
+                    create: {
+                        name: req.body.name,
+                        serial: req.body.serial,
+                        brand: req.body.brand,
+                        category: req.body.category,
+                        material: req.body.material,
+                        designer: req.body.designer,
+                        madeCountry: req.body.madeCountry,
+                        factory: req.body.factory,
+                        totalSupply: req.body.totalSupply,
+                        created_at: req.body.created_at,
+                        season: req.body.season,
+                        price: req.body.price,
+                        image_url: req.body.image_url,
+                        description: req.body.description,
+                        isResell: resell,
+                        ipfsurl: url
+                    }
+                }
+            }
+        })
+
+
 
         return res.status(200).send("luxury register success");
     }
