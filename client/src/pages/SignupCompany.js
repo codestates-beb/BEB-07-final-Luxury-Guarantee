@@ -12,8 +12,7 @@ const SignupCompany = () => {
     const [Name, setName] = useState("");
     const [Password, setPassword] = useState("");
     const [ConfirmPassword, setConfirmPassword] = useState("");
-    const [userSignup, setUserSignup] = useRecoilState(userSignup)
-
+   
     const onEmailHandler = (event) => {
         setEmail(event.currentTarget.value);
     }
@@ -31,16 +30,20 @@ const SignupCompany = () => {
             return alert("비밀번호가 다릅니다.")
         }
 
-        axios.post(`${apiUrl}/newuser`,{
+        axios.post(`${apiUrl}/newcompany`,{
             userId: Email,
             nickname: Name,
             password: Password
             
         })
             .then(res => {
-                console.log(res.data)
-               setUserSignup(() => userSignup)
-               sessionStorage.setItem('userSignup', JSON.stringify(userSignup))
+              const signData={userId: res.data.message.userId,
+                address: res.data.message.address,
+                nickname: res.data.message.nickname,
+                isCompany: res.data.message.isCompany,
+                isSigned: true} 
+              console.log (signData)
+               sessionStorage.setItem('signdata', JSON.stringify(signData))
                 document.location.href = '/'
             })
     }
@@ -62,21 +65,21 @@ const SignupCompany = () => {
         <form action="#">
             <div className="flex flex-col mb-2">
                 <div className=" relative ">
-                    <input type="text" id="create-account-companyname" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" name="CompanyName" placeholder="Company Name"/>
+                    <input type="text" value={Name} onChange={onNameHandler} id="create-account-companyname" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" name="CompanyName" placeholder="Company Name"/>
                     </div>
                     <div className=" relative mt-2">
-                        <input type="text" id="create-account-companynumber" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" name="CompanyNumber" placeholder="Company Number"/>
+                        <input type="number" value={Name} onChange={onPasswordHandler} id="create-account-companynumber" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" name="CompanyNumber" placeholder="Company Number"/>
                     </div>
                 </div>
                 <div className="flex gap-4 mb-2">
                     <div className=" relative ">
-                        <input type="email" id="create-account-email" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" placeholder="Email"/>
+                        <input type="email" value={Email} onChange={onEmailHandler} id="create-account-email" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" placeholder="Email"/>
                         </div>
                        
                         </div>
                         <div className="flex flex-col mb-2">
                             <div className=" relative ">
-                                <input type="password" id="create-account-password" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" placeholder="PassWord"/>
+                                <input type="password" value={Password} onChange={onPasswordHandler} id="create-account-password" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" placeholder="PassWord"/>
                                 </div>
                             </div>
                             <div className="flex w-full my-4">
