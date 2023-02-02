@@ -1,4 +1,4 @@
-export default () => {
+const isSigned = () => {
     const sessionSignData = sessionStorage.getItem('signData')
     if (sessionSignData) {
         return JSON.parse(sessionSignData)
@@ -6,3 +6,5 @@ export default () => {
         return { isSigned: false };
     }
 };
+
+export default isSigned;

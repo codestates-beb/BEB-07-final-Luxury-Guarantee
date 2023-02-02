@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Category from './Category';
-import signData from '../app/isSigned'
+import isSigned from '../app/isSigned'
 
 const Header = () => {
-  const userData = signData();
+  const userData = isSigned();
 
   const signOut = () => {
     sessionStorage.clear();
@@ -18,7 +18,7 @@ const Header = () => {
       </div>
       <div className='absolute top-5 left-[80%] h-[119px] w-[153px]  text-white text-3xl flex space-x-6'>
 
-        <Link to="/"><i className="fa-regular fa-user"></i></Link>
+        <Link to="/mypage"><i className="fa-regular fa-user"></i></Link>
 
         <Link to="/"><i className="fa-solid fa-heart"></i></Link>
         <Link to="/cart"><i className="fa-solid fa-cart-shopping"></i></Link>
@@ -56,7 +56,7 @@ const Header = () => {
                   Login
                 </Link>
               ) : (
-                <button onClick={signOut} className="category-item text-white p-[30px] text-[30px] ">Logout</button>
+                <button onClick={signOut} className="category-item text-white p-[30px] text-[30px] pt-0 pb-0">Logout</button>
               )}
 
           </li>
