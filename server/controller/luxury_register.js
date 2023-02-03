@@ -12,6 +12,13 @@ module.exports = {
             return res.status(400).send("not enough params");
         }
 
+        const serial_test = await prisma.luxury_goods.findMany({
+            where: {serial:req.body.serial}
+        });
+        if(serial_test.length!==0) {
+            return res.status(400).send("serial exists");
+        }
+
         const data = JSON.stringify({
             "pinataOptions": {
                 "cidVersion":1
