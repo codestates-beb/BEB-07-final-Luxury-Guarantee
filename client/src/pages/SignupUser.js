@@ -1,42 +1,81 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
-import { status } from '../app/store';
 import axios from 'axios';
 import apiUrl from '../utils/api';
 //개인용 회원가입 페이지
 const SignupUser = () => {
 
-    const [Email, setEmail] = useState("");
+    const [Id, setId] = useState("");
+    const [IdVaild, setIdValid] = useState("");
+    const [isId, setIsId] = useState(false);
+
     const [Name, setName] = useState("");
+    const [NameValid, setNameValid] = useState("");
+    const [isName, setIsName] = useState(false);
+
     const [Password, setPassword] = useState("");
-    const [ConfirmPassword, setConfirmPassword] = useState("");
-    const [Signup, setSignup] = useRecoilState(status)
+    const [PasswordValid, setPasswordValid] = useState("");
+    const [isPassword, setIsPassword] = useState(false)
 
-    const onEmailHandler = (event) => {
-        setEmail(event.currentTarget.value);
-    }
-    const onNameHandler = (event) => {
-        setName(event.currentTarget.value);
-    }
-    const onPasswordHandler = (event) => {
-        setPassword(event.currentTarget.value);
-    }
-    const onConfirmPasswordHandler = (event) => {
-        setConfirmPassword(event.currentTarget.value);
-    }
-    const onSubmitHandler = () => {
-        if(Password !== ConfirmPassword){
-            return alert("비밀번호가 다릅니다.")
+    const [AlertMessage, setAlertMessage] = useState("")
+
+    const onCheckPassword = (event) => {
+        //  6 ~ 18자 영문, 숫자 조합
+        const currentPassword = event.currentTarget.value;
+        setPassword(currentPassword);
+
+        const regExp = /^[a-zA-z0-9]{6,18}$/
+        
+        if(!regExp.test(currentPassword)) {
+            setPasswordValid("숫자+영문자 6자리 이상 입력해주세요")
+            setIsPassword(false)
+        } else {
+            setPasswordValid("안전한 비밀번호입니다.")
+            setIsPassword(true)
         }
+    }
 
+    const onCheckId = (event) => {
+        const currentId = event.currentTarget.value;
+        setId(currentId);
+
+        if(currentId.length < 4) {
+            setIdValid("이메일 형식에 맞게 작성해주세요")
+            setIsId(false);
+        } else {
+            setIdValid("")
+            setIsId(true);
+        }
+    }
+
+    const onCheckName = (event) => {
+        const currentName = event.currentTarget.value;
+        setName(currentName)
+        if(currentName.length < 3) {
+            setNameValid("3자리 이상 입력해주세요.")
+            setIsName(false);
+        }else {
+            setNameValid("")
+            setIsName(true);
+        }
+    }
+
+    const onSubmitHandler = () => {
         axios.post(`${apiUrl}/newuser`,{
-            userId: Email,
+            userId: Id,
             nickname: Name,
             password: Password
             
         })
             .then(res => {
+                if(res.data.message === "same id exist"){
+                    setAlertMessage("아이디가 중복됩니다.")
+                } 
+                else if(res.data.message === "same nickname exist"){
+                    setAlertMessage("닉네임이 중복됩니다.")
+                }
+                else {
+                
                 console.log(res.data)
                 const signData = {
                     userId: res.data.message.userId,
@@ -45,10 +84,10 @@ const SignupUser = () => {
                     isCompany: res.data.message.isCompany,
                     isSigned: true
                 }
-                setSignup(() => signData)
-               sessionStorage.setItem('signData', JSON.stringify(signData))
+                sessionStorage.setItem('signData', JSON.stringify(signData))
                 document.location.href = '/'
-            })
+    }})
+        
     }
 
 
@@ -66,31 +105,34 @@ const SignupUser = () => {
                     </Link>
                 </span>
                 <div className="p-6 mt-2">
-                        <div className="flex flex-col mb-2">
-                            <div className=" relative ">
-                                <input type="text" value={Name} onChange={onNameHandler} id="create-account-username" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" name="username" placeholder="NickName" />
+                        <div className="flex flex-col mb-3">
+                            <div className=" relative">
+                                <input type="text" value={Name} onChange={onCheckName} id="create-account-username" className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" name="username" placeholder="NickName" />
+                                <p className='text-white text-base mt-2'>{NameValid}</p>
                             </div>
 
                         </div>
-                        <div className="flex gap-4 mb-2">
+                        <div className="flex flex-col mb-3">
                             <div className=" relative ">
-                                <input type="email" value={Email} onChange={onEmailHandler} id="create-account-email" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" placeholder="Email" />
+                                <input type="email" value={Id} onChange={onCheckId} id="create-account-email" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" placeholder="Id" />
+                                <p className='text-white text-base mt-2'>{IdVaild}</p>
                             </div>
 
                         </div>
-                        <div className="flex flex-col mb-2">
+                        <div className="flex flex-col mb-3">
                             <div className=" relative ">
-                                <input type="password" value={Password} onChange={onPasswordHandler} id="create-account-password" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" placeholder="PassWord" />
+                                <input type="password" value={Password} onChange={onCheckPassword} id="create-account-password" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" placeholder="PassWord" />
                             </div>
                         </div>
-                        <div className="flex flex-col mb-2">
+                        <div className="flex flex-col">
                             <div className=" relative ">
-                                <input type="password" value={ConfirmPassword} onChange={onConfirmPasswordHandler} id="create-account-password" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" placeholder="ConfirmPassWord" />
+                                <input type="password" id="create-account-password" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" placeholder="ConfirmPassWord" />
+                                <p className='text-white text-xs mt-2'>{PasswordValid}</p>
                             </div>
                         </div>
-                        <div className="flex w-full my-4">
+                        <div className="flex w-full mt-4">
                             <button onClick={onSubmitHandler} className="py-2 px-4  bg-black hover:bg-black focus:ring-black focus:ring-offset-black text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
-                                submit
+                                Login
                             </button>
                         </div>
 
