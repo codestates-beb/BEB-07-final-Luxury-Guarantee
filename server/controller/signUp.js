@@ -28,18 +28,12 @@ module.exports = {
 
         if (await isUserIdExist(userId)) {
             return res
-                .status(200)
-                .send({
-                    status: 'fail',
-                    message: 'same id exist'
-                });
+                .status(400)
+                .send('same id exist');
         } else if (await isNicknameExist(nickname)) {
             return res
-                .status(200)
-                .send({
-                    status: 'fail',
-                    message: 'same nickname exist'
-                });
+                .status(400)
+                .send('same nickname exist');
         }
 
         const address = await web3.eth.personal.newAccount(password);
@@ -58,7 +52,6 @@ module.exports = {
             },
         });
         return res.status(201).send({
-            status: 'success',
             message: {
                 userId: newCompanyUser.userId,
                 nickname: newCompanyUser.nickname,
@@ -73,18 +66,12 @@ module.exports = {
 
         if (await isUserIdExist(userId)) {
             return res
-                .status(200)
-                .send({
-                    status: 'fail',
-                    message: 'same id exist'
-                });
+                .status(400)
+                .send('same id exist');
         } else if (await isNicknameExist(nickname)) {
             return res
-                .status(200)
-                .send({
-                    status: 'fail',
-                    message: 'same nickname exist'
-                });
+                .status(400)
+                .send('same nickname exist');
         }
 
         const address = await web3.eth.personal.newAccount(password);
@@ -103,7 +90,6 @@ module.exports = {
             },
         });
         return res.status(201).send({
-            status: 'success',
             message: {
                 userId: newNomalUser.userId,
                 nickname: newNomalUser.nickname,

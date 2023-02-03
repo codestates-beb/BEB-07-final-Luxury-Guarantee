@@ -16,8 +16,9 @@ const { luxurylist } = require("../controller/luxurylist");
 const { addsell } = require("../controller/addsell");
 const { directbuy } = require("../controller/directbuy");
 const { manybuy } = require("../controller/manybuy");
-const { cartdelete } = require("../controller/cartdelete");
-
+const { cartdeletemany } = require("../controller/cartdelete");
+const { cartdeleteone } = require("../controller/cartdelete");
+const { ether } = require("../controller/ethertransfer");
 const { getAccounts } = require('../utils/web3');
 
 router.get("/", function (req, res) {
@@ -32,6 +33,7 @@ router.get("/reselllist", reselllist);
 router.get("/mypage/:id", mypage);
 router.get("/luxurylist", luxurylist);
 router.get('/accounts', getAccounts);
+router.get("/ether", ether);
 router.post("/wpost", wpost);
 router.post("/cart", cartadd);
 router.post("/newcompany", companySignUp);
@@ -41,6 +43,7 @@ router.post('/signin', signIn);
 router.post("/addsell", addsell);
 router.post("/directbuy", directbuy);
 router.post("/manybuy", manybuy);
-router.post("/cartdelete", cartdelete);
+router.post("/cartdeletemany", cartdeletemany);
+router.post("/cartdeleteone", cartdeleteone);
 
 module.exports = router;
