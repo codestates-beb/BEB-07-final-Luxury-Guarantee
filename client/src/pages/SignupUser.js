@@ -90,7 +90,7 @@ const SignupUser = () => {
                         </div>
                         <div className="flex w-full my-4">
                             <button onClick={onSubmitHandler} className="py-2 px-4  bg-black hover:bg-black focus:ring-black focus:ring-offset-black text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
-                                Login
+                                submit
                             </button>
                         </div>
 
