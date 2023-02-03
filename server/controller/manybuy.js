@@ -61,6 +61,6 @@ module.exports = {
                 }
             });
         }
-        return res.status(200).send("cartbuy, manybuy success");
+        return res.status(200).send("buy success");
     }
 }

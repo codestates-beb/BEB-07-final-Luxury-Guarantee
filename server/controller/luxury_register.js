@@ -9,7 +9,7 @@ module.exports = {
             !req.body.material || !req.body.designer || !req.body.madeCountry || !req.body.factory ||
             !req.body.totalSupply || !req.body.created_at || !req.body.season || !req.body.price ||
             !req.body.image_url || !req.body.description || !req.body.userId) {
-            return res.status(400).send("not enough entity");
+            return res.status(400).send("not enough params");
         }
 
         const data = JSON.stringify({
@@ -80,9 +80,6 @@ module.exports = {
                 }
             }
         })
-
-
-
         return res.status(200).send("luxury register success");
     }
 }
