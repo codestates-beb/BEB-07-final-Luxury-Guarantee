@@ -1,5 +1,7 @@
 const prisma = require("../prisma/prisma");
 const axios = require('axios');
+const {MyLuxuryContract, web3} = require("../web3s/web3");
+
 require("dotenv").config();
 const JWT = process.env.JWT;
 
@@ -85,6 +87,21 @@ module.exports = {
                         ipfsurl: url
                     }
                 }
+            }
+        })
+        const accounts = await web3.eth.getAccounts();
+        const serverAd = accounts[0];
+
+        const serialget = await prisma.luxury_goods.findUnique({
+            where: {serial:req.body.serial}
+        });
+
+        const mint = await MyLuxuryContract.methods.mintNFT(serialget.ipfsurl, userss.address).send({from:serverAd, gas: '1000000'});
+        
+        const goods2 = await prisma.luxury_goods.update({
+            where: {id: serialget.id},
+            data: {
+                tokenId: Number(mint.events.Transfer.returnValues.tokenId)
             }
         })
         return res.status(200).send("luxury register success");

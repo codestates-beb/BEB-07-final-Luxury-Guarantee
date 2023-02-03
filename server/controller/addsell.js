@@ -7,6 +7,18 @@ module.exports = {
         if(!req.body.id || !req.body.image_url || !req.body.content || !req.body.price) {
             return res.status(400).send("not enough params");
         }
+
+        const valid = await prisma.luxury_goods.findMany({
+            where: {
+                id:req.body.id,
+                isSelling: true
+            }
+        });
+        if(valid.length===1) {
+            return res.status(400).send("already selling");
+        }
+
+
         const goods = await prisma.luxury_goods.update({
             where: {id: req.body.id},
             data: {
@@ -37,14 +49,6 @@ module.exports = {
                 ethAmount: user_ether
             }
         });
-
-        const mint = await MyLuxuryContract.methods.mintNFT(goods.ipfsurl, users.address).call();
-        const goods2 = await prisma.luxury_goods.update({
-            where: {id: req.body.id},
-            data: {
-                tokenId: Number(mint)
-            }
-        })
 
         return res.status(200).send("addsell success");
     }

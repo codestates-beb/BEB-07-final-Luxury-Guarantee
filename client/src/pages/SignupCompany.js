@@ -149,3 +149,4 @@ const SignupCompany = () => {
 }
 
 export default SignupCompany;
+
