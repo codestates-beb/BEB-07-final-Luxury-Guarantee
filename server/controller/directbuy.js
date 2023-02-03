@@ -4,7 +4,7 @@ const {MyLuxuryContract, LuxTokenContract, web3} = require("../web3s/web3");
 module.exports = {
     directbuy: async (req, res) => {
         if(!req.body.userId || !req.body.goodsId) {
-            return res.status(400).send("not enough params");
+            return res.status(400).send("not enough body params");
         }
 
         const goods = await prisma.luxury_goods.findUnique({
@@ -27,7 +27,7 @@ module.exports = {
             return res.status(400).send("can't buy your goods")
         }
 
-/*         const accounts = await web3.eth.getAccounts();
+        const accounts = await web3.eth.getAccounts();
         const serverAd = accounts[0];
         // await web3.eth.sendTransaction({from:serverAd, to:sell_user.address, value:web3.utils.toWei(String(1), "ether")});
         // await LuxTokenContract.methods.transfer(buy_user.address, 1000).send({from:serverAd});
@@ -62,7 +62,7 @@ module.exports = {
                 tokenAmount: sell_token,
                 ethAmount: sell_ether
             }
-        }); */
+        });
         return res.status(200).send("directbuy success");
     }
 }

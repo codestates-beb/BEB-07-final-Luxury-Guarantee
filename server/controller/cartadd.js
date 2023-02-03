@@ -3,7 +3,7 @@ const prisma = require("../prisma/prisma");
 module.exports = {
     cartadd: async (req, res) => {
         if(!req.body.goodsId || !req.body.userId) {
-            return res.status(400).send("not enough params");
+            return res.status(400).send("not enough body params");
         }
 
         const goods = await prisma.luxury_goods.findUnique({
@@ -19,7 +19,7 @@ module.exports = {
         console.log(users.Cart[0].id);
         for(let i=0;i<users.Cart.length;i++) {
             if(users.Cart[i].id === req.body.goodsId) {
-                return res.status(400).send("이미 카트에 등록된 아이템입니다.");
+                return res.status(400).send("already in cart");
             }
         }
 
