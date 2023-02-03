@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import LuxuryDetail from "./pages/LuxuryDetail";
 import LuxuryGallery from "./pages/LuxuryGallery";
 import LuxurySell from "./pages/LuxurySell";
+import LuxuryResister from "./pages/LuxuryResister";
 import MyPage from "./pages/MyPage";
 import Payment from "./pages/Payment";
 import Post from "./pages/Review";
@@ -43,6 +44,7 @@ function App() {
         <Route path='/luxurydetail/:id' element={<LuxuryDetail />}></Route>
         <Route path='/luxurygallery' element={<LuxuryGallery />}></Route>
         <Route path='/luxurysell' element={<LuxurySell />}></Route>
+        <Route path='/luxuryresister' element={<LuxuryResister />}></Route>
         <Route path='/mypage' element={<MyPage />}></Route>
         <Route path='/payment' element={<Payment />}></Route>
         <Route path='/post' element={<Post />}></Route>
