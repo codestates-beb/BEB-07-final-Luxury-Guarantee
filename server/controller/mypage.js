@@ -7,7 +7,7 @@ module.exports = {
         }
         const users = await prisma.user.findUnique({
             where: {
-                userId: req.params.id
+                id: Number(req.params.id)
             },
             include: {
                 Items: true,
