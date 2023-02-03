@@ -54,6 +54,6 @@ module.exports = {
                 ethAmount: sell_ether
             }
         });
-        return res.status(200).send("buy success");
+        return res.status(200).send("directbuy success");
     }
 }

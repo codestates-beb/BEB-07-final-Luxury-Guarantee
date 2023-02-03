@@ -10,6 +10,6 @@ module.exports = {
                 where: {id:req.body.cartIds[i]}
             });
         }
-        return res.status(200).send("delete success");
+        return res.status(200).send("cartdelete success");
     }
 }
