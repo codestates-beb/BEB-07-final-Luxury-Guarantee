@@ -12,11 +12,11 @@ datasource db {
 
 model user {
     id          Int            @unique @default(autoincrement())
-    userId      String         @id @unique
+    userId      String         @id
     password    String
     nickname    String         @unique
-    tokenAmount Int?
-    ethAmount   Int?
+    tokenAmount String?
+    ethAmount   String?
     address     String
     isCompany   Boolean
     Items       luxury_goods[]
@@ -26,7 +26,7 @@ model user {
 
 model cart {
     id        Int    @unique @default(autoincrement())
-    goodsId   Int    @unique
+    goodsId   Int
     image_url String
     price     Int
     cartowner user   @relation(fields: [userId], references: [id])
@@ -53,6 +53,8 @@ model luxury_goods {
     isSelling   Boolean? @default(false)
     owner       user     @relation(fields: [userId], references: [id])
     userId      Int
+    ipfsurl     String?
+    tokenId     Int?
 }
 
 model posts {

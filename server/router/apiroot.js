@@ -11,10 +11,12 @@ const { luxury_register } = require("../controller/luxury_register");
 const { cartadd } = require("../controller/cartadd");
 const { cartlist } = require("../controller/cartlist");
 const { reselllist } = require("../controller/reselllist");
-const { buy } = require("../controller/buy")
 const { mypage } = require("../controller/mypage");
 const { luxurylist } = require("../controller/luxurylist");
 const { addsell } = require("../controller/addsell");
+const { directbuy } = require("../controller/directbuy");
+const { manybuy } = require("../controller/manybuy");
+const { cartdelete } = require("../controller/cartdelete");
 
 const { getAccounts } = require('../utils/web3');
 
@@ -35,8 +37,10 @@ router.post("/cart", cartadd);
 router.post("/newcompany", companySignUp);
 router.post("/newuser", userSignUp)
 router.post("/luxury_register", luxury_register);
-router.post("/buy", buy);
 router.post('/signin', signIn);
 router.post("/addsell", addsell);
+router.post("/directbuy", directbuy);
+router.post("/manybuy", manybuy);
+router.post("/cartdelete", cartdelete);
 
 module.exports = router;

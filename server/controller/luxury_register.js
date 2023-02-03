@@ -9,39 +9,15 @@ module.exports = {
             !req.body.material || !req.body.designer || !req.body.madeCountry || !req.body.factory ||
             !req.body.totalSupply || !req.body.created_at || !req.body.season || !req.body.price ||
             !req.body.image_url || !req.body.description || !req.body.userId) {
-            return res.status(400).send("not enough entity");
+            return res.status(400).send("not enough params");
         }
 
-        const userss = await prisma.user.findUnique({
-            where: {id:req.body.userId}
+        const serial_test = await prisma.luxury_goods.findMany({
+            where: {serial:req.body.serial}
         });
-        let resell = false;
-        if(userss.isCompany == false) resell = true; 
-
-        const item = await prisma.user.update({
-            where: { id: req.body.userId },
-            data: {
-                Items: {
-                    create: {
-                        name: req.body.name,
-                        serial: req.body.serial,
-                        brand: req.body.brand,
-                        category: req.body.category,
-                        material: req.body.material,
-                        designer: req.body.designer,
-                        madeCountry: req.body.madeCountry,
-                        factory: req.body.factory,
-                        totalSupply: req.body.totalSupply,
-                        created_at: req.body.created_at,
-                        season: req.body.season,
-                        price: req.body.price,
-                        image_url: req.body.image_url,
-                        description: req.body.description,
-                        isResell: resell
-                    }
-                }
-            }
-        })
+        if(serial_test.length!==0) {
+            return res.status(400).send("serial exists");
+        }
 
         const data = JSON.stringify({
             "pinataOptions": {
@@ -77,8 +53,40 @@ module.exports = {
         };
         const addconfig = await axios(config);
         const url = `https://gateway.pinata.cloud/ipfs/${addconfig.data.IpfsHash}`;
+
         console.log(url);
 
+        const userss = await prisma.user.findUnique({
+            where: {id:req.body.userId}
+        });
+        let resell = false;
+        if(userss.isCompany === false) resell = true; 
+
+        const item = await prisma.user.update({
+            where: { id: req.body.userId },
+            data: {
+                Items: {
+                    create: {
+                        name: req.body.name,
+                        serial: req.body.serial,
+                        brand: req.body.brand,
+                        category: req.body.category,
+                        material: req.body.material,
+                        designer: req.body.designer,
+                        madeCountry: req.body.madeCountry,
+                        factory: req.body.factory,
+                        totalSupply: req.body.totalSupply,
+                        created_at: req.body.created_at,
+                        season: req.body.season,
+                        price: req.body.price,
+                        image_url: req.body.image_url,
+                        description: req.body.description,
+                        isResell: resell,
+                        ipfsurl: url
+                    }
+                }
+            }
+        })
         return res.status(200).send("luxury register success");
     }
 }

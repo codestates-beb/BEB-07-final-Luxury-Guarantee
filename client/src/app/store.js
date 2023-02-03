@@ -10,3 +10,4 @@ export const status = atom({
     isCompany: false
   }
 })
+
