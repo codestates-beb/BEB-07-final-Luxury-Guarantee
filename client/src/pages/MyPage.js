@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import isSigned from '../app/isSigned'
 import apiUrl from "../utils/api";
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const MyPage = () => {
 	const [userInfo, setUserInfo] = useState("");
@@ -20,7 +21,9 @@ const MyPage = () => {
 
 			})
 	}, []);
-	console.log(userInfo)
+
+	const myItem = userInfo.Items;
+
 	return (
 		<div className="grid grid-cols-1 lg:grid-cols-1 gap-6 my-12 w-2xl container px-2 mx-auto">
 			<div className="bg-white shadow rounded-lg p-10">
@@ -47,13 +50,22 @@ const MyPage = () => {
 					</div>
 				</div>
 
-				<div className="mypost ">{userInfo.post}</div>
-
-
+				<div className="mypost ">post{userInfo.post}</div>
+				<div className='flex justify-end'>
+					<button className='lux-resister bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded '><Link to='/luxuryresister'>명품 등록하기</Link></button>
+				</div>
 			</div>
 
 			<div className="grid mt-5 grid-cols-4 gap-6 justify-center items-center w-full ">
-				<div className="relative flex flex-col justify-between   bg-white   bg-cover text-gray-800  overflow-hidden cursor-pointer w-full object-cover object-center rounded shadow-md h-64 my-2" >
+
+				<div>
+					<p>My Items</p>
+					{myItem && myItem.map((e) => (
+						<img key={e.id} src={e.image_url}></img>
+					))}
+				</div>
+
+				{/* <div className="relative flex flex-col justify-between   bg-white   bg-cover text-gray-800  overflow-hidden cursor-pointer w-full object-cover object-center rounded shadow-md h-64 my-2" >
 					<div className="absolute bg-gradient-to-t from-green-400 to-blue-400  opacity-50 inset-0 z-0"></div>
 					<div className="relative flex flex-row items-end  h-72 w-full ">
 						<div className="absolute right-0 top-0 m-2">
@@ -92,7 +104,7 @@ const MyPage = () => {
 						</div>
 					</div>
 				</div>
-
+ */}
 			</div>
 		</div>
 	)

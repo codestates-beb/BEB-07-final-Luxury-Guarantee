@@ -19,6 +19,7 @@ module.exports = {
         }
         return res.status(200).send({
             status: "success", message: {
+                id: user[0].id,
                 userId: user[0].userId,
                 nickname: user[0].nickname,
                 address: user[0].address,
