@@ -3,7 +3,7 @@ const { LuxTokenContract, web3 } = require("../web3s/web3")
 
 module.exports = {
     wpost: async (req, res) => {
-        if (! req.body.userId || !req.body.category || !req.body.title || !req.body.content) {
+        if (!req.body.userId || !req.body.category || !req.body.title || !req.body.content) {
             return res.status(400).send("not enough params");
         }
         const { userId, category, title, content } = req.body;
@@ -17,7 +17,6 @@ module.exports = {
                         content: content
                     }
                 }
-
             }
         })
 

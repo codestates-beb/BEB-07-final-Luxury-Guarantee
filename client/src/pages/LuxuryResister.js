@@ -59,96 +59,105 @@ const LuxuryResister = () => {
 
 
     return (
-        <>
-            <h1>Resister Your Luxury</h1>
+        
+        <div className='flex justify-center mb-10 mt-10'>
+            <div className="flex flex-col max-w-md px-4 py-8 bg-white rounded-lg shadow dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10">
+    <div className="self-center mb-2 text-xl font-light text-gray-800 sm:text-2xl dark:text-white">
+            Resister Your Luxury
+            </div>
+            <br></br>
             <input type="file" accept="image/*"
                 className="media" onChange={saveImgFile} ref={imgRef}
             />
             {imageSrc && <img className="preview-img" src={imageSrc} alt="preview-img" />}
-            <div>
-                <label>
+            <br></br>
+                <div className=''>
                     name
-                </label>
-                <br></br>
-                <input name='name' onChange={handleChange} value={inputValue.name || ""} className='border border-black' ></input>
-                <br></br>
-                <label>
+                <input name='name' onChange={handleChange} value={inputValue.name || ""} className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-600 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-700 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" />
+                    </div>
+                    <br></br>
+               
+                <div className=''>
                     serial
-                </label>
+                </div>
+                
+                <input name='serial' onChange={handleChange} value={inputValue.serial || ""} className='rounded-lg border-transparent flex-1 appearance-none border border-gray-600 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-700 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent'  ></input>
                 <br></br>
-                <input name='serial' onChange={handleChange} value={inputValue.serial || ""} className='border border-black' ></input>
-                <br></br>
-                <label>
+                <div className=''>
                     brand
-                </label>
-                <br></br>
-                <input name='brand' onChange={handleChange} value={inputValue.brand || ""} className='border border-black' ></input>
-                <br></br>
+                
+                
+                <input name='brand' onChange={handleChange} value={inputValue.brand || ""} className='rounded-lg border-transparent flex-1 appearance-none border border-gray-600 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-700 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent' ></input>
+               </div>
+               <br></br>
                 <label>
                     category
                 </label>
-                <br></br>
-                <select name='category' onChange={handleChange} value={inputValue.category || ""} className='border border-black' >{options}</select>
+               
+                <select name='category' onChange={handleChange} value={inputValue.category || ""} className='rounded-lg border-transparent flex-1 appearance-none border border-gray-600 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-700 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent' >{options}</select>
                 <br></br>
                 <label>
                     material and fabric
                 </label>
-                <br></br>
-                <input name='material' onChange={handleChange} value={inputValue.material || ""} className='border border-black' ></input>
+                
+                <input name='material' onChange={handleChange} value={inputValue.material || ""} className='rounded-lg border-transparent flex-1 appearance-none border border-gray-600 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-700 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent' ></input>
                 <br></br>
                 <label>
                     designer
                 </label>
-                <br></br>
-                <input name='designer' onChange={handleChange} value={inputValue.designer || ""} className='border border-black' ></input>
+                
+                <input name='designer' onChange={handleChange} value={inputValue.designer || ""} className='rounded-lg border-transparent flex-1 appearance-none border border-gray-600 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-700 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent' ></input>
                 <br></br>
                 <label>
                     madeCountry
                 </label>
-                <br></br>
-                <input name='madeCountry' onChange={handleChange} value={inputValue.madeCountry || ""} className='border border-black' ></input>
+               
+                <input name='madeCountry' onChange={handleChange} value={inputValue.madeCountry || ""} className='rounded-lg border-transparent flex-1 appearance-none border border-gray-600 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-700 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent' ></input>
                 <br></br>
                 <label>
                     factory
                 </label>
-                <br></br>
-                <input name='factory' onChange={handleChange} value={inputValue.factory || ""} className='border border-black' ></input>
+               
+                <input name='factory' onChange={handleChange} value={inputValue.factory || ""} className='rounded-lg border-transparent flex-1 appearance-none border border-gray-600 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-700 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent' ></input>
                 <br></br>
                 <label>
                     totalSupply
                 </label>
-                <br></br>
-                <input name='totalSupply' onChange={handleChange} value={inputValue.totalSupply || ""} className='border border-black' ></input>
+                
+                <input name='totalSupply' onChange={handleChange} value={inputValue.totalSupply || ""} className='rounded-lg border-transparent flex-1 appearance-none border border-gray-600 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-700 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent' ></input>
                 <br></br>
                 <label>
                     created_at
                 </label>
-                <br></br>
-                <input name='createdDate' onChange={handleChange} type='date' value={inputValue.createdDate || ""} className='border border-black' ></input>
+               
+                <input name='createdDate' onChange={handleChange} type='date' value={inputValue.createdDate || ""} className='rounded-lg border-transparent flex-1 appearance-none border border-gray-600 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-700 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent' ></input>
                 <br></br>
                 <label>
                     season
                 </label>
-                <br></br>
-                <input name='season' onChange={handleChange} value={inputValue.season || ""} className='border border-black' ></input>
+               
+                <input name='season' onChange={handleChange} value={inputValue.season || ""} className='rounded-lg border-transparent flex-1 appearance-none border border-gray-600 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-700 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent' ></input>
                 <br></br>
                 <label>
                     price
                 </label>
-                <br></br>
-                <input name='price' onChange={handleChange} value={inputValue.price || ""} className='border border-black' ></input>
+               
+                <input name='price' onChange={handleChange} value={inputValue.price || ""} className='rounded-lg border-transparent flex-1 appearance-none border border-gray-600 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-700 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent' ></input>
                 <br></br>
                 <label>
                     description
                 </label>
+              
+                <input name='description' onChange={handleChange} value={inputValue.description || ""} className='rounded-lg border-transparent flex-1 appearance-none border border-gray-600 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-700 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent' ></input>
                 <br></br>
-                <input name='description' onChange={handleChange} value={inputValue.description || ""} className='border border-black' ></input>
-                <br></br>
+            
+            
+                <button className='lux-resister bg-black hover:bg-black text-white font-bold py-2 px-4 rounded ' onClick={onSubmitHandler}>Create</button>
             </div>
-            <div>
-                <button className='lux-resister bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ' onClick={onSubmitHandler}>명품 등록하기</button>
             </div>
-        </>
+            
+        
+        
     )
 }
 
