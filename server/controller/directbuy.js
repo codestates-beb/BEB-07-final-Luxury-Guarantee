@@ -62,7 +62,7 @@ module.exports = {
                 tokenAmount: sell_token,
                 ethAmount: sell_ether
             }
-        });
+        }); */
         return res.status(200).send("directbuy success");
     }
 }
