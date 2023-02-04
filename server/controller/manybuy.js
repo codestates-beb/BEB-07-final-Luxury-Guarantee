@@ -4,7 +4,7 @@ const {MyLuxuryContract, LuxTokenContract, web3} = require("../web3s/web3");
 module.exports = {
     manybuy:async (req, res) => { 
         if(!req.body.userId || !req.body.cartIds) {
-            return res.status(400).send("not enough params");
+            return res.status(400).send("not enough body params");
         }
         for(let i=0;i<req.body.cartIds.length;i++) {
             const carts = await prisma.cart.findUnique({

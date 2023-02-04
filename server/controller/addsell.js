@@ -5,7 +5,7 @@ require("dotenv").config();
 module.exports = {
     addsell: async (req, res) => {
         if(!req.body.id || !req.body.image_url || !req.body.content || !req.body.price) {
-            return res.status(400).send("not enough params");
+            return res.status(400).send("not enough body params");
         }
 
         const valid = await prisma.luxury_goods.findMany({
