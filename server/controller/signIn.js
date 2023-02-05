@@ -10,12 +10,13 @@ module.exports = {
 
         if (user.length === 0 || user[0].userId != req.body.userId) {
             return res
-                .status(400)
-                .send("Login information does not match" );
+                .send("Login information does not match")
+                .status(400).end();
         } else if (user[0].password != req.body.password) {
             return res
-                .status(400)
-                .send("Login information does not match" );
+
+                .send("Login information does not match")
+                .status(400).end();
         }
         return res.status(200).send({
             message: {

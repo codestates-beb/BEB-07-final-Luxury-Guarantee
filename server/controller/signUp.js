@@ -1,5 +1,5 @@
 const prisma = require("../prisma/prisma");
-const {LuxTokenContract, web3} = require("../web3s/web3");
+const { LuxTokenContract, web3 } = require("../web3s/web3");
 
 const isUserIdExist = async (userId) => {
     const user = await prisma.user.findMany({
@@ -28,12 +28,12 @@ module.exports = {
 
         if (await isUserIdExist(userId)) {
             return res
-                .status(400)
-                .send('same id exist');
+                .send('same id exist')
+                .status(400).end();
         } else if (await isNicknameExist(nickname)) {
             return res
-                .status(400)
-                .send('same nickname exist');
+                .send('same nickname exist')
+                .status(400).end();
         }
 
         const address = await web3.eth.personal.newAccount(password);
@@ -53,6 +53,7 @@ module.exports = {
         });
         return res.status(201).send({
             message: {
+                id: newCompanyUser.id,
                 userId: newCompanyUser.userId,
                 nickname: newCompanyUser.nickname,
                 address: newCompanyUser.address,
@@ -63,15 +64,14 @@ module.exports = {
 
     userSignUp: async (req, res) => {
         const { userId, password, nickname } = req.body;
-
         if (await isUserIdExist(userId)) {
             return res
-                .status(400)
-                .send('same id exist');
+                .send('same id exist')
+                .status(400).end();
         } else if (await isNicknameExist(nickname)) {
             return res
-                .status(400)
-                .send('same nickname exist');
+                .send('same nickname exist')
+                .status(400).end();
         }
 
         const address = await web3.eth.personal.newAccount(password);
@@ -91,6 +91,7 @@ module.exports = {
         });
         return res.status(201).send({
             message: {
+                id: newNomalUser.id,
                 userId: newNomalUser.userId,
                 nickname: newNomalUser.nickname,
                 address: newNomalUser.address,

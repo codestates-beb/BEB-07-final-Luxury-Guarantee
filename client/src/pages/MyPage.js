@@ -9,7 +9,7 @@ const MyPage = () => {
 
 	useEffect(() => {
 		const userData = isSigned();
-		const userId = userData.userId;
+		const userId = userData.id;
 		if (!userData.isSigned) {
 			alert('로그인이 필요합니다.');
 			document.location.href = '/login';
@@ -61,7 +61,7 @@ const MyPage = () => {
 				<div>
 					<p>My Items</p>
 					{myItem && myItem.map((e) => (
-						<img key={e.id} src={e.image_url}></img>
+						<img alt='my-item' key={e.id} src={e.image_url}></img>
 					))}
 				</div>
 
