@@ -2,24 +2,28 @@ const prisma = require("../prisma/prisma");
 
 module.exports = {
     cartadd: async (req, res) => {
-        if(!req.body.goodsId || !req.body.userId) {
-            return res.status(400).send("not enough body params");
+        if (!req.body.goodsId || !req.body.userId) {
+            return res
+                .send("not enough body params")
+                .status(400).end();
         }
 
         const goods = await prisma.luxury_goods.findUnique({
-            where: {id:req.body.goodsId}
+            where: { id: req.body.goodsId }
         })
 
         const users = await prisma.user.findUnique({
-            where: {id: req.body.userId},
-            include:{
-                Cart:true
+            where: { id: req.body.userId },
+            include: {
+                Cart: true
             }
         })
         console.log(users.Cart[0].id);
-        for(let i=0;i<users.Cart.length;i++) {
-            if(users.Cart[i].id === req.body.goodsId) {
-                return res.status(400).send("already in cart");
+        for (let i = 0; i < users.Cart.length; i++) {
+            if (users.Cart[i].id === req.body.goodsId) {
+                return res
+                    .send("already in cart")
+                    .status(400).end();
             }
         }
 
