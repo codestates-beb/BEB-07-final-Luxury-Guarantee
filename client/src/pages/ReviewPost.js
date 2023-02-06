@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import apiUrl from '../utils/api';
+import isSigned from '../app/isSigned'
 //리뷰작성 페이지
-const ReviewPost = ({userId}) => {
+const ReviewPost = () => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [category, setCategory] = useState("남성");
+
+    const userId = isSigned().id;
 
     const choice = ["남성", "여성", "악세서리"];
     const options = choice.map((choice) => {
@@ -31,7 +34,7 @@ const ReviewPost = ({userId}) => {
             category:category
         })
         .then(res => {
-            console.log(res)
+            console.log(res.data.message)
         })
     }
 

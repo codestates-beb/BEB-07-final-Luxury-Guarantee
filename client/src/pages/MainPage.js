@@ -4,9 +4,9 @@ import mainIMG from './img/main.jpg';
 const MainPage = () => { 
 
     return (
-        <div className='h-[808px] w-[1920px]'>
+        <div className='h-full w-full'>
         
-        <img className='h-[808px] w-[1920px]' src={mainIMG}  alt="none"/>
+        <img className='h-full w-full' src={mainIMG}  alt="none"/>
         
         </div>
     );
