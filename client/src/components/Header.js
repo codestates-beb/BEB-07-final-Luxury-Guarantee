@@ -12,7 +12,7 @@ const Header = () => {
   }
 
   return (
-    <div className="header relative h-[271px] w-[1920px] pt-[80px] bg-black">
+    <div className="header relative h-full w-full pt-[80px] bg-black">
       <div className="logo absolute top-[30.27%] left-[4.84%] h-[119px] w-[153px] text-5xl font-normal text-white">
         <Link to="/">Luxury Guarantee</Link>
       </div>

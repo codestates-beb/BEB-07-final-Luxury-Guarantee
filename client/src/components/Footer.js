@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
     return(
-        <div className='h-[580px] w-[1920px] bg-black flex items-stretch'>
+        <div className='h-full w-full bg-black flex items-stretch'>
         <div className='h-[580px] w-[480px] self-auto'>
             <div className='text-[32px] text-white'><span>About</span></div>
              <div className='text-[16px] text-white'>We,the Luxury Guarantee, are a non-profit association of luxury brands investing in technologies 
