@@ -22,6 +22,7 @@ model user {
     Items       luxury_goods[]
     post        posts[]
     Cart        cart[]
+    likes       like[]
 }
 
 model cart {
@@ -31,6 +32,15 @@ model cart {
     price     Int
     cartowner user   @relation(fields: [userId], references: [id])
     userId    Int
+}
+
+model like {
+    id         Int    @unique @default(autoincrement())
+    goodsId    Int
+    image_url  String
+    price      Int
+    likeowner  user   @relation(fields: [userId], references: [id])
+    userId     Int
 }
 
 model luxury_goods {
@@ -55,6 +65,7 @@ model luxury_goods {
     userId      Int
     ipfsurl     String?
     tokenId     Int?
+    likecnt     Int
 }
 
 model posts {
