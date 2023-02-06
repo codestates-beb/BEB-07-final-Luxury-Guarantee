@@ -1,8 +1,33 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import apiUrl from '../utils/api';
+import axios from 'axios';
 import photo from './img/main.jpg'
+import isSigned from '../app/isSigned';
 // 리뷰  a태그 나중에 링크로 바꾸기
 const Review= () => {
+
+    const[review, setReview] = useState([]);
+
+    const userId = isSigned().nickname;
+
+    const navigate = useNavigate();
+
+    async function getAllReview() {
+        const res = await axios.get(`${apiUrl}/postlist`)
+        return res
+    }
+
+    useEffect(() => {
+        getAllReview().then((res) => {
+          console.log(res.data);
+          setReview([...res.data]);
+        });
+      }, []);
+    
+      const goDetail = async (id) => {
+        navigate(`/reviewdetail`, { state: { postId: id } });
+      };
 
     return (
         
@@ -27,19 +52,21 @@ const Review= () => {
                 </form>
             </div>
         </div>
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-4 gap-12 md:grid-cols-2 xl:grid-cols-3">
+        {review.map((review, id)=> {
+            return(
             <div className="m-auto overflow-hidden rounded-lg shadow-lg cursor-pointer h-90 w-60 md:w-80">
                 <Link to="" className="block w-full h-full">
                     <img alt="" src={photo} className="object-cover w-full max-h-40"/>
                     <div className="w-full p-4 bg-white dark:bg-gray-800">
                         <p className="font-medium text-indigo-500 text-md">
-                            Video
+                            {/* 상품명 */}
                         </p>
                         <p className="mb-2 text-xl font-medium text-gray-800 dark:text-white">
-                            Work at home
+                            {review.title}
                         </p>
                         <p className="font-light text-gray-400 dark:text-gray-300 text-md">
-                            Work at home, remote, is the new age of the job, every person can work at home....
+                            {review.content}
                         </p>
                         <div className="flex items-center mt-4">
                             <Link to="" className="relative block">
@@ -47,163 +74,20 @@ const Review= () => {
                             </Link>
                             <div className="flex flex-col justify-between ml-4 text-sm">
                                 <p className="text-gray-800 dark:text-white">
-                                    Jean Jacques
+                                    {userId}
                                 </p>
                                 <p className="text-gray-400 dark:text-gray-300">
-                                    20 mars 2029 - 6 min read
+                                    {review.createdAt.split("T")[0]}
                                 </p>
                             </div>
                         </div>
                     </div>
                 </Link>
             </div>
-            <div className="m-auto overflow-hidden rounded-lg shadow-lg cursor-pointer h-90 w-60 md:w-80">
-                <Link to="" className="block w-full h-full">
-                    <img alt="" src={photo} className="object-cover w-full max-h-40"/>
-                    <div className="w-full p-4 bg-white dark:bg-gray-800">
-                        <p className="font-medium text-indigo-500 text-md">
-                            Oui
-                        </p>
-                        <p className="mb-2 text-xl font-medium text-gray-800 dark:text-white">
-                            test
-                        </p>
-                        <p className="font-light text-gray-400 dark:text-gray-300 text-md">
-                            The new supercar is here, 543 cv and 140 000$ !!
-                        </p>
-                        <div className="flex items-center mt-4">
-                            <Link to="" className="relative block">
-                                <img alt="profil" src={photo} className="mx-auto object-cover rounded-full h-10 w-10 "/>
-                            </Link>
-                            <div className="flex flex-col justify-between ml-4 text-sm">
-                                <p className="text-gray-800 dark:text-white">
-                                    Jean Jacques
-                                </p>
-                                <p className="text-gray-400 dark:text-gray-300">
-                                    20 mars 2029 - 6 min read
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </Link>
+            )
+        })}
             </div>
-            <div className="m-auto overflow-hidden rounded-lg shadow-lg cursor-pointer h-90 w-60 md:w-80">
-                <Link to="" className="block w-full h-full">
-                    <img alt="" src={photo} className="object-cover w-full max-h-40"/>
-                    <div className="w-full p-4 bg-white dark:bg-gray-800">
-                        <p className="font-medium text-indigo-500 text-md">
-                            Oui
-                        </p>
-                        <p className="mb-2 text-xl font-medium text-gray-800 dark:text-white">
-                            test
-                        </p>
-                        <p className="font-light text-gray-400 dark:text-gray-300 text-md">
-                            The new supercar is here, 543 cv and 140 000$ !!
-                        </p>
-                        <div className="flex items-center mt-4">
-                            <Link to="" className="relative block">
-                                <img alt="profil" src={photo} className="mx-auto object-cover rounded-full h-10 w-10 "/>
-                            </Link>
-                            <div className="flex flex-col justify-between ml-4 text-sm">
-                                <p className="text-gray-800 dark:text-white">
-                                    Jean Jacques
-                                </p>
-                                <p className="text-gray-400 dark:text-gray-300">
-                                    20 mars 2029 - 6 min read
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </Link>
             </div>
-            <div className="m-auto overflow-hidden rounded-lg shadow-lg cursor-pointer h-90 w-60 md:w-80">
-                <Link to="" className="block w-full h-full">
-                    <img alt="" src={photo} className="object-cover w-full max-h-40"/>
-                    <div className="w-full p-4 bg-white dark:bg-gray-800">
-                        <p className="font-medium text-indigo-500 text-md">
-                            제품 이름
-                        </p>
-                        <p className="mb-2 text-xl font-medium text-gray-800 dark:text-white">
-                            test
-                        </p>
-                        <p className="font-light text-gray-400 dark:text-gray-300 text-md">
-                            The new supercar is here, 543 cv and 140 000$ !!
-                        </p>
-                        <div className="flex items-center mt-4">
-                            <Link to="" className="relative block">
-                                <img alt="profil" src={photo} className="mx-auto object-cover rounded-full h-10 w-10 "/>
-                            </Link>
-                            <div className="flex flex-col justify-between ml-4 text-sm">
-                                <p className="text-gray-800 dark:text-white">
-                                    Jean Jacques
-                                </p>
-                                <p className="text-gray-400 dark:text-gray-300">
-                                    20 mars 2029 - 6 min read
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </Link>
-            </div>
-            <div className="m-auto overflow-hidden rounded-lg shadow-lg cursor-pointer h-90 w-60 md:w-80">
-                <Link to="" className="block w-full h-full">
-                    <img alt="" src={photo} className="object-cover w-full max-h-40"/>
-                    <div className="w-full p-4 bg-white dark:bg-gray-800">
-                        <p className="font-medium text-indigo-500 text-md">
-                            제품 이름
-                        </p>
-                        <p className="mb-2 text-xl font-medium text-gray-800 dark:text-white">
-                            test
-                        </p>
-                        <p className="font-light text-gray-400 dark:text-gray-300 text-md">
-                            The new supercar is here, 543 cv and 140 000$ !!
-                        </p>
-                        <div className="flex items-center mt-4">
-                            <Link to="" className="relative block">
-                                <img alt="profil" src={photo} className="mx-auto object-cover rounded-full h-10 w-10 "/>
-                            </Link>
-                            <div className="flex flex-col justify-between ml-4 text-sm">
-                                <p className="text-gray-800 dark:text-white">
-                                    Jean Jacques
-                                </p>
-                                <p className="text-gray-400 dark:text-gray-300">
-                                    20 mars 2029 - 6 min read
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </Link>
-            </div>
-            <div className="m-auto overflow-hidden rounded-lg shadow-lg cursor-pointer h-90 w-60 md:w-80">
-                <Link to="" className="block w-full h-full">
-                    <img alt="" src={photo} className="object-cover w-full max-h-40"/>
-                    <div className="w-full p-4 bg-white dark:bg-gray-800">
-                        <p className="font-medium text-indigo-500 text-md">
-                            Oui
-                        </p>
-                        <p className="mb-2 text-xl font-medium text-gray-800 dark:text-white">
-                            test
-                        </p>
-                        <p className="font-light text-gray-400 dark:text-gray-300 text-md">
-                            The new supercar is here, 543 cv and 140 000$ !!
-                        </p>
-                        <div className="flex items-center mt-4">
-                            <Link to="" className="relative block">
-                                <img alt="profil" src={photo} className="mx-auto object-cover rounded-full h-10 w-10 "/>
-                            </Link>
-                            <div className="flex flex-col justify-between ml-4 text-sm">
-                                <p className="text-gray-800 dark:text-white">
-                                    Jean Jacques
-                                </p>
-                                <p className="text-gray-400 dark:text-gray-300">
-                                    20 mars 2029 - 6 min read
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </Link>
-            </div>
-        </div>
-    </div>
 
     )
 }

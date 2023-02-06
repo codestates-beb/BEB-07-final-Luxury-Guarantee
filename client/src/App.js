@@ -29,6 +29,7 @@ import Shirts from "./pages/LuxuryGalleryMan/Shirts";
 import Shorts from "./pages/LuxuryGalleryMan/Shorts";
 import Trousers from "./pages/LuxuryGalleryMan/Trousers";
 import TshirtsVests from "./pages/LuxuryGalleryMan/TshirtsVests";
+import ReviewDetail from "./pages/ReviewDetail";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
         <Route path='/post' element={<Post />}></Route>
         <Route path='/review' element={<Review />}></Route>
         <Route path='/reviewpost' element={<ReviewPost />}></Route>
+        <Route path='/reviewdetail/:id' element={<ReviewDetail />}></Route>
         <Route path='/faq' element={<FAQ />}></Route>
         <Route path='/recell' element={<Recell />}></Route>
         <Route path='/signupcompany' element={<SignupCompany />}></Route>

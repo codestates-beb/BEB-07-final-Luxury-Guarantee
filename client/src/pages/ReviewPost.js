@@ -34,7 +34,14 @@ const ReviewPost = () => {
             category:category
         })
         .then(res => {
-            console.log(res.data.message)
+            if (title === '') {
+                alert('제목을 입력해주세요'); return;
+            }
+    
+            if (content === '') {
+                alert('내용을 입력해주세요'); return;
+            }
+            document.location.href = '/review'
         })
     }
 
