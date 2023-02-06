@@ -28,11 +28,15 @@ const MyPage = () => {
 		<div className="grid grid-cols-1 lg:grid-cols-1 gap-6 my-12 w-2xl container px-2 mx-auto">
 			<div className="bg-white shadow rounded-lg p-10">
 				<div className="flex flex-col gap-1 text-left items-left">
-					<img className="h-32 w-32 bg-white p-2 rounded-full shadow mb-4" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2000&amp;q=80" alt="" />
+					<img className="h-32 w-32 bg-white p-2 rounded-full shadow mb-4" src="https://www.pngarts.com/files/10/Default-Profile-Picture-PNG-Download-Image.png" alt="" />
 					<p className="font-semibold mt-5"> {userInfo.nickname}님 안녕하세요!</p>
+					<br></br>
+					<p className="font-semibold mt-3">내 지갑 주소:</p>
 					<p className="font-semibold mt-3">{userInfo.address}</p>
+					<br></br>
 					<p className="font-semibold mt-3">My Token: {userInfo.tokenAmount}</p>
 					<p className="font-semibold mt-3">My ETH: {userInfo.ethAmount}</p>
+					<br></br>
 				</div>
 
 				<div className="flex justify-start items-left gap-2 my-3">
@@ -49,19 +53,38 @@ const MyPage = () => {
 						<span className="text-gray-400">구매</span>
 					</div>
 				</div>
-
-				<div className="mypost ">post{userInfo.post}</div>
+				<br></br>
+				<div className="mypost font-semibold mt-3">작성글{userInfo.post}</div>
 				<div className='flex justify-end'>
-					<button className='lux-resister bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded '><Link to='/luxuryresister'>명품 등록하기</Link></button>
+					{userInfo.isCompany === true ? (<button className='lux-resister bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded '><Link to='/luxuryresister'>명품 등록하기</Link></button>) : (<></>)}
+
 				</div>
 			</div>
 
 			<div className="grid mt-5 grid-cols-4 gap-6 justify-center items-center w-full ">
 
 				<div>
-					<p>My Items</p>
+					{userInfo.isCompany === true ?
+						(<p className="font-semibold mt-3">내가 등록한 아이템</p>) :
+						(<p className="font-semibold mt-3">내가 구매한 아이템</p>)}
+					<br></br>
 					{myItem && myItem.map((e) => (
-						<img alt='my-item' key={e.id} src={e.image_url}></img>
+						<div key={e.id} className='border-solid border-2 mb-5'>
+							<p>{e.id}</p>
+							<img alt='my-item' src={e.image_url}  ></img>
+							<br></br>
+							<p>{e.brand}</p>
+							<br></br>
+							<div className='flex justify-center'>
+								{userInfo.isCompany === true ? (
+									<Link to={`/luxurysell/${e.id}`}
+										className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' >판매 등록하기</Link>
+								) : (
+									<Link to='/' className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>리셀 판매하기</Link>
+								)}
+
+							</div>
+						</div>
 					))}
 				</div>
 

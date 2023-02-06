@@ -43,7 +43,7 @@ function App() {
         <Route path='/login' element={<Login />}></Route>
         <Route path='/luxurydetail/:id' element={<LuxuryDetail />}></Route>
         <Route path='/luxurygallery' element={<LuxuryGallery />}></Route>
-        <Route path='/luxurysell' element={<LuxurySell />}></Route>
+        <Route path='/luxurysell/:id' element={<LuxurySell />}></Route>
         <Route path='/luxuryresister' element={<LuxuryResister />}></Route>
         <Route path='/mypage' element={<MyPage />}></Route>
         <Route path='/payment' element={<Payment />}></Route>

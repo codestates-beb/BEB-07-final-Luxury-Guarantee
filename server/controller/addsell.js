@@ -4,7 +4,8 @@ require("dotenv").config();
 
 module.exports = {
     addsell: async (req, res) => {
-        if (!req.body.id || !req.body.image_url || !req.body.content || !req.body.price) {
+        console.log(req.body)
+        if (!req.body.id || !req.body.content || !req.body.price) {
             return res
                 .send("not enough body params")
                 .status(400).end();
@@ -26,7 +27,6 @@ module.exports = {
         const goods = await prisma.luxury_goods.update({
             where: { id: req.body.id },
             data: {
-                image_url: req.body.image_url,
                 description: req.body.content,
                 price: req.body.price,
                 isSelling: true
