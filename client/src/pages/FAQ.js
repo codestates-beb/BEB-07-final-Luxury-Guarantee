@@ -3,37 +3,6 @@ import React from 'react';
 const FAQ = () => {
 
        
-{/*
-      
-
-   \
-            </p>
-        </li>
-        <li className="w-2/5">
-            <p className="text-lg font-medium leading-6 text-gray-900">
-            교환/반품/환불 접수에 대한 취소가 가능한가요?
-            </p>
-            <p className="mt-2">    
-                <p className="text-base leading-6 text-gray-500">
-                접수철회의 경우 한스타일 1:1문의 또는 채널톡(https://naver.com)으로 취소 접수 부탁드립니다.
-                </p>
-            </p>
-        </li>
-        <li className="w-2/5 ml-6">
-            <p className="text-lg font-medium leading-6 text-gray-900">
-            결제취소 이후 대금지급 소요일은 어떻게 되나요?
-            </p>
-            <p className="mt-2">
-                <p className="text-base leading-6 text-gray-500">
-                [환불 관련 안내]<br/>
-                1. 카드결제 : 승인 취소 처리 (반품완료일 기준 카드사 반영 4~5일 소요)<br/>
-                2. 실시간 계좌이체: 초기 이체 계좌 (반품완료일 기준 은행 처리 2~3일 소요)<br/>
-                3. 무통장입금: 환불계좌로 입금 (반품완료일 기준 은행 처리 3일 소요)<br/>
-                </p>
-            </p>
-        </li>
-    </ul>
-</div> */}
 return (
 <div>
 	<div className="max-w-screen-xl mx-auto px-5 bg-white min-h-sceen">
