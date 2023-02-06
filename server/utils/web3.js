@@ -3,7 +3,7 @@ require('dotenv').config({ path: '../.env' });
 const Web3 = require('web3');
 const LuxABI = require('./abi/LuxTokenABI');
 
-const { LOCAL_RPC_SERVER_NETWORK, LOCAL_RPC_SERVER_PORT, CONTRACT_ADDRESS } =
+const { LOCAL_RPC_SERVER_NETWORK, LOCAL_RPC_SERVER_PORT, LUX } =
     process.env;
 
 const getWeb3 = (network, port) =>
@@ -14,7 +14,7 @@ const getContract = (web3, abi, contractAddr) =>
 
 const web = getWeb3(LOCAL_RPC_SERVER_NETWORK, LOCAL_RPC_SERVER_PORT);
 
-const tokenContract = getContract(web, LuxABI, CONTRACT_ADDRESS)
+const tokenContract = getContract(web, LuxABI, LUX)
 
 module.exports = {
     createWallet: async (password) => {

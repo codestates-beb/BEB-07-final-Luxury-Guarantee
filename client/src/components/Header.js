@@ -61,9 +61,18 @@ const Header = () => {
 
           </li>
           <li>
-            <Link to="/signupmain" className="category-item text-white p-[30px] text-[30px]">
-              Membership
-            </Link>
+            {userData.isSigned === false ?
+              (
+                <Link to="/signupmain" className="category-item text-white p-[30px] text-[30px]">
+                  Membership
+                </Link>
+              ) : (
+                <Link to="post" className="category-item text-white p-[30px] text-[30px]">
+                  Post
+                </Link>
+              )
+            }
+
           </li>
 
         </ul>
