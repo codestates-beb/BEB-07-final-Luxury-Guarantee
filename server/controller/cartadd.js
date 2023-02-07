@@ -18,7 +18,6 @@ module.exports = {
                 Cart: true
             }
         })
-        console.log(users.Cart[0].id);
         for (let i = 0; i < users.Cart.length; i++) {
             if (users.Cart[i].id === req.body.goodsId) {
                 return res

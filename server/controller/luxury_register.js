@@ -88,7 +88,8 @@ module.exports = {
                         image_url: req.body.image_url,
                         description: req.body.description,
                         isResell: resell,
-                        ipfsurl: url
+                        ipfsurl: url,
+                        likecnt: 0
                     }
                 }
             }

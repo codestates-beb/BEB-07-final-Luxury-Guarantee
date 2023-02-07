@@ -2,20 +2,29 @@ import React from 'react';
 //FAQ
 const FAQ = () => {
 
-    return (
        
-<div className="max-w-screen-xl p-8 mx-auto">
-    <h2 className="mb-12 text-3xl font-extrabold leading-9 text-gray-900 border-b-2 border-gray-100">
-        FAQs
-    </h2>
-    <ul className="flex flex-wrap items-start gap-8">
-        <li className="w-1/2">
-            <p className="text-lg font-medium leading-6 text-gray-900">
-                상품을 A/S 받고 싶습니다. 어떻게 접수해야하나요?
+return (
+<div>
+	<div className="max-w-screen-xl mx-auto px-5 bg-white min-h-sceen">
+        <div className="flex flex-col items-center">
+            <h2 className="font-bold text-5xl mt-5 tracking-tight">
+                FAQ
+            </h2>
+            <p className="text-neutral-500 text-xl mt-3">
+                Frequenty asked questions
             </p>
-            <p className="mt-2">
-                <p className="text-base leading-6 text-gray-500">
-                온라인에서 구매한 자사상품에 대해서만 A/S가 가능하며, 오프라인 및 타 쇼핑몰에서 구매한 상품의 경우 해당 구매처로 문의 부탁드립니다.
+        </div><div className="grid divide-y divide-neutral-200 max-w-xl mx-auto mt-8">
+                <div className="">
+                    <details className="group">
+                        <summary className="flex justify-between items-center font-medium cursor-pointer list-none">
+                                <span> 상품을 A/S 받고 싶습니다. 어떻게 접수해야하나요??</span>
+                                <span className="transition group-open:rotate-180">
+                                    <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path>
+                                    </svg>
+                                </span>
+                            </summary>
+                        <p className="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                        온라인에서 구매한 자사상품에 대해서만 A/S가 가능하며, 오프라인 및 타 쇼핑몰에서 구매한 상품의 경우 해당 구매처로 문의 부탁드립니다.
                 실물 확인 전 A/S가능여부에 대해 정확히 안내 드리지 못하는 점 양해 부탁드립니다.
                 <br/>
                 <br/>
@@ -31,16 +40,24 @@ const FAQ = () => {
                 AS담당자에게 상품 실물입고 후 디자인 및 손상 정도, 부자재 유무에 따라 수선이 불가하거나 변동사항이 있을 경우 별도 연락을 드릴 수 있는 점 참고 부탁드립니다.
                 <br/>
                 그 밖에 'A/S가능여부 / 접수방법 / 진행과정' 등의 문의는 A/S센터 (☎ 1588-0000) 로 문의 부탁드립니다.
-                </p>
-            </p>
-        </li>
-        <li className="w-2/5">
-            <p className="text-lg font-medium leading-6 text-gray-900">
-            교환/반품/환불 정책이 어떻게 되나요?
-            </p>
-            <p className="mt-2">
-                <p className="text-base leading-6 text-gray-500">
-                1. 상품 배송완료일로부터 7일 이내 교환 / 반품 신청이 가능 합니다.<br/>
+                        </p>
+            </details>
+            </div>
+        </div>
+    </div>
+    <div className="max-w-screen-xl mx-auto px-5 bg-white min-h-sceen">
+    <div className="grid divide-y divide-neutral-200 max-w-xl mx-auto mt-8">
+            <div className="">
+                <details className="group">
+                    <summary className="flex justify-between items-center font-medium cursor-pointer list-none">
+                            <span>교환/반품/환불 정책이 어떻게 되나요?</span>
+                            <span className="transition group-open:rotate-180">
+                                <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path>
+                                </svg>
+                            </span>
+                        </summary>
+                    <p className="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                    1. 상품 배송완료일로부터 7일 이내 교환 / 반품 신청이 가능 합니다.<br/>
                 * 단, 일부 상품, 빈티지, 리미티드 등의 경우 상품 출고 후 교환/반품/취소가 어려울 수 있으니 참고하여 구매 부탁 드립니다.
                 <br/><br/>
                 2. 상품을 미사용한 상태에서 반송 부탁드립니다.<br/>
@@ -55,60 +72,92 @@ const FAQ = () => {
                 * 구매하신 상품의 구성(사은)품이 누락된 경우 (단, 그 구성품이 훼손 없이 회수가 가능한 경우 제외<br/>
 
                 5. 교환 / 반품은 배송 완료일로부터 7일 경과후 교환 접수 기간이 경과되어 교환이 어려운 점 양해 부탁드립니다.
-                </p>
-            </p>
-        </li>
-        <li className="w-2/5">
-            <p className="text-lg font-medium leading-6 text-gray-900">
-            반품에 대한 회수는 얼마나 걸리나요?
-            </p>
-            <p className="mt-2">
-                <p className="text-base leading-6 text-gray-500">
-                반품신청을 하신 후 영업일 기준 2-3일 이내 대한통운 기사님이 방문합니다. (라이프 스타일 및 입점사 경우 수거택배사가 일부 상이)
+                    </p>
+        </details>
+        </div>
+    </div>
+</div>
+<div className="max-w-screen-xl mx-auto px-5 bg-white min-h-sceen">
+        <div className="grid divide-y divide-neutral-200 max-w-xl mx-auto mt-8">
+                <div className="">
+                    <details className="group">
+                        <summary className="flex justify-between items-center font-medium cursor-pointer list-none">
+                                <span> 반품에 대한 회수는 얼마나 걸리나요?</span>
+                                <span className="transition group-open:rotate-180">
+                                    <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path>
+                                    </svg>
+                                </span>
+                            </summary>
+                        <p className="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                        반품신청을 하신 후 영업일 기준 2-3일 이내 대한통운 기사님이 방문합니다. (라이프 스타일 및 입점사 경우 수거택배사가 일부 상이)
                 택배사로 인계된 시점부터 1~2일(주말 및 공휴일 제외)후 상품 수령 예상되며,
-                품이 물류센터로 입고 되면 평일기준 2~3일의 검수 확인 후 결제금액을 취소해드리겠습니다.    
-                </p>
-            </p>
-        </li>
-        <li className="w-2/5 ml-6">
-            <p className="text-lg font-medium leading-6 text-gray-900">
-            리미티드 상품을 교환/반품/환불하고 싶어요.
-            </p>
-            <p className="mt-2">
-                <p className="text-base leading-6 text-gray-500">
-                리미티드 제품은 한정된 수량으로 입고되는 제품으로,
+                품이 물류센터로 입고 되면 평일기준 2~3일의 검수 확인 후 결제금액을 취소해드리겠습니다.
+                        </p>
+            </details>
+            </div>
+        </div>
+    </div>
+    <div className="max-w-screen-xl mx-auto px-5 bg-white min-h-sceen">
+<div className="grid divide-y divide-neutral-200 max-w-xl mx-auto mt-8">
+            <div className="">
+                <details className="group">
+                    <summary className="flex justify-between items-center font-medium cursor-pointer list-none">
+                            <span> 리미티드 상품을 교환/반품/환불하고 싶어요.</span>
+                            <span className="transition group-open:rotate-180">
+                                <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path>
+                                </svg>
+                            </span>
+                        </summary>
+                    <p className="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                    리미티드 제품은 한정된 수량으로 입고되는 제품으로,
                 제품 특성상 교환 / 반품 / 환불이 어렵습니다.
                 제품 불량 및 구성품 누락 등으로 교환 / 환불을 원하시는 경우,
                  1:1문의 또는 채널톡(https://naver.com) 로 문의 부탁드립니다.
-                </p>
-            </p>
-        </li>
-        <li className="w-2/5">
-            <p className="text-lg font-medium leading-6 text-gray-900">
-            교환/반품/환불 접수에 대한 취소가 가능한가요?
-            </p>
-            <p className="mt-2">
-                <p className="text-base leading-6 text-gray-500">
-                접수철회의 경우 한스타일 1:1문의 또는 채널톡(https://naver.com)으로 취소 접수 부탁드립니다.
-                </p>
-            </p>
-        </li>
-        <li className="w-2/5 ml-6">
-            <p className="text-lg font-medium leading-6 text-gray-900">
-            결제취소 이후 대금지급 소요일은 어떻게 되나요?
-            </p>
-            <p className="mt-2">
-                <p className="text-base leading-6 text-gray-500">
-                [환불 관련 안내]<br/>
+                    </p>
+        </details>
+        </div>
+    </div>
+</div>
+<div className="max-w-screen-xl mx-auto px-5 bg-white min-h-sceen">
+<div className="grid divide-y divide-neutral-200 max-w-xl mx-auto mt-8">
+            <div className="">
+                <details className="group">
+                    <summary className="flex justify-between items-center font-medium cursor-pointer list-none">
+                            <span> 교환/반품/환불 접수에 대한 취소가 가능한가요?</span>
+                            <span className="transition group-open:rotate-180">
+                                <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path>
+                                </svg>
+                            </span>
+                        </summary>
+                    <p className="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                    접수철회의 경우 한스타일 1:1문의 또는 채널톡(https://naver.com)으로 취소 접수 부탁드립니다.
+                    </p>
+        </details>
+        </div>
+    </div>
+</div>
+<div className="max-w-screen-xl mx-auto px-5 bg-white min-h-sceen">
+<div className="grid divide-y divide-neutral-200 max-w-xl mx-auto mt-8 mb-10">
+            <div className="">
+                <details className="group">
+                    <summary className="flex justify-between items-center font-medium cursor-pointer list-none">
+                            <span> 결제취소 이후 대금지급 소요일은 어떻게 되나요?</span>
+                            <span className="transition group-open:rotate-180">
+                                <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path>
+                                </svg>
+                            </span>
+                        </summary>
+                    <p className="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                    [환불 관련 안내]<br/>
                 1. 카드결제 : 승인 취소 처리 (반품완료일 기준 카드사 반영 4~5일 소요)<br/>
                 2. 실시간 계좌이체: 초기 이체 계좌 (반품완료일 기준 은행 처리 2~3일 소요)<br/>
                 3. 무통장입금: 환불계좌로 입금 (반품완료일 기준 은행 처리 3일 소요)<br/>
                 </p>
-            </p>
-        </li>
-    </ul>
+        </details>
+        </div>
+    </div>
 </div>
-
+</div>
     )
 }
 
