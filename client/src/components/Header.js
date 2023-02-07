@@ -20,7 +20,7 @@ const Header = () => {
 
         <Link to="/mypage"><i className="fa-regular fa-user"></i></Link>
 
-        <Link to="/"><i className="fa-solid fa-heart"></i></Link>
+        <Link to="/likelist"><i className="fa-solid fa-heart"></i></Link>
         <Link to="/cart"><i className="fa-solid fa-cart-shopping"></i></Link>
       </div>
 
