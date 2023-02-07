@@ -14,7 +14,7 @@ const Payment = () => {
                                 <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80" alt="" />
                             </div>
                             <div className="flex-grow pl-8">
-                                <h6 className="font-semibold uppercase text-gray-600">Ray Ban Sunglasses.</h6>
+                                <button className="font-semibold uppercase text-gray-600">Ray Ban Sunglasses.</button>
                                 <p className="text-gray-400">x 1</p>
                             </div>
                             <div>
@@ -27,11 +27,11 @@ const Payment = () => {
                             <div className="flex-grow px-2 lg:max-w-xs">
                                 <label className="text-gray-600 font-semibold text-sm mb-2 ml-1">Discount code</label>
                                 <div>
-                                    <input className="w-full px-3 py-2 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="XXXXXX" type="text"/>
+                                    <input className="w-full px-3 py-2 border border-gray-200 rounded-md focus:outline-none focus:border-black transition-colors" placeholder="XXXXXX" type="text"/>
                                 </div>
                             </div>
                             <div className="px-2">
-                                <button className="block w-full max-w-xs mx-auto border border-transparent bg-gray-400 hover:bg-gray-500 focus:bg-gray-500 text-white rounded-md px-5 py-2 font-semibold">APPLY</button>
+                                <button className="block w-full max-w-xs mx-auto border border-transparent bg-black hover:bg-gray-500 focus:bg-gray-500 text-white rounded-md px-5 py-2 font-semibold">APPLY</button>
                             </div>
                         </div>
                     </div>
@@ -87,7 +87,7 @@ const Payment = () => {
                         <div className="w-full p-3 border-b border-gray-200">
                             <div className="mb-5">
                                 <label htmlfor="type1" className="flex items-center cursor-pointer">
-                                    <input type="radio" className="form-radio h-5 w-5 text-indigo-500" name="type" id="type1" checked />
+                                    <input type="radio" className="form-radio h-5 w-5 text-black" name="type" id="type1" checked />
                                     <img src="https://leadershipmemphis.org/wp-content/uploads/2020/08/780370.png" className="h-6 ml-3" alt=''/>
                                 </label>
                             </div>
@@ -95,20 +95,20 @@ const Payment = () => {
                                 <div className="mb-3">
                                     <label className="text-gray-600 font-semibold text-sm mb-2 ml-1">Name on card</label>
                                     <div>
-                                        <input className="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="John Smith" type="text"/>
+                                        <input className="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-black transition-colors" placeholder="John Smith" type="text"/>
                                     </div>
                                 </div>
                                 <div className="mb-3">
                                     <label className="text-gray-600 font-semibold text-sm mb-2 ml-1">Card number</label>
                                     <div>
-                                        <input className="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="0000 0000 0000 0000" type="text"/>
+                                        <input className="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-black transition-colors" placeholder="0000 0000 0000 0000" type="text"/>
                                     </div>
                                 </div>
                                 <div className="mb-3 -mx-2 flex items-end">
                                     <div className="px-2 w-1/4">
                                         <label className="text-gray-600 font-semibold text-sm mb-2 ml-1">Expiration date</label>
                                         <div>
-                                            <select className="form-select w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer">
+                                            <select className="form-select w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-black transition-colors cursor-pointer">
                                                 <option value="01">01 - January</option>
                                                 <option value="02">02 - February</option>
                                                 <option value="03">03 - March</option>
@@ -125,7 +125,7 @@ const Payment = () => {
                                         </div>
                                     </div>
                                     <div className="px-2 w-1/4">
-                                        <select className="form-select w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer">
+                                        <select className="form-select w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-black transition-colors cursor-pointer">
                                             <option value="2020">2020</option>
                                             <option value="2021">2021</option>
                                             <option value="2022">2022</option>
@@ -141,7 +141,7 @@ const Payment = () => {
                                     <div className="px-2 w-1/4">
                                         <label className="text-gray-600 font-semibold text-sm mb-2 ml-1">Security code</label>
                                         <div>
-                                            <input className="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="000" type="text"/>
+                                            <input className="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-black transition-colors" placeholder="000" type="text"/>
                                         </div>
                                     </div>
                                 </div>
@@ -149,13 +149,13 @@ const Payment = () => {
                         </div>
                         <div className="w-full p-3">
                             <label htmlfor="type2" className="flex items-center cursor-pointer">
-                                <input type="radio" className="form-radio h-5 w-5 text-indigo-500" name="type" id="type2" />
+                                <input type="radio" className="form-radio h-5 w-5 text-black" name="type" id="type2" />
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" width="80" className="ml-3" alt=''/>
                             </label>
                         </div>
                     </div>
                     <div>
-                        <button className="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-2 font-semibold"><i className="mdi mdi-lock-outline mr-1"></i> PAY NOW</button>
+                        <button className="block w-full max-w-xs mx-auto bg-black hover:bg-gray-700 focus:bg-black text-white rounded-lg px-3 py-2 font-semibold"><i className="mdi mdi-lock-outline mr-1"></i> PAY NOW</button>
                     </div>
                 </div>
             </div>
