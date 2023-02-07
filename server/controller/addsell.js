@@ -1,5 +1,5 @@
 const prisma = require("../prisma/prisma");
-const { MyLuxuryContract, LuxTokenContract, web3 } = require("../web3s/web3");
+const { LuxTokenContract, web3 } = require("../web3s/web3");
 require("dotenv").config();
 
 module.exports = {
@@ -23,18 +23,29 @@ module.exports = {
                 .status(400).end();
         }
 
+        const goods_valid = await prisma.luxury_goods.findUnique({
+            where: {id: req.body.id}
+        });
 
+        const users = await prisma.user.findUnique({
+            where: { id: goods_valid.userId }
+        })
+
+        if(Number(users.tokenAmount) < goods_valid.price) {
+            return res.send("not enough token").status(400).send();
+        }
+
+        let isResells = false;
+        if(users.isCompany===false) isResells = true;
+        
         const goods = await prisma.luxury_goods.update({
             where: { id: req.body.id },
             data: {
-                description: req.body.content,
+                content: req.body.content,
                 price: req.body.price,
+                isResell: isResells,
                 isSelling: true
             }
-        })
-
-        const users = await prisma.user.findUnique({
-            where: { id: goods.userId }
         })
 
         const accounts = await web3.eth.getAccounts();

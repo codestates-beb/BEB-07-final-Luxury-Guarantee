@@ -20,6 +20,9 @@ import Footer from "./components/Footer"
 import Review from "./pages/Review";
 import ReviewPost from "./pages/ReviewPost";
 import FAQ from "./pages/FAQ";
+
+import Like from "./pages/Like";
+
 import ReviewDetail from "./pages/ReviewDetail";
 
 function App() {
@@ -48,6 +51,7 @@ function App() {
         <Route path='/signupcompany' element={<SignupCompany />}></Route>
         <Route path='/signupmain' element={<SignupMain />}></Route>
         <Route path='/signupuser' element={<SignupUser />}></Route>
+        <Route path='/likelist' element={<Like />}></Route>
       </Routes>
       <Footer />
     </div>
