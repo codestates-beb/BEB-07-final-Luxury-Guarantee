@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import apiUrl from '../utils/api';
 import axios from 'axios';
 import photo from './img/main.jpg'
@@ -10,8 +10,6 @@ const Review= () => {
     const[review, setReview] = useState([]);
 
     const userId = isSigned().nickname;
-
-    const navigate = useNavigate();
 
     async function getAllReview() {
         const res = await axios.get(`${apiUrl}/postlist`)
@@ -25,10 +23,6 @@ const Review= () => {
         });
       }, []);
     
-      const goDetail = async (id) => {
-        navigate(`/reviewdetail`, { state: { postId: id } });
-      };
-
     return (
         
 <div className="w-full p-12 bg-white">
@@ -56,7 +50,7 @@ const Review= () => {
         {review.map((review, id)=> {
             return(
             <div className="m-auto overflow-hidden rounded-lg shadow-lg cursor-pointer h-90 w-60 md:w-80">
-                <Link to="" className="block w-full h-full">
+                <Link to={`/reviewdetail/${review.id}`} className="block w-full h-full">
                     <img alt="" src={photo} className="object-cover w-full max-h-40"/>
                     <div className="w-full p-4 bg-white dark:bg-gray-800">
                         <p className="font-medium text-indigo-500 text-md">
