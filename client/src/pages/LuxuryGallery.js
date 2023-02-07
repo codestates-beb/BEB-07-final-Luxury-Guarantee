@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import apiUrl from "../utils/api";
 
@@ -36,10 +37,13 @@ const LuxuryGallery = () => {
                         <div className="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                             {itemList && itemList.map((e) => {
                                 return (
-                                    <div key={e.id} className="flex flex-col items-center justify-center w-full max-w-lg mx-auto">
-                                        <img className="object-cover w-full rounded-md h-72 xl:h-80" alt='my-item' src={e.image_url}  ></img>
-                                        <h4 className="mt-2 text-lg font-medium text-gray-700 dark:text-gray-200">{e.name}</h4>
-                                        <p className="text-blue-500">{e.price} LUX</p>
+                                    <div key={e.id}>
+                                        <Link className="flex flex-col items-center justify-center w-full max-w-lg mx-auto" to={`/luxurydetail/${e.id}`}><img className="object-cover w-full rounded-md h-72 xl:h-80" alt='my-item' src={e.image_url}  >
+
+                                        </img>
+                                            <h4 className="mt-2 text-lg font-medium text-gray-700 dark:text-gray-200">{e.name}</h4>
+                                            <p className="text-blue-500">{e.price} LUX</p></Link>
+
 
                                         <button className="flex items-center justify-center w-full px-2 py-2 mt-4 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700">
                                             <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 mx-1" viewBox="0 0 20 20" fill="currentColor">
