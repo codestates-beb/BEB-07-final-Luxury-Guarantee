@@ -4,7 +4,6 @@ require("dotenv").config();
 
 module.exports = {
     addsellcompany: async (req, res) => {
-        console.log(req.body)
         if (!req.body.id || !req.body.content || !req.body.price) {
             return res
                 .send("not enough body params")
@@ -24,20 +23,20 @@ module.exports = {
         }
 
         const goods_valid = await prisma.luxury_goods.findUnique({
-            where: {id: req.body.id}
+            where: { id: req.body.id }
         });
 
         const users = await prisma.user.findUnique({
             where: { id: goods_valid.userId }
         })
 
-        if(Number(users.tokenAmount) < goods_valid.price) {
+        if (Number(users.tokenAmount) < goods_valid.price) {
             return res.send("not enough token").status(400).send();
         }
 
         let isResells = false;
-        if(users.isCompany===false) isResells = true;
-        
+        if (users.isCompany === false) isResells = true;
+
         const goods = await prisma.luxury_goods.update({
             where: { id: req.body.id },
             data: {
