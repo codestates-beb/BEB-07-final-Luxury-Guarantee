@@ -80,7 +80,7 @@ const MyPage = () => {
 									<Link to={`/luxurysell/${e.id}`}
 										className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' >판매 등록하기</Link>
 								) : (
-									<Link to='/' className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>리셀 판매하기</Link>
+									<Link to={`/luxuryselluser/${e.id}`} className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>리셀 판매하기</Link>
 								)}
 
 							</div>

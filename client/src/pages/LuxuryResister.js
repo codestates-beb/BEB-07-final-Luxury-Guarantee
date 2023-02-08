@@ -58,6 +58,7 @@ const LuxuryResister = () => {
             userId: isSigned().id,
         })
             .then(res => {
+                console.log(res)
                 document.location.href = '/mypage'
             })
     }

@@ -45,7 +45,7 @@ const LuxurySell = () => {
     const addImage = e => {
         const nowSelectImageList = e.target.files;
         const nowImageURLList = [...myImage];
-        for(let i=0;i<nowSelectImageList.length;i++) {
+        for (let i = 0; i < nowSelectImageList.length; i++) {
             const nowImageURL = URL.createObjectURL(nowSelectImageList[i]);
             nowImageURLList.push(nowImageURL);
         }
@@ -63,7 +63,6 @@ const LuxurySell = () => {
                 console.log(res)
             })
     }
-
     if (!itemInfo) {
         return null;
     }
@@ -92,8 +91,8 @@ const LuxurySell = () => {
                 <br></br>
                 <label htmlFor="input-file" className="images-input-file" onChange={addImage}>
                     Add your photo
-                    <input type="file" multiple="multiple" id="input-file" style={{display:'none'}} accept=".jpg, .jpeg, .png"/>
-                 </label>
+                    <input type="file" multiple="multiple" id="input-file" style={{ display: 'none' }} accept=".jpg, .jpeg, .png" />
+                </label>
                 <br></br>
                 <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3' onClick={onSubmitHandler}>판매 등록</button>
             </div>
