@@ -4,9 +4,7 @@ import isSigned from '../app/isSigned'
 import axios from 'axios';
 import apiUrl from "../utils/api";
 
-
-//명품 판매 정보등록 (기업전용)
-
+//명품 판매 정보등록 (회원전용)
 
 const LuxurySell = () => {
     const [itemInfo, setItemInfo] = useState('');
@@ -22,7 +20,7 @@ const LuxurySell = () => {
         const id = params.id;
         const getData = async () => {
             try {
-                const res = await axios.get(`${apiUrl}/beforesalelist/${id}`)
+                const res = await axios.get(`${apiUrl}/beforereselllist/${id}`)
                 if (res.data.length === 0 || res.data[0].userId !== isSigned().id) {
                     alert('잘못된 접근입니다.');
                     document.location.href = '/';
@@ -42,9 +40,22 @@ const LuxurySell = () => {
         });
     };
 
+    const [myImage, setMyImage] = useState([]);
+
+    const addImage = e => {
+        const nowSelectImageList = e.target.files;
+        const nowImageURLList = [...myImage];
+        for(let i=0;i<nowSelectImageList.length;i++) {
+            const nowImageURL = URL.createObjectURL(nowSelectImageList[i]);
+            nowImageURLList.push(nowImageURL);
+        }
+        setMyImage(nowImageURLList);
+    }
+
     const onSubmitHandler = () => {
-        axios.post(`${apiUrl}/addsellcompany`, {
+        axios.post(`${apiUrl}/addselluser`, {
             id: Number(params.id),
+            images: myImage,
             content: inputValue.content,
             price: Number(inputValue.price)
         })
@@ -52,7 +63,6 @@ const LuxurySell = () => {
                 console.log(res)
             })
     }
-
 
     if (!itemInfo) {
         return null;
@@ -79,6 +89,11 @@ const LuxurySell = () => {
                 </label>
                 <br></br>
                 <textarea className='border-solid border-2 h-48 w-80 ' name='content' onChange={handleChange} value={inputValue.content || ""} />
+                <br></br>
+                <label htmlFor="input-file" className="images-input-file" onChange={addImage}>
+                    Add your photo
+                    <input type="file" multiple="multiple" id="input-file" style={{display:'none'}} accept=".jpg, .jpeg, .png"/>
+                 </label>
                 <br></br>
                 <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3' onClick={onSubmitHandler}>판매 등록</button>
             </div>

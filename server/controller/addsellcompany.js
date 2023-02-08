@@ -3,7 +3,7 @@ const { LuxTokenContract, web3 } = require("../web3s/web3");
 require("dotenv").config();
 
 module.exports = {
-    addsell: async (req, res) => {
+    addsellcompany: async (req, res) => {
         console.log(req.body)
         if (!req.body.id || !req.body.content || !req.body.price) {
             return res
