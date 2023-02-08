@@ -22,6 +22,7 @@ import Footer from "./components/Footer"
 import Review from "./pages/Review";
 import ReviewPost from "./pages/ReviewPost";
 import FAQ from "./pages/FAQ";
+import FAQPost from "./pages/FAQPost";
 
 import Like from "./pages/Like";
 import LuxurySellUser from "./pages/LuxurySellUser";
@@ -58,6 +59,7 @@ function App() {
         <Route path='/signupuser' element={<SignupUser />}></Route>
         <Route path='/likelist' element={<Like />}></Route>
         <Route path='/luxuryselluser/:id' element={<LuxurySellUser />}></Route>
+        <Route path='/FAQPost' element={<FAQPost />}></Route>
       </Routes>
       <Footer />
     </div>
