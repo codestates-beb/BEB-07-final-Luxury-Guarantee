@@ -32,7 +32,7 @@ const LuxurySell = () => {
             }
         }
         getData();
-    }, []);
+    }, [params]);
 
     const handleChange = (e) => {
         setInputValue({
@@ -46,19 +46,20 @@ const LuxurySell = () => {
 
         if (file.length === 0) {
             return
-        } 
+        }
         else {
             const reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onloadend = () => {
-                if(imageSrc.length>=3) {
+                if (imageSrc.length >= 3) {
                     alert("이미지를 최대 3개까지만 업로드 가능합니다");
                 }
-                else{
+                else {
                     imageSrc.push(reader.result);
                     setImageSrc([...imageSrc]);
+
                 }
-             }
+            }
         };
     }
 
@@ -71,12 +72,13 @@ const LuxurySell = () => {
         })
             .then(res => {
                 console.log(res)
+                document.location.href = '/Recell';
+
             })
     }
     if (!itemInfo) {
         return null;
     }
-
     return (
         <div>
             <div className='left-div float-left w-1/3 mr-10'>
@@ -90,7 +92,11 @@ const LuxurySell = () => {
                         className="media hidden" onChange={saveImgFile} ref={imgRef}
                     />
                 </label>
-                {imageSrc && <img className="preview-img" src={imageSrc} alt="preview-img" />}
+                {imageSrc && imageSrc.map((e) => {
+                    return (
+                        <img className="preview-img" key={e} src={e} alt="" />
+                    )
+                })}
 
             </div>
             <div className='right-div ml-10'>
