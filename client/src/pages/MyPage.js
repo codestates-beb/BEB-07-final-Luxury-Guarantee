@@ -14,17 +14,19 @@ const MyPage = () => {
 			alert('로그인이 필요합니다.');
 			document.location.href = '/login';
 		}
+		else {
+			axios.get(`${apiUrl}/mypage/${userId}`)
+				.then(res => {
+					setUserInfo(res.data);
 
-		axios.get(`${apiUrl}/mypage/${userId}`)
-			.then(res => {
-				console.log(res)
-				setUserInfo(res.data);
+				})
+		}
 
-			})
 	}, []);
-	console.log(userInfo.post)
+
 	const myPost = userInfo.post;
 	const myItem = userInfo.Items;
+	const myLux = Number(userInfo.tokenAmount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 
 	return (
 		<div className="grid grid-cols-1 lg:grid-cols-1 gap-6 my-12 w-2xl container px-2 mx-auto">
@@ -36,11 +38,11 @@ const MyPage = () => {
 					<p className="font-semibold mt-1">Wallet address</p>
 					<p className=" mt-1">{userInfo.address}</p>
 					<br></br>
-					<p className="font-semibold">My Token: {userInfo.tokenAmount}</p>
+					<p className="font-semibold">My LUX: {myLux}</p>
 					<p className="font-semibold mt-3">My ETH: {userInfo.ethAmount}</p>
 					<br></br>
 				</div>
-				 <div className="mypost font-semibold">FAQ {/*{myPost && myPost.map((post)=> (
+				<div className="mypost font-semibold">FAQ {/*{myPost && myPost.map((post)=> (
 					<div key={post.id}>
 						<Link to={`/reviewdetail/${post.id}`}>
 						<p>
@@ -51,12 +53,12 @@ const MyPage = () => {
 				))}*/}
 				</div>
 				<br></br>
-				<div className="mypost font-semibold mt-3">Post {myPost && myPost.map((post)=> (
+				<div className="mypost font-semibold mt-3">Post {myPost && myPost.map((post) => (
 					<div key={post.id}>
 						<Link to={`/reviewdetail/${post.id}`}>
-						<p>
-							{post.title}
-						</p>
+							<p>
+								{post.title}
+							</p>
 						</Link>
 					</div>
 				))}

@@ -24,6 +24,7 @@ const { getAccounts } = require('../utils/web3');
 const { likeadd } = require("../controller/likeadd");
 const { likedelete } = require("../controller/likedelete");
 const { likelist } = require("../controller/likelist");
+const { tokenTransfer } = require("../controller/transfer")
 
 router.get("/", function (req, res) {
     return res.status(200).send("index router, hello world");
@@ -40,7 +41,7 @@ router.get("/beforesalelist/:id", beforesalelist);
 router.get('/accounts', getAccounts);
 router.get("/ether", ether);
 router.get("/likelist/:id", likelist);
-router.get("/beforereselllist/:id",beforereselllist);
+router.get("/beforereselllist/:id", beforereselllist);
 router.post("/wpost", wpost);
 router.post("/cart", cartadd);
 router.post("/newcompany", companySignUp);
@@ -55,5 +56,6 @@ router.post("/cartdeletemany", cartdeletemany);
 router.post("/cartdeleteone", cartdeleteone);
 router.post("/likeadd", likeadd);
 router.post("/likedelete", likedelete);
+router.post("/tokentransfer", tokenTransfer)
 
 module.exports = router;
