@@ -58,6 +58,7 @@ model luxury_goods {
     season      String
     price       Int
     image_url   String
+    images      String[]
     description String
     content     String?
     isResell    Boolean? @default(false)

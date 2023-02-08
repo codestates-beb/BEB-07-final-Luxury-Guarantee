@@ -22,6 +22,8 @@ import ReviewPost from "./pages/ReviewPost";
 import FAQ from "./pages/FAQ";
 
 import Like from "./pages/Like";
+import LuxurySellUser from "./pages/LuxurySellUser";
+import Test from "./pages/test";
 
 import ReviewDetail from "./pages/ReviewDetail";
 
@@ -52,6 +54,7 @@ function App() {
         <Route path='/signupmain' element={<SignupMain />}></Route>
         <Route path='/signupuser' element={<SignupUser />}></Route>
         <Route path='/likelist' element={<Like />}></Route>
+        <Route path='/luxuryselluser/:id' element={<LuxurySellUser/>}></Route>
       </Routes>
       <Footer />
     </div>
