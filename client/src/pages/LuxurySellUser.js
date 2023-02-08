@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import isSigned from '../app/isSigned'
 import axios from 'axios';
@@ -9,6 +9,7 @@ import apiUrl from "../utils/api";
 const LuxurySell = () => {
     const [itemInfo, setItemInfo] = useState('');
     const [inputValue, setInputValue] = useState('');
+    const [imageSrc, setImageSrc] = useState([]);
 
     const params = useParams();
 
@@ -39,23 +40,32 @@ const LuxurySell = () => {
             [e.target.name]: e.target.value
         });
     };
+    const imgRef = useRef();
+    const saveImgFile = () => {
+        const file = imgRef.current.files[0];
 
-    const [myImage, setMyImage] = useState([]);
-
-    const addImage = e => {
-        const nowSelectImageList = e.target.files;
-        const nowImageURLList = [...myImage];
-        for (let i = 0; i < nowSelectImageList.length; i++) {
-            const nowImageURL = URL.createObjectURL(nowSelectImageList[i]);
-            nowImageURLList.push(nowImageURL);
-        }
-        setMyImage(nowImageURLList);
+        if (file.length === 0) {
+            return
+        } 
+        else {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadend = () => {
+                if(imageSrc.length>=3) {
+                    alert("이미지를 최대 3개까지만 업로드 가능합니다");
+                }
+                else{
+                    imageSrc.push(reader.result);
+                    setImageSrc([...imageSrc]);
+                }
+             }
+        };
     }
 
     const onSubmitHandler = () => {
         axios.post(`${apiUrl}/addselluser`, {
             id: Number(params.id),
-            images: myImage,
+            images: imageSrc,
             content: inputValue.content,
             price: Number(inputValue.price)
         })
@@ -70,7 +80,18 @@ const LuxurySell = () => {
     return (
         <div>
             <div className='left-div float-left w-1/3 mr-10'>
-                <img src={itemInfo[0].image_url} className='border-solid border-2 mt-3 mb-3'></img>
+                <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer">
+                    <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                        <svg aria-hidden="true" className="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span></p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                    </div>
+                    <input type="file" id="dropzone-file"
+                        className="media hidden" onChange={saveImgFile} ref={imgRef}
+                    />
+                </label>
+                {imageSrc && <img className="preview-img" src={imageSrc} alt="preview-img" />}
+
             </div>
             <div className='right-div ml-10'>
                 <div className='text-gray-400'>{itemInfo[0].brand}</div>
@@ -88,11 +109,6 @@ const LuxurySell = () => {
                 </label>
                 <br></br>
                 <textarea className='border-solid border-2 h-48 w-80 ' name='content' onChange={handleChange} value={inputValue.content || ""} />
-                <br></br>
-                <label htmlFor="input-file" className="images-input-file" onChange={addImage}>
-                    Add your photo
-                    <input type="file" multiple="multiple" id="input-file" style={{ display: 'none' }} accept=".jpg, .jpeg, .png" />
-                </label>
                 <br></br>
                 <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3' onClick={onSubmitHandler}>판매 등록</button>
             </div>
