@@ -29,10 +29,10 @@ const MyPage = () => {
 			<div className="bg-white shadow rounded-lg p-10">
 				<div className="flex flex-col gap-1 text-left items-left">
 					<img className="h-32 w-32 bg-white p-2 rounded-full shadow mb-4" src="https://www.pngarts.com/files/10/Default-Profile-Picture-PNG-Download-Image.png" alt="" />
-					<p className="font-semibold mt-5"> {userInfo.nickname}님 안녕하세요!</p>
+					<p className="text-[20px] mt-5"> Hello {userInfo.nickname}</p>
 					<br></br>
-					<p className="font-semibold mt-3">내 지갑 주소:</p>
-					<p className="font-semibold mt-3">{userInfo.address}</p>
+					<p className="font-semibold mt-1">Wallet address</p>
+					<p className=" mt-1">{userInfo.address}</p>
 					<br></br>
 					<p className="font-semibold mt-3">My Token: {userInfo.tokenAmount}</p>
 					<p className="font-semibold mt-3">My ETH: {userInfo.ethAmount}</p>
@@ -42,21 +42,21 @@ const MyPage = () => {
 				<div className="flex justify-start items-left gap-2 my-3">
 					<div className="font-semibold text-center mx-4">
 						<p className="text-black">102</p>
-						<span className="text-gray-400">리뷰</span>
+						<span className="text-gray-400">Review</span>
 					</div>
 					<div className="font-semibold text-center mx-4">
 						<p className="text-black">102</p>
-						<span className="text-gray-400">판매</span>
+						<span className="text-gray-400">Sell</span>
 					</div>
 					<div className="font-semibold text-center mx-4">
 						<p className="text-black">102</p>
-						<span className="text-gray-400">구매</span>
+						<span className="text-gray-400">Buy</span>
 					</div>
 				</div>
 				<br></br>
-				<div className="mypost font-semibold mt-3">작성글{userInfo.post}</div>
+				<div className="mypost font-semibold mt-3">Post {userInfo.post}</div>
 				<div className='flex justify-end'>
-					{userInfo.isCompany === true ? (<button className='lux-resister bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded '><Link to='/luxuryresister'>명품 등록하기</Link></button>) : (<></>)}
+					{userInfo.isCompany === true ? (<button className='lux-resister bg-black hover:bg-gray-600 text-white font-bold py-2 px-4 rounded '><Link to='/luxuryresister'>명품 등록하기</Link></button>) : (<></>)}
 
 				</div>
 			</div>

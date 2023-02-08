@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import isSigned from '../app/isSigned'
 import axios from 'axios';
 import apiUrl from "../utils/api";
 
@@ -14,10 +15,18 @@ const LuxurySell = () => {
     const params = useParams();
 
     useEffect(() => {
+        if (!isSigned().isSigned) {
+            alert('로그인이 필요합니다.');
+            document.location.href = '/login';
+        }
         const id = params.id;
         const getData = async () => {
             try {
                 const res = await axios.get(`${apiUrl}/beforesalelist/${id}`)
+                if (res.data.length === 0 || res.data[0].userId !== isSigned().id) {
+                    alert('잘못된 접근입니다.');
+                    document.location.href = '/';
+                }
                 setItemInfo(res.data)
             } catch (e) {
                 console.log(e)

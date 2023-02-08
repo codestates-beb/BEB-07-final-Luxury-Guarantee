@@ -59,6 +59,7 @@ model luxury_goods {
     price       Int
     image_url   String
     description String
+    content     String?
     isResell    Boolean? @default(false)
     isSelling   Boolean? @default(false)
     owner       user     @relation(fields: [userId], references: [id])

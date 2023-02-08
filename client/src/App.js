@@ -21,14 +21,8 @@ import Review from "./pages/Review";
 import ReviewPost from "./pages/ReviewPost";
 import FAQ from "./pages/FAQ";
 
-import JacketCoats from "./pages/LuxuryGalleryMan/JacketCoats";
-import BlazersSuits from "./pages/LuxuryGalleryMan/BlazersSuits";
-import Hoodies from "./pages/LuxuryGalleryMan/Hoodies";
-import Jeans from "./pages/LuxuryGalleryMan/Jeans";
-import Shirts from "./pages/LuxuryGalleryMan/Shirts";
-import Shorts from "./pages/LuxuryGalleryMan/Shorts";
-import Trousers from "./pages/LuxuryGalleryMan/Trousers";
-import TshirtsVests from "./pages/LuxuryGalleryMan/TshirtsVests";
+import Like from "./pages/Like";
+
 import ReviewDetail from "./pages/ReviewDetail";
 
 function App() {
@@ -57,15 +51,7 @@ function App() {
         <Route path='/signupcompany' element={<SignupCompany />}></Route>
         <Route path='/signupmain' element={<SignupMain />}></Route>
         <Route path='/signupuser' element={<SignupUser />}></Route>
-
-        <Route path='/luxurygallery/blazerssuits' element={<BlazersSuits />}></Route>
-        <Route path='/luxurygallery/hoodies' element={<Hoodies />}></Route>
-        <Route path='/luxurygallery/jacketcoats' element={<JacketCoats />}></Route>
-        <Route path='/luxurygallery/jeans' element={<Jeans />}></Route>
-        <Route path='/luxurygallery/shirts' element={<Shirts />}></Route>
-        <Route path='/luxurygallery/shorts' element={<Shorts />}></Route>
-        <Route path='/luxurygallery/trousers' element={<Trousers />}></Route>
-        <Route path='/luxurygallery/tshirtsvests' element={<TshirtsVests />}></Route>
+        <Route path='/likelist' element={<Like />}></Route>
       </Routes>
       <Footer />
     </div>
