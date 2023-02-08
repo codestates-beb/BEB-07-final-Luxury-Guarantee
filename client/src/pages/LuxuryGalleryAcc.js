@@ -3,17 +3,27 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import apiUrl from "../utils/api";
 
+
 //명품 갤러리
 
-const LuxuryGallery = () => {
+const LuxuryGalleryAcc = () => {
     const [itemList, setItemList] = useState("");
 
     useEffect(() => {
         axios.get(`${apiUrl}/luxurylist`)
             .then(res => {
-                setItemList(res.data)
+                const data = res.data;
+                const accList = data.filter(e => e.category === 'ACC');
+                setItemList(accList)
             })
+
     }, []);
+
+    if (itemList.length === 0) {
+        return (
+            <h1>판매중인 아이템이 없습니다.</h1>
+        )
+    }
 
     return (
         <section className="bg-white dark:bg-gray-900">
@@ -26,6 +36,8 @@ const LuxuryGallery = () => {
                             <div className="flex items-center">
                                 <p className="text-gray-500 dark:text-gray-300">Sort</p>
                                 <select className="font-medium text-gray-700 bg-transparent dark:text-gray-500 focus:outline-none">
+
+
                                     <option value="#">Recommended</option>
                                     <option value="#">Size</option>
                                     <option value="#">Price</option>
@@ -53,7 +65,6 @@ const LuxuryGallery = () => {
                                         </button>
                                     </div>
                                 )
-
                             })}
                         </div>
                     </div>
@@ -63,4 +74,4 @@ const LuxuryGallery = () => {
     )
 }
 
-export default LuxuryGallery;
+export default LuxuryGalleryAcc;

@@ -5,7 +5,9 @@ import AddToCart from "./pages/AddToCart";
 import Category from "./components/Category";
 import Login from "./pages/Login";
 import LuxuryDetail from "./pages/LuxuryDetail";
-import LuxuryGallery from "./pages/LuxuryGallery";
+import LuxuryGalleryAcc from "./pages/LuxuryGalleryAcc";
+import LuxuryGalleryMan from "./pages/LuxuryGalleryMan";
+import LuxuryGalleryWomen from "./pages/LuxuryGalleryWomen";
 import LuxurySell from "./pages/LuxurySell";
 import LuxuryResister from "./pages/LuxuryResister";
 import MyPage from "./pages/MyPage";
@@ -37,7 +39,9 @@ function App() {
         <Route path='/category' element={<Category />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/luxurydetail/:id' element={<LuxuryDetail />}></Route>
-        <Route path='/luxurygallery' element={<LuxuryGallery />}></Route>
+        <Route path='/luxurygalleryAcc' element={<LuxuryGalleryAcc />}></Route>
+        <Route path='/luxurygalleryMan' element={<LuxuryGalleryMan />}></Route>
+        <Route path='/luxurygalleryWomen' element={<LuxuryGalleryWomen />}></Route>
         <Route path='/luxurysell/:id' element={<LuxurySell />}></Route>
         <Route path='/luxuryresister' element={<LuxuryResister />}></Route>
         <Route path='/mypage' element={<MyPage />}></Route>

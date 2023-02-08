@@ -24,7 +24,7 @@ const LuxuryDetail = () => {
       }
     }
     getData();
-  }, []);
+  }, [params]);
 
   if (!itemInfo) {
     return null;
@@ -33,7 +33,7 @@ const LuxuryDetail = () => {
   return (
     <div>
       <div className='left-div float-left w-1/3 mr-10'>
-        <img src={itemInfo.image_url} className='border-solid border-2 mt-3 mb-3'></img>
+        <img alt='' src={itemInfo.image_url} className='border-solid border-2 mt-3 mb-3'></img>
       </div>
       <div className='right-div ml-10'>
         <div className='text-gray-400'>{itemInfo.brand}</div>
