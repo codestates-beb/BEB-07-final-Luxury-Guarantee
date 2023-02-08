@@ -18,14 +18,16 @@ module.exports = {
                 .send("already selling")
                 .status(400).end();
         }
-
+        const resellItem = await prisma.luxury_goods.findUnique({
+            where: { id: req.body.id }
+        })
         const users = await prisma.user.findUnique({
-            where: { id: valid.userId }
+            where: { id: resellItem.userId }
         })
 
         const token_valid = await LuxTokenContract.methods.balanceOf(users.address).call();
 
-        if (Number(token_valid) < goods_valid.price) {
+        if (Number(token_valid) < resellItem.price) {
             return res.send("not enough token").status(400).send();
         }
 
