@@ -28,6 +28,7 @@ import Like from "./pages/Like";
 import LuxurySellUser from "./pages/LuxurySellUser";
 
 import ReviewDetail from "./pages/ReviewDetail";
+import Exchange from "./pages/Exchange";
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
         <Route path='/likelist' element={<Like />}></Route>
         <Route path='/luxuryselluser/:id' element={<LuxurySellUser />}></Route>
         <Route path='/FAQPost' element={<FAQPost />}></Route>
+        <Route path='/exchange' element={<Exchange />}></Route>
       </Routes>
       <Footer />
     </div>

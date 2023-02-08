@@ -81,25 +81,26 @@ const LuxurySell = () => {
     }
     return (
         <div>
-            <div className='left-div float-left w-1/3 mr-10'>
+            <div className='content-start'>
                 <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer">
                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
                         <svg aria-hidden="true" className="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
-                        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span></p>
+                        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to image Upload</span></p>
                         <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
                     </div>
                     <input type="file" id="dropzone-file"
                         className="media hidden" onChange={saveImgFile} ref={imgRef}
                     />
                 </label>
-                {imageSrc && imageSrc.map((e) => {
-                    return (
-                        <img className="preview-img" key={e} src={e} alt="" />
-                    )
-                })}
-
+                <div className='flex items-center w-[480px]'>
+                    {imageSrc && imageSrc.map((e) => {
+                        return (
+                            <img className="preview-img border-solid border-2 m-3 " key={e} src={e} alt="" />
+                        )
+                    })}
+                </div>
             </div>
-            <div className='right-div ml-10'>
+            <div className='right-div ml-10 mt-10'>
                 <div className='text-gray-400'>{itemInfo[0].brand}</div>
                 <div className='text-5xl'>{itemInfo[0].name}</div>
                 <br></br>
@@ -116,7 +117,7 @@ const LuxurySell = () => {
                 <br></br>
                 <textarea className='border-solid border-2 h-48 w-80 ' name='content' onChange={handleChange} value={inputValue.content || ""} />
                 <br></br>
-                <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3' onClick={onSubmitHandler}>판매 등록</button>
+                <button className='bg-black hover:bg-gray-600 text-white font-bold py-2 px-4 rounded mt-3 mb-3' onClick={onSubmitHandler}>판매 등록</button>
             </div>
         </div>
 
