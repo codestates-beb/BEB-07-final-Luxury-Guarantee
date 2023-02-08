@@ -34,7 +34,7 @@ const LuxuryResister = () => {
 
     };
 
-    const choice = ["MAN", "WOMAN", "ACC"]
+    const choice = ["MAN", "WOMEN", "ACC"]
     const options = choice.map((e) => {
         return <option key={e}>{e}</option>
     })
