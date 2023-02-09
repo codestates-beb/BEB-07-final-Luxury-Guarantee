@@ -23,6 +23,7 @@ model user {
     post        posts[]
     Cart        cart[]
     likes       like[]
+    limit       Int
 }
 
 model cart {
