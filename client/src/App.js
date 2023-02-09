@@ -51,7 +51,7 @@ function App() {
         <Route path='/payment' element={<Payment />}></Route>
         <Route path='/post' element={<Post />}></Route>
         <Route path='/review' element={<Review />}></Route>
-        <Route path='/reviewpost' element={<ReviewPost />}></Route>
+        <Route path='/reviewpost/:id' element={<ReviewPost />}></Route>
         <Route path='/reviewdetail/:id' element={<ReviewDetail />}></Route>
         <Route path='/faq' element={<FAQ />}></Route>
         <Route path='/recell' element={<Recell />}></Route>
