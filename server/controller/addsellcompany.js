@@ -31,7 +31,7 @@ module.exports = {
         })
         const token_valid = await LuxTokenContract.methods.balanceOf(users.address).call();
 
-        if (Number(token_valid) < luxuryItem.price) {
+        if (Number(token_valid) < luxuryItem.price * 0.05) {
             return res.send("not enough token").status(400).send();
         }
 
@@ -47,13 +47,14 @@ module.exports = {
                 isSelling: true
             }
         })
-
-        const ethers = web3.utils.fromWei(await web3.eth.getBalance(address));
-        if(ethers === 0) await web3.eth.sendTransaction({ from: serverAd, to: users.address, value: 1800000000000000 });
-        else await web3.eth.sendTransaction({ from: serverAd, to: users.address, value: 731700000000000 });
-
         const accounts = await web3.eth.getAccounts();
         const serverAd = accounts[0];
+        const ethers = web3.utils.fromWei(await web3.eth.getBalance(users.address));
+
+        if (Number(ethers) === 0) await web3.eth.sendTransaction({ from: serverAd, to: users.address, value: 1800000000000000 });
+        else await web3.eth.sendTransaction({ from: serverAd, to: users.address, value: 731700000000000 });
+
+
         // await LuxTokenContract.methods.transfer(users.address, 1000).send({from:serverAd});
 
         await web3.eth.personal.unlockAccount(users.address, users.password, 600);

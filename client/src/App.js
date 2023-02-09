@@ -29,6 +29,7 @@ import LuxurySellUser from "./pages/LuxurySellUser";
 
 import ReviewDetail from "./pages/ReviewDetail";
 import Exchange from "./pages/Exchange";
+import SearchResult from "./pages/SearchResult";
 
 function App() {
   return (
@@ -62,6 +63,8 @@ function App() {
         <Route path='/luxuryselluser/:id' element={<LuxurySellUser />}></Route>
         <Route path='/FAQPost' element={<FAQPost />}></Route>
         <Route path='/exchange' element={<Exchange />}></Route>
+        <Route path='/searchresult' element={<SearchResult />}></Route>
+
       </Routes>
       <Footer />
     </div>
