@@ -65,8 +65,6 @@ module.exports = {
         const userss = await prisma.user.findUnique({
             where: { id: req.body.userId }
         });
-        let resell = false;
-        if (userss.isCompany === false) resell = true;
 
         const item = await prisma.user.update({
             where: { id: req.body.userId },
