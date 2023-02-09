@@ -2,6 +2,7 @@ const prisma = require("../prisma/prisma");
 
 module.exports = {
     cartadd: async (req, res) => {
+        console.log(req.body)
         if (!req.body.goodsId || !req.body.userId) {
             return res
                 .send("not enough body params")

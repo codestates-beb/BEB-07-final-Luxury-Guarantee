@@ -38,7 +38,7 @@ function App() {
       <Routes>
         <Route path='/' element={<MainPage />}></Route>
         <Route path='/*' element={<NotFound />}></Route>
-        <Route path='/cart' element={<AddToCart />}></Route>
+        <Route path='/cart/:id' element={<AddToCart />}></Route>
         <Route path='/category' element={<Category />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/luxurydetail/:id' element={<LuxuryDetail />}></Route>
@@ -48,7 +48,7 @@ function App() {
         <Route path='/luxurysell/:id' element={<LuxurySell />}></Route>
         <Route path='/luxuryresister' element={<LuxuryResister />}></Route>
         <Route path='/mypage' element={<MyPage />}></Route>
-        <Route path='/payment' element={<Payment />}></Route>
+        <Route path='/payment/:id' element={<Payment />}></Route>
         <Route path='/post' element={<Post />}></Route>
         <Route path='/review' element={<Review />}></Route>
         <Route path='/reviewpost/:id' element={<ReviewPost />}></Route>
