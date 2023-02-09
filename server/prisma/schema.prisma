@@ -64,6 +64,7 @@ model luxury_goods {
     content     String?
     isResell    Boolean? @default(false)
     isSelling   Boolean? @default(false)
+    isReview    Boolean? @default(false)
     owner       user     @relation(fields: [userId], references: [id])
     userId      Int
     ipfsurl     String?

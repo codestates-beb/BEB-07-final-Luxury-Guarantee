@@ -26,7 +26,6 @@ const MyPage = () => {
 
 	const myPost = userInfo.post;
 	const myItem = userInfo.Items;
-	console.log(myItem)
 	const myLux = Number(userInfo.tokenAmount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 
 	return (
@@ -89,15 +88,15 @@ const MyPage = () => {
 							<div className='flex justify-center'>
 								{e.isSelling === true ? (
 									<p
-										className='bg-black text-white font-bold py-2 px-4 rounded' >판매중인 제품입니다.</p>
+										className='bg-black text-white font-bold py-2 px-4 rounded m-1' >판매중</p>
 								) : userInfo.isCompany === true ? (
 									<Link to={`/luxurysell/${e.id}`} className='bg-black hover:bg-gray-600 text-white font-bold py-2 px-4 rounded'>판매 등록하기</Link>
 								) : (
-									<>
-										<Link to={`/luxuryselluser/${e.id}`} className='bg-black hover:bg-gray-600 text-white font-bold py-2 px-4 rounded m-1'>리셀 판매하기</Link> <Link to={`/reviewpost/${e.id}`} className='bg-black hover:bg-gray-600 text-white font-bold py-2 px-4 rounded m-1'>리뷰 작성</Link>
-									</>
-								)
-								}
+									<Link to={`/luxuryselluser/${e.id}`} className='bg-black hover:bg-gray-600 text-white font-bold py-2 px-4 rounded m-1'>리셀 판매하기</Link>
+								)}
+								{e.isReview === false && userInfo.isCompany === false ? (
+									<Link to={`/reviewpost/${e.id}`} className='bg-black hover:bg-gray-600 text-white font-bold py-2 px-4 rounded m-1'>리뷰 작성하기</Link>
+								) : userInfo.isCompany === false ? (<p className='bg-black text-white font-bold py-2 px-4 rounded m-1'>리뷰 작성 완료</p>) : <></>}
 							</div>
 						</div>
 					))}

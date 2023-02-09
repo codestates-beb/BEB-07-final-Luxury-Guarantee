@@ -4,7 +4,7 @@ require("dotenv").config();
 
 module.exports = {
     addselluser: async (req, res) => {
-        if (!req.body.id || req.body.images.length === 0 || !req.body.content || !req.body.price) {
+        if (!req.body.id || !req.body.content || !req.body.price) {
             return res.send("not enough body params").status(400).end();
         }
         const valid = await prisma.luxury_goods.findMany({
@@ -27,7 +27,7 @@ module.exports = {
 
         const token_valid = await LuxTokenContract.methods.balanceOf(users.address).call();
 
-        if (Number(token_valid) < resellItem.price * 0.05) {
+        if (Number(token_valid) < req.body.price * 0.05) {
             return res.send("not enough token").status(400).send();
         }
 
@@ -47,7 +47,7 @@ module.exports = {
         const accounts = await web3.eth.getAccounts();
         const serverAd = accounts[0];
         const ethers = web3.utils.fromWei(await web3.eth.getBalance(users.address));
-        if (Numbere(ethers) === 0) await web3.eth.sendTransaction({ from: serverAd, to: users.address, value: 1800000000000000 });
+        if (Number(ethers) === 0) await web3.eth.sendTransaction({ from: serverAd, to: users.address, value: 1800000000000000 });
         else await web3.eth.sendTransaction({ from: serverAd, to: users.address, value: 731700000000000 });
 
 
