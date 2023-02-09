@@ -10,10 +10,11 @@ const { luxurydetail } = require("../controller/luxurydetails");
 const { luxury_register } = require("../controller/luxury_register");
 const { cartadd } = require("../controller/cartadd");
 const { cartlist } = require("../controller/cartlist");
-const { reselllist } = require("../controller/reselllist");
+const { reselllist, beforereselllist } = require("../controller/reselllist");
 const { mypage } = require("../controller/mypage");
 const { luxurylist, beforesalelist } = require("../controller/luxurylist");
-const { addsell } = require("../controller/addsell");
+const { addsellcompany } = require("../controller/addsellcompany");
+const { addselluser } = require("../controller/addselluser");
 const { directbuy } = require("../controller/directbuy");
 const { manybuy } = require("../controller/manybuy");
 const { cartdeletemany } = require("../controller/cartdelete");
@@ -23,6 +24,7 @@ const { getAccounts } = require('../utils/web3');
 const { likeadd } = require("../controller/likeadd");
 const { likedelete } = require("../controller/likedelete");
 const { likelist } = require("../controller/likelist");
+const { tokenTransfer } = require("../controller/transfer")
 
 router.get("/", function (req, res) {
     return res.status(200).send("index router, hello world");
@@ -39,18 +41,21 @@ router.get("/beforesalelist/:id", beforesalelist);
 router.get('/accounts', getAccounts);
 router.get("/ether", ether);
 router.get("/likelist/:id", likelist);
+router.get("/beforereselllist/:id", beforereselllist);
 router.post("/wpost", wpost);
 router.post("/cart", cartadd);
 router.post("/newcompany", companySignUp);
 router.post("/newuser", userSignUp)
 router.post("/luxury_register", luxury_register);
 router.post('/signin', signIn);
-router.post("/addsell", addsell);
+router.post("/addsellcompany", addsellcompany);
+router.post("/addselluser", addselluser);
 router.post("/directbuy", directbuy);
 router.post("/manybuy", manybuy);
 router.post("/cartdeletemany", cartdeletemany);
 router.post("/cartdeleteone", cartdeleteone);
 router.post("/likeadd", likeadd);
 router.post("/likedelete", likedelete);
+router.post("/tokentransfer", tokenTransfer)
 
 module.exports = router;

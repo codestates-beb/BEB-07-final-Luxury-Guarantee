@@ -3,15 +3,18 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import apiUrl from "../utils/api";
 
-//리셀 페이지
 
-const Recell = () => {
+//명품 갤러리
+
+const LuxuryGalleryWomen = () => {
     const [itemList, setItemList] = useState("");
 
     useEffect(() => {
-        axios.get(`${apiUrl}/reselllist`)
+        axios.get(`${apiUrl}/luxurylist`)
             .then(res => {
-                setItemList(res.data)
+                const data = res.data;
+                const accList = data.filter(e => e.category === 'WOMEN');
+                setItemList(accList)
             })
 
     }, []);
@@ -21,17 +24,18 @@ const Recell = () => {
             <h1>판매중인 아이템이 없습니다.</h1>
         )
     }
+
     return (
-        <section className="bg-gray-900">
+        <section className="bg-white dark:bg-gray-900">
             <div className="container px-6 py-8 mx-auto">
                 <div className="lg:flex lg:-mx-2">
 
                     <div className="mt-6 lg:mt-0 lg:px-2 lg:w-4/5 ">
                         <div className="flex items-center justify-between text-sm tracking-widest uppercase ">
-                            <p className="text-gray-300">{itemList.length} Items</p>
+                            <p className="text-gray-500 dark:text-gray-300">{itemList.length} Items</p>
                             <div className="flex items-center">
-                                <p className="text-gray-300">Sort</p>
-                                <select className="font-medium  bg-transparent text-gray-500 focus:outline-none">
+                                <p className="text-gray-500 dark:text-gray-300">Sort</p>
+                                <select className="font-medium text-gray-700 bg-transparent dark:text-gray-500 focus:outline-none">
 
 
                                     <option value="#">Recommended</option>
@@ -70,4 +74,4 @@ const Recell = () => {
     )
 }
 
-export default Recell;
+export default LuxuryGalleryWomen;

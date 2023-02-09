@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 //FAQ
 const FAQ = () => {
 
@@ -10,9 +11,11 @@ return (
             <h2 className="font-bold text-5xl mt-5 tracking-tight">
                 FAQ
             </h2>
-            <p className="text-neutral-500 text-xl mt-3">
-                Frequenty asked questions
-            </p>
+            <button className='bg-black hover:bg-gray-610 text-white font-bold py-2 px-4 rounded mt-5'>
+                <Link to="/FAQPost">
+                    문의하기
+                </Link>   
+            </button>
         </div><div className="grid divide-y divide-neutral-200 max-w-xl mx-auto mt-8">
                 <div className="">
                     <details className="group">

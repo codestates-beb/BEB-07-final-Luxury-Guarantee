@@ -14,5 +14,20 @@ module.exports = {
             }
         })
         return res.status(200).send(resellgoods);
+    },
+    beforereselllist: async (req, res) => {
+        if (!req.params.id) {
+            return res
+                .send("not enough params")
+                .status(400).end();
+        }
+        const beforeSaleGoods = await prisma.luxury_goods.findMany({
+            where: {
+                id: Number(req.params.id),
+                isResell: false,
+                isSelling: false
+            }
+        })
+        return res.status(200).send(beforeSaleGoods);
     }
 }

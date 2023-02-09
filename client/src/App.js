@@ -5,7 +5,9 @@ import AddToCart from "./pages/AddToCart";
 import Category from "./components/Category";
 import Login from "./pages/Login";
 import LuxuryDetail from "./pages/LuxuryDetail";
-import LuxuryGallery from "./pages/LuxuryGallery";
+import LuxuryGalleryAcc from "./pages/LuxuryGalleryAcc";
+import LuxuryGalleryMan from "./pages/LuxuryGalleryMan";
+import LuxuryGalleryWomen from "./pages/LuxuryGalleryWomen";
 import LuxurySell from "./pages/LuxurySell";
 import LuxuryResister from "./pages/LuxuryResister";
 import MyPage from "./pages/MyPage";
@@ -20,10 +22,13 @@ import Footer from "./components/Footer"
 import Review from "./pages/Review";
 import ReviewPost from "./pages/ReviewPost";
 import FAQ from "./pages/FAQ";
+import FAQPost from "./pages/FAQPost";
 
 import Like from "./pages/Like";
+import LuxurySellUser from "./pages/LuxurySellUser";
 
 import ReviewDetail from "./pages/ReviewDetail";
+import Exchange from "./pages/Exchange";
 
 function App() {
   return (
@@ -37,7 +42,9 @@ function App() {
         <Route path='/category' element={<Category />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/luxurydetail/:id' element={<LuxuryDetail />}></Route>
-        <Route path='/luxurygallery' element={<LuxuryGallery />}></Route>
+        <Route path='/luxurygalleryAcc' element={<LuxuryGalleryAcc />}></Route>
+        <Route path='/luxurygalleryMan' element={<LuxuryGalleryMan />}></Route>
+        <Route path='/luxurygalleryWomen' element={<LuxuryGalleryWomen />}></Route>
         <Route path='/luxurysell/:id' element={<LuxurySell />}></Route>
         <Route path='/luxuryresister' element={<LuxuryResister />}></Route>
         <Route path='/mypage' element={<MyPage />}></Route>
@@ -52,6 +59,9 @@ function App() {
         <Route path='/signupmain' element={<SignupMain />}></Route>
         <Route path='/signupuser' element={<SignupUser />}></Route>
         <Route path='/likelist' element={<Like />}></Route>
+        <Route path='/luxuryselluser/:id' element={<LuxurySellUser />}></Route>
+        <Route path='/FAQPost' element={<FAQPost />}></Route>
+        <Route path='/exchange' element={<Exchange />}></Route>
       </Routes>
       <Footer />
     </div>

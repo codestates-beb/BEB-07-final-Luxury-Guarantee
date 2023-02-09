@@ -33,7 +33,7 @@ const LuxurySell = () => {
             }
         }
         getData();
-    }, []);
+    }, [params]);
 
     const handleChange = (e) => {
         setInputValue({
@@ -43,7 +43,7 @@ const LuxurySell = () => {
     };
 
     const onSubmitHandler = () => {
-        axios.post(`${apiUrl}/addsell`, {
+        axios.post(`${apiUrl}/addsellcompany`, {
             id: Number(params.id),
             content: inputValue.content,
             price: Number(inputValue.price)
@@ -61,7 +61,7 @@ const LuxurySell = () => {
     return (
         <div>
             <div className='left-div float-left w-1/3 mr-10'>
-                <img src={itemInfo[0].image_url} className='border-solid border-2 mt-3 mb-3'></img>
+                <img alt='' src={itemInfo[0].image_url} className='border-solid border-2 mt-3 mb-3'></img>
             </div>
             <div className='right-div ml-10'>
                 <div className='text-gray-400'>{itemInfo[0].brand}</div>

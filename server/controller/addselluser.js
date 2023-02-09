@@ -3,14 +3,10 @@ const { LuxTokenContract, web3 } = require("../web3s/web3");
 require("dotenv").config();
 
 module.exports = {
-    addsell: async (req, res) => {
-        console.log(req.body)
-        if (!req.body.id || !req.body.content || !req.body.price) {
-            return res
-                .send("not enough body params")
-                .status(400).end();
+    addselluser: async (req, res) => {
+        if (!req.body.id || req.body.images.length === 0 || !req.body.content || !req.body.price) {
+            return res.send("not enough body params").status(400).end();
         }
-
         const valid = await prisma.luxury_goods.findMany({
             where: {
                 id: req.body.id,
@@ -22,31 +18,35 @@ module.exports = {
                 .send("already selling")
                 .status(400).end();
         }
-
-        const goods_valid = await prisma.luxury_goods.findUnique({
-            where: {id: req.body.id}
-        });
-
+        const resellItem = await prisma.luxury_goods.findUnique({
+            where: { id: req.body.id }
+        })
         const users = await prisma.user.findUnique({
-            where: { id: goods_valid.userId }
+            where: { id: resellItem.userId }
         })
 
-        if(Number(users.tokenAmount) < goods_valid.price) {
+        const token_valid = await LuxTokenContract.methods.balanceOf(users.address).call();
+
+        if (Number(token_valid) < resellItem.price) {
             return res.send("not enough token").status(400).send();
         }
 
         let isResells = false;
-        if(users.isCompany===false) isResells = true;
-        
+        if (users.isCompany === false) isResells = true;
+
         const goods = await prisma.luxury_goods.update({
             where: { id: req.body.id },
             data: {
                 content: req.body.content,
+                images: req.body.images,
                 price: req.body.price,
                 isResell: isResells,
                 isSelling: true
             }
         })
+
+        if(ethers === 0) await web3.eth.sendTransaction({ from: serverAd, to: users.address, value: 1800000000000000 });
+        else await web3.eth.sendTransaction({ from: serverAd, to: users.address, value: 731700000000000 });
 
         const accounts = await web3.eth.getAccounts();
         const serverAd = accounts[0];
