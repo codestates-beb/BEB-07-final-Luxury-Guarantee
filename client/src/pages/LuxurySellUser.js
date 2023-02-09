@@ -10,6 +10,7 @@ const LuxurySell = () => {
     const [itemInfo, setItemInfo] = useState('');
     const [inputValue, setInputValue] = useState('');
     const [imageSrc, setImageSrc] = useState([]);
+    const [isToken, setIsToken] = useState('');
 
     const params = useParams();
 
@@ -64,6 +65,7 @@ const LuxurySell = () => {
     }
 
     const onSubmitHandler = () => {
+        console.log("이게문제?");
         axios.post(`${apiUrl}/addselluser`, {
             id: Number(params.id),
             images: imageSrc,
@@ -72,7 +74,12 @@ const LuxurySell = () => {
         })
             .then(res => {
                 console.log(res)
-                document.location.href = '/Recell';
+                if(res.data === 'not enough token') {
+                    setIsToken("보유하신 토큰의 양이 부족합니다.");
+                }
+                else {
+                    document.location.href = '/Recell';
+                }
 
             })
     }
@@ -110,6 +117,8 @@ const LuxurySell = () => {
                 <br></br>
                 <input className='border-solid border-2 text-right	' name='price' onChange={handleChange} value={inputValue.price || ""} />
                 <span className='ml-2'>LUX token</span>
+                <br></br>
+                <p className='text-red-500'>{isToken}</p>
                 <br></br>
                 <label>
                     content
