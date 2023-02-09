@@ -73,24 +73,26 @@ const MyPage = () => {
 
 				<div>
 					{userInfo.isCompany === true ?
-						(<p className="font-semibold mt-3">내가 등록한 아이템</p>) :
-						(<p className="font-semibold mt-3">내가 구매한 아이템</p>)}
+						(<p className="font-semibold mt-3">내가 등록한 아이템 (NFT)</p>) :
+						(<p className="font-semibold mt-3">내가 구매한 아이템 (NFT)</p>)}
 					<br></br>
 					{myItem && myItem.map((e) => (
-						<div key={e.id} className='border-solid border-2 mb-5'>
+						<div key={e.id} className='border-solid border-2 mb-5 '>
 							<p>{e.id}</p>
 							<img alt='my-item' src={e.image_url}  ></img>
 							<br></br>
 							<p>{e.brand}</p>
 							<br></br>
 							<div className='flex justify-center'>
-								{userInfo.isCompany === true ? (
-									<Link to={`/luxurysell/${e.id}`}
-										className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' >판매 등록하기</Link>
+								{e.isSelling === true ? (
+									<p
+										className='bg-black text-white font-bold py-2 px-4 rounded' >판매중</p>
+								) : userInfo.isCompany === true ? (
+									<Link to={`/luxurysell/${e.id}`} className='bg-black hover:bg-gray-600 text-white font-bold py-2 px-4 rounded'>판매 등록하기</Link>
 								) : (
-									<Link to={`/luxuryselluser/${e.id}`} className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>리셀 판매하기</Link>
-								)}
-
+									<Link to={`/luxuryselluser/${e.id}`} className='bg-black hover:bg-gray-600 text-white font-bold py-2 px-4 rounded'>리셀 판매하기</Link>
+								)
+								}
 							</div>
 						</div>
 					))}
