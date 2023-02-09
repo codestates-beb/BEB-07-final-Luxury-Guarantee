@@ -63,7 +63,7 @@ const AddToCart = () => {
           {item && Array.isArray(item) && item.map((item, id) => {
             return (
               <div key={id} className="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
-                <img src={item.image_url} alt="" className="w-full rounded-lg sm:w-40" />
+                <img src={item.image_url} alt="" className="w-auto rounded-lg sm:w-40" />
                 <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
                   <div className="mt-5 sm:mt-0">
                     <button className="text-lg font-bold text-gray-900">{item.goodsId}</button>
@@ -83,7 +83,7 @@ const AddToCart = () => {
             )
           })}
 
-          <div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
+          <div className="mt-6 h-auto rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
             <div className="flex justify-between">
               <p className="text-lg font-bold">Total</p>
               <div className="">
