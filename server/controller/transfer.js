@@ -16,6 +16,13 @@ module.exports = {
             where: { userId: req.body.userId },
         })
 
+        if(Number(users.limit) + Number(req.body.amount) > 20000000) {
+            return res.send({
+                message: "exceed the daily limit for exchanges",
+                more: 20000000-Number(users.limit)
+            }).status(400).end();
+        }
+
         await LuxTokenContract.methods.transfer(`${users.address}`, req.body.amount).send({ from: serverAd });
 
         const user_token = await LuxTokenContract.methods.balanceOf(users.address).call();
@@ -23,10 +30,10 @@ module.exports = {
         await prisma.user.update({
             where: { userId: req.body.userId },
             data: {
-                tokenAmount: user_token
+                tokenAmount: user_token,
+                limit: Number(req.body.amount) + Number(users.limit) 
             }
-        }
-        )
+        })
 
         return res.status(200).send("tranfersuccess");
     }

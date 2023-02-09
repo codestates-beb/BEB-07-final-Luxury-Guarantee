@@ -3,10 +3,12 @@ const cors = require('cors');
 const path = require('path');
 const app = express();
 const apiRouter = require('./router/apiroot');
+const { tokencron } = require("./controller/cron");
 
 const http = require('http').createServer(app);
 
 http.listen(8080, () => {
+    tokencron();
     console.log('Listening 8080');
 });
 
