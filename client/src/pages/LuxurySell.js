@@ -11,6 +11,7 @@ import apiUrl from "../utils/api";
 const LuxurySell = () => {
     const [itemInfo, setItemInfo] = useState('');
     const [inputValue, setInputValue] = useState('');
+    const [isToken, setIsToken] = useState('');
 
     const params = useParams();
 
@@ -30,6 +31,7 @@ const LuxurySell = () => {
                 setItemInfo(res.data)
             } catch (e) {
                 console.log(e)
+                
             }
         }
         getData();
@@ -49,7 +51,10 @@ const LuxurySell = () => {
             price: Number(inputValue.price)
         })
             .then(res => {
-                console.log(res)
+                console.log(res);
+                if(res.data === 'not enough token') {
+                    setIsToken("보유하신 토큰의 양이 부족합니다.");
+                }
             })
     }
 
@@ -73,6 +78,8 @@ const LuxurySell = () => {
                 <br></br>
                 <input className='border-solid border-2 text-right	' name='price' onChange={handleChange} value={inputValue.price || ""} />
                 <span className='ml-2'>LUX token</span>
+                <br></br>
+                <p className='text-red-500'>{isToken}</p>
                 <br></br>
                 <label>
                     content

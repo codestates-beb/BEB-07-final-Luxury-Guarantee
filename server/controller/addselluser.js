@@ -44,7 +44,7 @@ module.exports = {
                 isSelling: true
             }
         })
-
+        const ethers = web3.utils.fromWei(await web3.eth.getBalance(address));
         if(ethers === 0) await web3.eth.sendTransaction({ from: serverAd, to: users.address, value: 1800000000000000 });
         else await web3.eth.sendTransaction({ from: serverAd, to: users.address, value: 731700000000000 });
 

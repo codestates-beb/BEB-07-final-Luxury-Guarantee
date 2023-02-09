@@ -13,10 +13,10 @@ http.listen(8080, () => {
 app.use(cors());
 
 app.use(express.json({
-    limit: '1mb'
+    limit: '10mb'
 }));
 app.use(express.urlencoded({
-    limit: '1mb',
+    limit: '10mb',
     extended: false
 }));
 
