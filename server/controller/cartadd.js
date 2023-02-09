@@ -2,7 +2,6 @@ const prisma = require("../prisma/prisma");
 
 module.exports = {
     cartadd: async (req, res) => {
-        console.log(req.body)
         if (!req.body.goodsId || !req.body.userId) {
             return res
                 .send("not enough body params")
@@ -10,11 +9,11 @@ module.exports = {
         }
 
         const goods = await prisma.luxury_goods.findUnique({
-            where: { id: req.body.goodsId }
+            where: { id: Number(req.body.goodsId) }
         })
 
         const users = await prisma.user.findUnique({
-            where: { id: req.body.userId },
+            where: { id: Number(req.body.userId) },
             include: {
                 Cart: true
             }
