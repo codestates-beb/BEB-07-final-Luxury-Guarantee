@@ -118,7 +118,7 @@ const LuxurySell = () => {
                 <input className='border-solid border-2 text-right	' name='price' onChange={handleChange} value={inputValue.price || ""} />
                 <span className='ml-2'>LUX token</span>
                 <br></br>
-                <p className='text-red-500'>{isToken}</p>
+                <p className='text-red-500 font-bold'>{isToken}</p>
                 <br></br>
                 <label>
                     content
