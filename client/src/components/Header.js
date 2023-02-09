@@ -21,7 +21,7 @@ const Header = () => {
         <Link to="/mypage"><i className="fa-regular fa-user"></i></Link>
 
         <Link to="/likelist"><i className="fa-solid fa-heart"></i></Link>
-        <Link to="/cart"><i className="fa-solid fa-cart-shopping"></i></Link>
+        <Link to={`/cart/${userData.id}`}><i className="fa-solid fa-cart-shopping"></i></Link>
       </div>
 
       <div className="sub-menu mx-auto mb-3 w-[55%]">
