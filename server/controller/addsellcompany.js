@@ -22,12 +22,16 @@ module.exports = {
                 .status(400).end();
         }
 
+        const luxuryItem = await prisma.luxury_goods.findUnique({
+            where: { id: req.body.id }
+        })
+
         const users = await prisma.user.findUnique({
-            where: { id: valid.userId }
+            where: { id: luxuryItem.userId }
         })
         const token_valid = await LuxTokenContract.methods.balanceOf(users.address).call();
 
-        if (Number(token_valid) < goods_valid.price) {
+        if (Number(token_valid) < luxuryItem.price) {
             return res.send("not enough token").status(400).send();
         }
 
