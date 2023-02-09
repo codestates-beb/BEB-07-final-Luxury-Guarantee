@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import apiUrl from "../utils/api";
 
@@ -26,6 +26,22 @@ const LuxuryDetail = () => {
     getData();
   }, [params]);
 
+ console.log(itemInfo)
+
+  const handleAddToCart = () => {
+    axios.post(`${apiUrl}/cart`,{
+      userId: itemInfo.userId,
+      goodsId: itemInfo.id
+    })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+};
+
+
   if (!itemInfo) {
     return null;
   }
@@ -48,7 +64,9 @@ const LuxuryDetail = () => {
         <br></br>
         <br></br>
         <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3'>구매하기</button>
-        <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3 ml-5'>장바구니에 담기</button>
+        <Link to={`../cart/${itemInfo.userId}`}>
+        <button onClick={handleAddToCart} className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3 ml-5'>장바구니에 담기</button>
+        </Link>
       </div>
     </div>
 
