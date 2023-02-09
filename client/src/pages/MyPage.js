@@ -26,6 +26,7 @@ const MyPage = () => {
 
 	const myPost = userInfo.post;
 	const myItem = userInfo.Items;
+	console.log(myItem)
 	const myLux = Number(userInfo.tokenAmount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 
 	return (
@@ -56,9 +57,10 @@ const MyPage = () => {
 				<div className="mypost font-semibold mt-3">Post {myPost && myPost.map((post) => (
 					<div key={post.id}>
 						<Link to={`/reviewdetail/${post.id}`}>
-							<p>
+							<p className='font-thin m-2'>
 								{post.title}
 							</p>
+
 						</Link>
 					</div>
 				))}
@@ -81,16 +83,19 @@ const MyPage = () => {
 							<p>{e.id}</p>
 							<img alt='my-item' src={e.image_url}  ></img>
 							<br></br>
-							<p>{e.brand}</p>
+							<p className='flex justify-center'>{e.brand}</p>
+							<p className='flex justify-center'>{e.name}</p>
 							<br></br>
 							<div className='flex justify-center'>
 								{e.isSelling === true ? (
 									<p
-										className='bg-black text-white font-bold py-2 px-4 rounded' >판매중</p>
+										className='bg-black text-white font-bold py-2 px-4 rounded' >판매중인 제품입니다.</p>
 								) : userInfo.isCompany === true ? (
 									<Link to={`/luxurysell/${e.id}`} className='bg-black hover:bg-gray-600 text-white font-bold py-2 px-4 rounded'>판매 등록하기</Link>
 								) : (
-									<Link to={`/luxuryselluser/${e.id}`} className='bg-black hover:bg-gray-600 text-white font-bold py-2 px-4 rounded'>리셀 판매하기</Link>
+									<>
+										<Link to={`/luxuryselluser/${e.id}`} className='bg-black hover:bg-gray-600 text-white font-bold py-2 px-4 rounded m-1'>리셀 판매하기</Link> <Link to={`/reviewpost/${e.id}`} className='bg-black hover:bg-gray-600 text-white font-bold py-2 px-4 rounded m-1'>리뷰 작성</Link>
+									</>
 								)
 								}
 							</div>
