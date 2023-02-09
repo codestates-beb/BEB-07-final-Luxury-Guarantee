@@ -53,7 +53,7 @@ const LuxurySell = () => {
             reader.readAsDataURL(file);
             reader.onloadend = () => {
                 if (imageSrc.length >= 3) {
-                    alert("이미지를 최대 3개까지만 업로드 가능합니다");
+                    alert("이미지는 최대 3개까지만 업로드 가능합니다");
                 }
                 else {
                     imageSrc.push(reader.result);
@@ -65,7 +65,6 @@ const LuxurySell = () => {
     }
 
     const onSubmitHandler = () => {
-        console.log("이게문제?");
         axios.post(`${apiUrl}/addselluser`, {
             id: Number(params.id),
             images: imageSrc,
@@ -74,7 +73,7 @@ const LuxurySell = () => {
         })
             .then(res => {
                 console.log(res)
-                if(res.data === 'not enough token') {
+                if (res.data === 'not enough token') {
                     setIsToken("보유하신 토큰의 양이 부족합니다.");
                 }
                 else {
@@ -86,6 +85,8 @@ const LuxurySell = () => {
     if (!itemInfo) {
         return null;
     }
+
+    console.log(itemInfo)
     return (
         <div>
             <div className='content-start'>
@@ -95,10 +96,13 @@ const LuxurySell = () => {
                         <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to image Upload</span></p>
                         <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
                     </div>
+
                     <input type="file" id="dropzone-file"
                         className="media hidden" onChange={saveImgFile} ref={imgRef}
                     />
                 </label>
+                <p className="text-gray-500">*제품 사용 사진을 업로드 해주세요.</p>
+                <p className="text-gray-500">*사진은 최대 3장까지 업로드 가능합니다.</p>
                 <div className='flex items-center w-[480px]'>
                     {imageSrc && imageSrc.map((e) => {
                         return (
@@ -110,6 +114,7 @@ const LuxurySell = () => {
             <div className='right-div ml-10 mt-10'>
                 <div className='text-gray-400'>{itemInfo[0].brand}</div>
                 <div className='text-5xl'>{itemInfo[0].name}</div>
+                <img src={itemInfo[0].image_url} alt=''></img>
                 <br></br>
                 <label>
                     price
@@ -126,7 +131,7 @@ const LuxurySell = () => {
                 <br></br>
                 <textarea className='border-solid border-2 h-48 w-80 ' name='content' onChange={handleChange} value={inputValue.content || ""} />
                 <br></br>
-                <button className='bg-black hover:bg-gray-600 text-white font-bold py-2 px-4 rounded mt-3 mb-3' onClick={onSubmitHandler}>판매 등록</button>
+                <button className='bg-black hover:bg-gray-600 text-white font-bold py-2 px-4 rounded mt-3 mb-3' onClick={onSubmitHandler}>리셀 판매 등록</button>
             </div>
         </div>
 

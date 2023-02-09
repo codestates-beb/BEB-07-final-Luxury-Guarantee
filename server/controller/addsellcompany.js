@@ -31,7 +31,7 @@ module.exports = {
         })
         const token_valid = await LuxTokenContract.methods.balanceOf(users.address).call();
 
-        if (Number(token_valid) < luxuryItem.price * 0.05) {
+        if (Number(token_valid) < req.body.price * 0.05) {
             return res.send("not enough token").status(400).send();
         }
 

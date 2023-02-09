@@ -17,11 +17,14 @@ const ReviewPost = () => {
     const getData = async () => {
       try {
         const res = await axios.get(`${apiUrl}/luxurydetail/${id}`)
-        if (res.data.length === 0) {
-          alert('존재하지 않는 상품입니다.');
+        if (res.data.length === 0 || res.data.userId !== isSigned().id || res.data.isReview === true) {
+          alert('잘못된 접근입니다.');
           document.location.href = '/';
         }
-        setItemInfo(res.data)
+        else {
+          setItemInfo(res.data)
+        }
+
       } catch (e) {
         console.log(e)
       }

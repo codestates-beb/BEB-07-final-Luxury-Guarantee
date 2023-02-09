@@ -31,7 +31,7 @@ const LuxurySell = () => {
                 setItemInfo(res.data)
             } catch (e) {
                 console.log(e)
-                
+
             }
         }
         getData();
@@ -52,12 +52,15 @@ const LuxurySell = () => {
         })
             .then(res => {
                 console.log(res);
-                if(res.data === 'not enough token') {
+                if (res.data === 'not enough token') {
                     setIsToken("보유하신 토큰의 양이 부족합니다.");
                 }
+                else {
+                    document.location.href = '/';
+                }
+
             })
     }
-
 
     if (!itemInfo) {
         return null;
