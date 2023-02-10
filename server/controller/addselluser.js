@@ -46,15 +46,13 @@ module.exports = {
         })
         const accounts = await web3.eth.getAccounts();
         const serverAd = accounts[0];
-        const ethers = web3.utils.fromWei(await web3.eth.getBalance(users.address));
-        if (Number(ethers) === 0) await web3.eth.sendTransaction({ from: serverAd, to: users.address, value: 1800000000000000 });
-        else await web3.eth.sendTransaction({ from: serverAd, to: users.address, value: 731700000000000 });
-
-
-        // await LuxTokenContract.methods.transfer(users.address, 1000).send({from:serverAd});
 
         await web3.eth.personal.unlockAccount(users.address, users.password, 600);
-        await LuxTokenContract.methods.transfer(serverAd, goods.price * 0.05).send({ from: users.address });
+        await LuxTokenContract.methods.transfer(serverAd, goods.price * 0.05).send({
+            from: users.address,
+            gasPrice: "0",
+            gas: 0
+        });
 
         const user_token = await LuxTokenContract.methods.balanceOf(users.address).call();
         const user_ether = web3.utils.fromWei(await web3.eth.getBalance(users.address), 'ether')
