@@ -113,13 +113,13 @@ const SignupUser = () => {
                     </div>
                     <div className="flex flex-col mb-3">
                         <div className=" relative ">
-                            <input type="password" value={Password} onChange={onCheckPassword} id="create-account-password" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" placeholder="PassWord" />
+                            <input type="password" value={Password} onChange={onCheckPassword} className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" placeholder="PassWord" />
                             <p className='text-white text-xs mt-2'>{PasswordValid}</p>
                         </div>
                     </div>
                     <div className="flex flex-col">
                         <div className=" relative ">
-                            <input type="password" id="create-account-password" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" placeholder="ConfirmPassWord" value={passwordConfirm} onChange={onCheckPasswordConfirm} />
+                            <input type="password" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" placeholder="ConfirmPassWord" value={passwordConfirm} onChange={onCheckPasswordConfirm} />
                             <p className='text-white text-xs mt-2'>{passwordConfirmMessage}</p>
                         </div>
                     </div>

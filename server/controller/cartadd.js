@@ -19,7 +19,7 @@ module.exports = {
             }
         })
         for (let i = 0; i < users.Cart.length; i++) {
-            if (users.Cart[i].id === req.body.goodsId) {
+            if (users.Cart[i].goodsId === req.body.goodsId) {
                 return res
                     .send("already in cart")
                     .status(400).end();
