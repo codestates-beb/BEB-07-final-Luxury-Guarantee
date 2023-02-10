@@ -63,34 +63,34 @@ const SignupCompany = () => {
 
     const onSubmitHandler = () => {
         const passwordRegEx = /^(?=.*[0-9])(?=.*[a-zA-Z])[0-9a-zA-Z]{6,}$/;
-        if(!passwordRegEx.test(Password)) {
+        if (!passwordRegEx.test(Password)) {
             alert("숫자+영문자 6자리 이상 입력해주세요");
             return;
         }
-        else if(Password !== passwordConfirm) {
+        else if (Password !== passwordConfirm) {
             alert("비밀번호가 일치하지 않습니다.")
         }
         else {
-        axios.post(`${apiUrl}/newcompany`, {
-            userId: Id,
-            nickname: Name,
-            password: Password
+            axios.post(`${apiUrl}/newcompany`, {
+                userId: Id,
+                nickname: Name,
+                password: Password
 
-        })
-            .then(res => {
-                if (res.data === "same id exist") {
-                    setIdValid("사용중인 아이디입니다.")
-                }
-                else if (res.data === "same nickname exist") {
-                    setNameValid("사용중인 닉네임입니다.")
-                }
-                else {
-                    const signData = res.data.message;
-                    signData['isSigned'] = true;
-                    sessionStorage.setItem('signData', JSON.stringify(signData));
-                    document.location.href = '/'
-                }
             })
+                .then(res => {
+                    if (res.data === "same id exist") {
+                        setIdValid("사용중인 아이디입니다.")
+                    }
+                    else if (res.data === "same nickname exist") {
+                        setNameValid("사용중인 닉네임입니다.")
+                    }
+                    else {
+                        const signData = res.data.message;
+                        signData['isSigned'] = true;
+                        sessionStorage.setItem('signData', JSON.stringify(signData));
+                        document.location.href = '/'
+                    }
+                })
         }
     }
 
@@ -125,13 +125,13 @@ const SignupCompany = () => {
                     </div>
                     <div className="flex flex-col mb-3">
                         <div className=" relative ">
-                            <input type="password" value={Password} onChange={onCheckPassword} id="create-account-password" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" placeholder="PassWord" />
+                            <input type="password" value={Password} onChange={onCheckPassword} className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" placeholder="PassWord" />
                             <p className='text-white text-xs mt-2'>{PasswordValid}</p>
                         </div>
                     </div>
                     <div className="flex flex-col">
                         <div className=" relative ">
-                            <input type="password" id="create-account-password" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" placeholder="ConfirmPassWord" value={passwordConfirm} onChange={onCheckPasswordConfirm} />
+                            <input type="password" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" placeholder="ConfirmPassWord" value={passwordConfirm} onChange={onCheckPasswordConfirm} />
                             <p className='text-white text-xs mt-2'>{passwordConfirmMessage}</p>
                         </div>
                     </div>

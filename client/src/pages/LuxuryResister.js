@@ -2,10 +2,11 @@ import React, { useState, useRef } from 'react';
 import apiUrl from "../utils/api";
 import axios from 'axios';
 import isSigned from '../app/isSigned'
-
+import Loading from '../components/Loading';
 //명품 정보 등록 (기업전용)
 
 const LuxuryResister = () => {
+    const [loading, setLoading] = useState(false);
     const [imageSrc, setImageSrc] = useState('');
     const [inputValue, setInputValue] = useState({ category: 'MAN' });
 
@@ -40,6 +41,7 @@ const LuxuryResister = () => {
     })
 
     const onSubmitHandler = () => {
+        setLoading(true)
         axios.post(`${apiUrl}/luxury_register`, {
             name: inputValue.name,
             serial: inputValue.serial,
@@ -65,8 +67,8 @@ const LuxuryResister = () => {
 
 
     return (
-
         <div className='flex justify-center mb-10 mt-10'>
+
             <div className="flex flex-col max-w-md px-4 py-8 bg-white rounded-lg shadow sm:px-6 md:px-8 lg:px-10">
                 <div className="self-center mb-2 text-xl font-light text-gray-800 sm:text-2xl">
                     Resister Your Luxury
@@ -164,7 +166,8 @@ const LuxuryResister = () => {
                 <br></br>
 
 
-                <button className='lux-resister bg-black hover:bg-black text-white font-bold py-2 px-4 rounded ' onClick={onSubmitHandler}>Create</button>
+                {loading ? <Loading /> : <button className='lux-resister bg-black hover:bg-black text-white font-bold py-2 px-4 rounded ' onClick={onSubmitHandler}>Create</button>}
+
             </div>
         </div>
 

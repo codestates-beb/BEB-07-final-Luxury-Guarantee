@@ -19,6 +19,7 @@ const Review = () => {
             setReview([...res.data]);
         });
     }, []);
+
     return (
 
         <div className="w-full p-12 bg-white">
@@ -30,6 +31,7 @@ const Review = () => {
                     <p className="text-2xl ml-14 font-light text-gray-400">
                         리뷰를 해보아요!
                     </p>
+                    {review.length === 0 ? (<p className='ml-14 mt-3'>등록된 리뷰가 없습니다.</p>) : (<></>)}
                 </div>
                 <div className="text-end">
                     <form className="flex flex-col justify-center w-3/4 max-w-sm space-y-3 md:flex-row md:w-full md:space-x-3 md:space-y-0">
