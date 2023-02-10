@@ -10,15 +10,19 @@ const AddToCart = () => {
   const item = cart.items;
 
 
-  const deleteItem = async () => {
+  const deleteItem = async (itemId) => {
     if (window.confirm('정말로 삭제하시겠습니까?')) {
       try {
         await axios.post(`${apiUrl}/cartdeleteone`, {
           cartId: cart.items.id
         });
-        const updatedCart = cart.items.filter((item) => item.id !== cart.id);
-        setCart(updatedCart);
-        console.log(cart)
+        const updatedCart = cart.items.filter((item) => item.id !== itemId);
+        setCart({ ...cart, items: updatedCart });
+        let total = 0;
+      updatedCart.forEach((item) => {
+        total += item.price;
+      });
+      setTotalPrice(total);
       } catch (error) {
         console.error(error);
       }
@@ -34,7 +38,7 @@ const AddToCart = () => {
           cartId: cart.items.id
         });
         setCart([]);
-        setTotalPrice([]);
+        setTotalPrice(0);
       } catch (error) {
         console.error(error);
       }
@@ -89,7 +93,7 @@ const AddToCart = () => {
                     </div>
                     <div className="flex items-center space-x-4">
                       <p className="text-lg">{item.price} LUX</p>
-                      <svg onClick={deleteItem} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeLinejoin="1.5" stroke="currentColor" className="h-5 w-5 cursor-pointer duration-150 hover:text-red-500">
+                      <svg onClick={() => deleteItem(item.id)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeLinejoin="1.5" stroke="currentColor" className="h-5 w-5 cursor-pointer duration-150 hover:text-red-500">
                         <path strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                       </svg>
                     </div>
