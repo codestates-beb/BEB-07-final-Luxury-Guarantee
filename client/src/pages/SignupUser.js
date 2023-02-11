@@ -19,7 +19,7 @@ const SignupUser = () => {
         //  6 ~ 18자 영문, 숫자 조합
         const currentPassword = event.currentTarget.value;
         setPassword(currentPassword);
-        const regExp = /^[a-zA-z0-9]{6,18}$/
+        const regExp = /^(?=.*[0-9])(?=.*[a-zA-Z])[0-9a-zA-Z]{6,}$/;
         if (!regExp.test(currentPassword)) {
             setPasswordValid("숫자+영문자 6자리 이상 입력해주세요")
         } else {

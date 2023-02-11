@@ -2,6 +2,7 @@ const prisma = require("../prisma/prisma");
 
 module.exports = {
     likeadd: async (req, res) => {
+        console.log(req.body);
         if(!req.body.userId || !req.body.goodsId) {
             return res.send("not enough body params").status(400).end();
         }
