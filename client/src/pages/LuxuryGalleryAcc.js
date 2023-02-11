@@ -6,13 +6,10 @@ import isSigned from '../app/isSigned';
 import likeheart from '../pages/img/likeheart.png';
 import emptyheart from "../pages/img/emptyheart.png";
 
-
 //명품 갤러리
 
 const LuxuryGalleryAcc = () => {
     const [itemList, setItemList] = useState([]);
-    const [isLike, setIsLike] = useState(false);
-    const [likeList, setLikeList] = useState([]);
 
     useEffect(() => {
         axios.get(`${apiUrl}/luxurylist`)
@@ -21,47 +18,28 @@ const LuxuryGalleryAcc = () => {
                 const accList = data.filter(e => e.category === 'ACC');
                 setItemList(accList)
             })
-        axios.get(`${apiUrl}/likelist/${isSigned().id}`)
-            .then(res => {
-                const data = res.data.likes;
-                setLikeList(data);
-            })
     }, []);
 
     const handleAddLike = async (id) => {
         await axios.post(`${apiUrl}/likeadd`, {
-          userId: isSigned().id,
-          goodsId: id
+            userId: isSigned().id,
+            goodsId: id
         })
-          .then(res => {
-            console.log(res);
-          })
-          .catch(error => {
-            console.error(error);
-          });
+            .then(res => {
+                window.location.reload();
+            });
     };
 
     const handleDeleteLike = async (id) => {
-        console.log(id);
-
-        
-
         await axios.post(`${apiUrl}/likedelete`, {
-          userId: isSigned().id,
-          goodsId: id
-            
+            userId: isSigned().id,
+            goodsId: id
         })
-          .then(res => {
-            console.log(res);
-          })
-          .catch(error => {
-            console.error(error);
-          });
-    };
-
-    const handleClick = () => {
-        setIsLike(!isLike);
+            .then(res => {
+                window.location.reload();
+            });
     }
+
 
     if (itemList.length === 0) {
         return (
@@ -70,7 +48,7 @@ const LuxuryGalleryAcc = () => {
     }
 
     return (
-        <section className="bg-white dark:bg-gray-900">
+        <section className="bg-white ">
             <div className="container px-6 py-8 mx-auto">
                 <div className="lg:flex lg:-mx-2">
 
@@ -98,30 +76,19 @@ const LuxuryGalleryAcc = () => {
                                         </img></Link>
                                         <div className='flex items-center ml-3'>
                                             <div className='grid justify-items-center'>
-                                            <h4 /* className="mt-2 text-lg font-medium text-gray-700 dark:text-gray-200" */>{e.name}</h4>
-                                            <p /* className="text-blue-500" */>{e.price} LUX</p>
-                                        </div>
-                                        <div className='relative left-20'>
-                                        {isLike ? (
-                                            <div className=''>
-                                            <button onClick={() => {
-                                                handleClick(); 
-                                                handleDeleteLike(e.id);
-                                                }}>
-                                                <img className="w-8" src={likeheart}  alt="none"/>
-                                            </button>
+                                                <h4 className="mt-2 text-lg font-medium text-gray-700">{e.name}</h4>
+                                                <p className="text-blue-500">{e.price} LUX</p>
                                             </div>
-                                        ) : (
-                                            <div className=''>
-                                            <button onClick={() => {
-                                                handleClick();
-                                                handleAddLike(e.id);
-                                            }}>
-                                                <img className="w-8" src={emptyheart}  alt="none"/>
-                                            </button>
+                                            <div className='relative left-20'>
+                                                <button>
+                                                    {e.likecnt !== 0 ? (<img onClick={() => {
+                                                        handleDeleteLike(e.id)
+                                                    }} className="w-8" src={likeheart} alt="none" />) : (<img onClick={() => {
+                                                        handleAddLike(e.id)
+                                                    }} className="w-8" src={emptyheart} alt="none" />)}
+                                                </button>
+                                                <p>{e.likecnt}</p>
                                             </div>
-                                        )}
-                                        </div>
                                         </div>
                                     </div>
                                 )
