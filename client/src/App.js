@@ -23,6 +23,7 @@ import Review from "./pages/Review";
 import ReviewPost from "./pages/ReviewPost";
 import FAQ from "./pages/FAQ";
 import FAQPost from "./pages/FAQPost";
+import FAQDetail from "./pages/FAQDetail";
 
 import Like from "./pages/Like";
 import LuxurySellUser from "./pages/LuxurySellUser";
@@ -61,9 +62,10 @@ function App() {
         <Route path='/signupuser' element={<SignupUser />}></Route>
         <Route path='/likelist' element={<Like />}></Route>
         <Route path='/luxuryselluser/:id' element={<LuxurySellUser />}></Route>
-        <Route path='/FAQPost' element={<FAQPost />}></Route>
+        <Route path='/faqpost' element={<FAQPost />}></Route>
         <Route path='/exchange' element={<Exchange />}></Route>
         <Route path='/searchresult' element={<SearchResult />}></Route>
+        <Route path='/faqdetail/:id' element={<FAQDetail />}></Route>
 
       </Routes>
       <Footer />
