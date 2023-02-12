@@ -1,19 +1,43 @@
-import { useState } from "react";
-import isSigned from "../app/isSigned";
+import { useEffect, useState } from "react";
+import apiUrl from "../utils/api";
+import axios from "axios";
 
 
 const FAQPost = () => {
 
     const [faqTitle, setFaqTitle] = useState("");
     const [faqContent, setFaqContent] = useState("");
-    
+  
     const onFaqTitleHandler = (e) => {
-        setFaqTitle(e.target.value)
+      setFaqTitle(e.target.value)
     }
     const onFaqContentHandler = (e) => {
-        setFaqContent(e.target.value)
+      setFaqContent(e.target.value)
     }
-
+  
+    // const onSubmitHandler = () => {
+    //     if (faqTitle === '') {
+    //       alert('제목을 입력해주세요'); return;
+    //     }
+      
+    //     if (faqContent === '') {
+    //       alert('내용을 입력해주세요'); return;
+    //     }
+      
+    //     axios.post(`${apiUrl}/faqpost`, {
+    //       userId: userId,
+    //       title: faqTitle,
+    //       content: faqContent
+    //     })
+    //       .then(() => {
+    //         document.location.href = '/faq';
+    //       })
+    //       .catch((error) => {
+    //         console.error(error);
+    //       });
+    //   }
+    
+      
     return (
         <div>
              <div className=" relative ">
