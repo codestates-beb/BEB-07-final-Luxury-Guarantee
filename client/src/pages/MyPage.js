@@ -72,18 +72,18 @@ const MyPage = () => {
 						(<p className="font-semibold mt-3">내가 구매한 아이템 (NFT)</p>)}
 					<br></br>
 					{myItem && myItem.map((e) => (
-						<div key={e.id} class="mx-auto grid max-w-6xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-						<article class="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
-        <div class="relative flex items-end overflow-hidden rounded-xl">
+						<div key={e.id} className="mx-auto grid max-w-6xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+						<article className="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
+        <div className="relative flex items-end overflow-hidden rounded-xl">
           <img src={e.image_url} alt="" />
 
         </div>
 
-        <div class="mt-1 p-2">
-          <h2 class="text-slate-700">{e.brand}</h2>
-          <p class="mt-1 text-sm text-slate-400">{e.name} ({e.id})</p>
+        <div className="mt-1 p-2">
+          <h2 className="text-slate-700">{e.brand}</h2>
+          <p className="mt-1 text-sm text-slate-400">{e.name} ({e.id})</p>
 
-          <div class="mt-3 flex items-end justify-center">
+          <div className="mt-3 flex items-end justify-center">
             
 			{e.isSelling === true ? (
 									<p
