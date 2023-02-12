@@ -42,15 +42,10 @@ const MyPage = () => {
 					<p className="font-semibold mt-3">My ETH: {userInfo.ethAmount}</p>
 					<br></br>
 				</div>
-				<div className="mypost font-semibold">FAQ {/*{myPost && myPost.map((post)=> (
-					<div key={post.id}>
-						<Link to={`/reviewdetail/${post.id}`}>
-						<p>
-							{post.title}
-						</p>
-						</Link> 
-					</div>
-				))}*/}
+				<div className="mypost font-semibold">
+					<Link to="/faq">
+					FAQ
+					</Link>
 				</div>
 				<br></br>
 				<div className="mypost font-semibold mt-3">Post {myPost && myPost.map((post) => (
@@ -70,7 +65,6 @@ const MyPage = () => {
 				</div>
 			</div>
 
-			<div className="grid mt-5 grid-cols-4 gap-6 justify-center items-center w-full ">
 
 				<div>
 					{userInfo.isCompany === true ?
@@ -78,15 +72,20 @@ const MyPage = () => {
 						(<p className="font-semibold mt-3">내가 구매한 아이템 (NFT)</p>)}
 					<br></br>
 					{myItem && myItem.map((e) => (
-						<div key={e.id} className='border-solid border-2 mb-5 '>
-							<p>{e.id}</p>
-							<img alt='my-item' src={e.image_url}  ></img>
-							<br></br>
-							<p className='flex justify-center'>{e.brand}</p>
-							<p className='flex justify-center'>{e.name}</p>
-							<br></br>
-							<div className='flex justify-center'>
-								{e.isSelling === true ? (
+						<div class="mx-auto grid max-w-6xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+						<article class="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
+        <div class="relative flex items-end overflow-hidden rounded-xl">
+          <img src={e.image_url} alt="" />
+
+        </div>
+
+        <div class="mt-1 p-2">
+          <h2 class="text-slate-700">{e.brand}</h2>
+          <p class="mt-1 text-sm text-slate-400">{e.name} ({e.id})</p>
+
+          <div class="mt-3 flex items-end justify-center">
+            
+			{e.isSelling === true ? (
 									<p
 										className='bg-black text-white font-bold py-2 px-4 rounded m-1' >판매중</p>
 								) : userInfo.isCompany === true ? (
@@ -97,12 +96,16 @@ const MyPage = () => {
 								{e.isReview === false && userInfo.isCompany === false ? (
 									<Link to={`/reviewpost/${e.id}`} className='bg-black hover:bg-gray-600 text-white font-bold py-2 px-4 rounded m-1'>리뷰 작성하기</Link>
 								) : userInfo.isCompany === false ? (<p className='bg-black text-white font-bold py-2 px-4 rounded m-1'>리뷰 작성 완료</p>) : <></>}
-							</div>
-						</div>
+
+
+          </div>
+        </div>
+    </article>
+	</div>
+						
 					))}
 				</div>
 			</div>
-		</div>
 	)
 }
 

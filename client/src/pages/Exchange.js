@@ -47,19 +47,39 @@ const Exchange = () => {
             })
         }
 
-    return (
-        <div className='m-5'>
-            <h1 className='text-4xl'>Token Exchange</h1>
-            <br>
-            </br>
-            <input className='number-input border-solid border-2 m-5 text-right' placeholder='원' onChange={handleChange} value={inputValue} ></input>
-            <button className='bg-black hover:bg-gray-600 text-white font-bold py-2 px-4 rounded' onClick={onSubmitHandler}>토큰 구매</button>
-            <p className='text-red-500 font-bold'>{exceed}</p>
-            <p className='m-5 mt-0 text-red-500 font-bold'>{alertMessage}</p>
-            <p>*LUX Token은 원화와 1:1 비율로 지급 됩니다.</p>
-            <p>*일일 구매 한도는 2천만 LUX Token 입니다.</p>
-        </div>
-    )
+        return ( 
+            <div className='flex justify-center m-10'>
+              <div className='w-1/2'>
+                <h1 className='text-4xl text-center'>Token Exchange</h1>
+                <br />
+                <input 
+                  className='ml-56 border-2 border-solid number-input m-5 text-right placeholder-gray-500 rounded-lg p-2' 
+                  placeholder='원' 
+                  onChange={handleChange} 
+                  value={inputValue} 
+                />
+                <button 
+                  className='bg-black hover:bg-gray-600 font-bold py-2 px-4 rounded text-white mt-5' 
+                  onClick={onSubmitHandler}
+                >
+                  토큰 구매
+                </button>
+                <p className='font-bold ml-56 text-red-500'>{exceed}</p>
+                <p className='font-bold ml-56 text-red-500'>{alertMessage}</p>
+                <p className='text-gray-500 text-center mt-5'>
+                  *LUX Token은 원화와 1:1 비율로 지급 됩니다.
+                </p>
+                <p className='text-gray-500 text-center'>
+                  *일일 구매 한도는 2천만 LUX Token 입니다.
+                </p>
+              </div>
+            </div>
+          );
+         
+          
+          
+          
+          
 }
 
 export default Exchange;

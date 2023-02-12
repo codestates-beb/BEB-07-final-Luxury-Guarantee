@@ -66,7 +66,7 @@ const Login = () => {
 
 
                         </div>
-                        <p className="alert-message text-white" > {alertMessage} </p>
+                        <p className="alert-message mt-2 text-white" > {alertMessage} </p>
                     </div>
                     <div className="flex items-center mb-6 -mt-4">
                         <div className="flex ml-auto">
@@ -80,7 +80,7 @@ const Login = () => {
 
 
                     <div className="flex w-full">
-                        <button onClick={onSubmitHandler} className="py-2 px-4  bg-black hover:bg-black focus:ring-gray-500 focus:ring-offset-gray-600 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+                        <button onClick={onSubmitHandler} className="py-2 px-4  bg-black focus:ring-gray-500 focus:ring-offset-gray-600 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
                             Login
                         </button>
 

@@ -34,7 +34,7 @@ const LuxuryGalleryMan = () => {
                         <div className="flex items-center justify-between text-sm tracking-widest uppercase ">
                             <p className="text-gray-500 dark:text-gray-300">{itemList.length} Items</p>
                             <div className="flex items-center">
-                                <p className="text-gray-500 dark:text-gray-300">Sort</p>
+                                <p className="text-gray-500 ">Sort</p>
                                 <select className="font-medium text-gray-700 bg-transparent dark:text-gray-500 focus:outline-none">
 
 

@@ -52,8 +52,8 @@ const LuxuryDetail = () => {
   }
 
   return (
-    <div>
-      <div className='left-div float-left w-1/3 mr-10'>
+    <div className="flex flex-center">
+      <div className=' mr-10'>
         <img alt='' src={itemInfo.image_url} className='border-solid border-2 mt-3 mb-3'></img>
       </div>
       <div className='right-div ml-10'>
@@ -75,7 +75,7 @@ const LuxuryDetail = () => {
         <p className='text-red-500 mt-3'>{alertMessage}</p>
       </div>
     </div>
-
+  
   )
 }
 
