@@ -90,7 +90,7 @@ const LuxurySell = () => {
                 <br></br>
                 <textarea className='border-solid border-2 h-48 w-80 ' name='content' onChange={handleChange} value={inputValue.content || ""} />
                 <br></br>
-                <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3' onClick={onSubmitHandler}>판매 등록</button>
+                <button className='bg-black hover:bg-gray-600 text-white font-bold py-2 px-4 rounded m-1' onClick={onSubmitHandler}>판매 등록</button>
             </div>
         </div>
 

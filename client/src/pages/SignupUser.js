@@ -59,27 +59,36 @@ const SignupUser = () => {
     }
 
     const onSubmitHandler = () => {
-        axios.post(`${apiUrl}/newuser`, {
-            userId: Id,
-            nickname: Name,
-            password: Password
+        const passwordRegEx = /^(?=.*[0-9])(?=.*[a-zA-Z])[0-9a-zA-Z]{6,}$/;
+        if (!passwordRegEx.test(Password)) {
+            alert("숫자+영문자 6자리 이상 입력해주세요");
+            return;
+        }
+        else if (Password !== passwordConfirm) {
+            alert("비밀번호가 일치하지 않습니다.")
+        }
+        else {
+            axios.post(`${apiUrl}/newuser`, {
+                userId: Id,
+                nickname: Name,
+                password: Password
 
-        })
-            .then(res => {
-                if (res.data === "same id exist") {
-                    setIdValid("사용중인 아이디입니다.")
-                }
-                else if (res.data === "same nickname exist") {
-                    setNameValid("사용중인 닉네임입니다.")
-                }
-                else {
-                    const signData = res.data.message;
-                    signData['isSigned'] = true;
-                    sessionStorage.setItem('signData', JSON.stringify(signData));
-                    document.location.href = '/'
-                }
             })
-
+                .then(res => {
+                    if (res.data === "same id exist") {
+                        setIdValid("사용중인 아이디입니다.")
+                    }
+                    else if (res.data === "same nickname exist") {
+                        setNameValid("사용중인 닉네임입니다.")
+                    }
+                    else {
+                        const signData = res.data.message;
+                        signData['isSigned'] = true;
+                        sessionStorage.setItem('signData', JSON.stringify(signData));
+                        document.location.href = '/'
+                    }
+                })
+        }
     }
 
 
