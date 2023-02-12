@@ -72,7 +72,7 @@ const MyPage = () => {
 						(<p className="font-semibold mt-3">내가 구매한 아이템 (NFT)</p>)}
 					<br></br>
 					{myItem && myItem.map((e) => (
-						<div class="mx-auto grid max-w-6xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+						<div key={e.id} class="mx-auto grid max-w-6xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 						<article class="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
         <div class="relative flex items-end overflow-hidden rounded-xl">
           <img src={e.image_url} alt="" />
