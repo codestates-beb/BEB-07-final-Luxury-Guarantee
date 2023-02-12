@@ -52,7 +52,7 @@ const LuxuryDetail = () => {
   }
 
   return (
-    <div className="flex flex-center">
+    <div className="flex flex-center ">
       <div className=' mr-10'>
         <img alt='' src={itemInfo.image_url} className='border-solid border-2 mt-3 mb-3'></img>
       </div>
@@ -69,13 +69,13 @@ const LuxuryDetail = () => {
         <br></br>
         <br></br>
         <Link to={`../payment/${itemInfo.id}`}>
-          <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3'>구매하기</button>
+          <button className='bg-black hover:bg-gray-600 text-white font-bold py-2 px-4 rounded m-1'>구매하기</button>
         </Link>
-        <button onClick={handleAddToCart} className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3 ml-5'>장바구니에 담기</button>
+        <button onClick={handleAddToCart} className='bg-black hover:bg-gray-600 text-white font-bold py-2 px-4 rounded m-1'>장바구니에 담기</button>
         <p className='text-red-500 mt-3'>{alertMessage}</p>
       </div>
     </div>
-  
+
   )
 }
 

@@ -10,10 +10,10 @@ module.exports = {
         }
         for (let i = 0; i < req.body.cartIds.length; i++) {
             const carts = await prisma.cart.findUnique({
-                where: { id: req.body.cartIds[i] }
+                where: { id: req.body.cartIds[i].id }
             });
             await prisma.cart.delete({
-                where: { id: req.body.cartIds[i] }
+                where: { id: req.body.cartIds[i].id }
             });
 
             const goods = await prisma.luxury_goods.findUnique({
@@ -49,8 +49,26 @@ module.exports = {
             await web3.eth.personal.unlockAccount(sell_user.address, sell_user.password, 600);
 
             //보내는 계정의 지갑에 이더가 있어야 트랜잭션을 날릴 수 있음. (transfer둘다)
-            await LuxTokenContract.methods.transfer(sell_user.address, goods.price).send({ from: buy_user.address });
-            await MyLuxuryContract.methods.transferFrom(sell_user.address, buy_user.address, goods.tokenId).send({ from: sell_user.address, gas: '1000000' });
+            await LuxTokenContract.methods.transfer(sell_user.address, goods.price).send({
+                from: buy_user.address,
+                gasPrice: "0",
+                gas: 1000000
+            });
+
+            await MyLuxuryContract.methods.approve(buy_user.address, goods.tokenId).send({
+                from: sell_user.address,
+                gasPrice: "0",
+                gas: 1000000
+            });
+
+            if (await MyLuxuryContract.methods.ownerOf(goods.tokenId).call() !== sell_user.address) {
+                throw new Error("The ownership of the token has already transferred.");
+            }
+
+            await MyLuxuryContract.methods.transferFrom(sell_user.address, buy_user.address, goods.tokenId).send({
+                from: sell_user.address, gasPrice: "0",
+                gas: 1000000
+            });
 
             const buy_token = await LuxTokenContract.methods.balanceOf(buy_user.address).call();
             const buy_ether = await web3.eth.getBalance(buy_user.address);
@@ -59,7 +77,10 @@ module.exports = {
 
             await prisma.luxury_goods.update({
                 where: { id: goods.id },
-                data: { userId: buy_user.id }
+                data: {
+                    userId: buy_user.id,
+                    isSelling: false
+                }
             });
 
             await prisma.user.update({

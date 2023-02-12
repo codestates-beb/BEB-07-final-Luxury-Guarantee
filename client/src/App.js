@@ -30,6 +30,7 @@ import LuxurySellUser from "./pages/LuxurySellUser";
 import ReviewDetail from "./pages/ReviewDetail";
 import Exchange from "./pages/Exchange";
 import SearchResult from "./pages/SearchResult";
+import PaymentMany from "./pages/PaymentMany";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
         <Route path='/luxuryresister' element={<LuxuryResister />}></Route>
         <Route path='/mypage' element={<MyPage />}></Route>
         <Route path='/payment/:id' element={<Payment />}></Route>
+        <Route path='/payment' element={<PaymentMany />}></Route>
         <Route path='/post' element={<Post />}></Route>
         <Route path='/review' element={<Review />}></Route>
         <Route path='/reviewpost/:id' element={<ReviewPost />}></Route>

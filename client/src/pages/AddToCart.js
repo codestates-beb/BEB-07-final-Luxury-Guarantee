@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import apiUrl from '../utils/api';
 import isSigned from '../app/isSigned';
-
+import { Link } from 'react-router-dom';
 
 const AddToCart = () => {
   const [cart, setCart] = useState([]);
@@ -44,27 +44,34 @@ const AddToCart = () => {
     if (!isSigned().isSigned) {
       alert('로그인이 필요합니다.');
       document.location.href = '/login';
-    }
-    const id = isSigned().id;
-    const getCartList = async () => {
-      try {
-        const res = await axios.get(`${apiUrl}/cart/${id}`)
-        setCart(res.data)
-        let sum = 0;
-        for (let i = 0; i < res.data.items.length; i++) {
-          sum += res.data.items[i].price;
+    } else {
+      const id = isSigned().id;
+      const getCartList = async () => {
+        try {
+          const res = await axios.get(`${apiUrl}/cart/${id}`)
+          setCart(res.data)
+          let sum = 0;
+          for (let i = 0; i < res.data.items.length; i++) {
+            sum += res.data.items[i].price;
+          }
+          setTotalPrice(sum);
+        } catch (e) {
+          console.log(e)
         }
-        setTotalPrice(sum);
-      } catch (e) {
-        console.log(e)
       }
+      getCartList();
     }
-    getCartList();
-
   }, []);
 
-
-
+  if (cart.length === 0 || item.length === 0) {
+    return (
+      <div className="h-screen bg-gray-100 pt-20">
+        <h1 className="mb-10 text-center text-2xl font-bold">Cart</h1>
+        <i className="fa-solid fa-cart-shopping flex justify-center mb-10 text-9xl text-gray-300"></i>
+        <p className='text-center'>장바구니에 담긴 상품이 없습니다.</p>
+      </div>
+    )
+  }
 
   return (
     <div className="h-screen bg-gray-100 pt-20">
@@ -104,7 +111,7 @@ const AddToCart = () => {
                                 {/*body*/}
                                 <div className="relative p-6 flex-auto">
                                   <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                                    정말로 삭제하시겠습니까?
+                                    해당 상품을 삭제하시겠습니까?
                                   </p>
                                 </div>
                                 {/*footer*/}
@@ -141,7 +148,7 @@ const AddToCart = () => {
 
         <div className="mt-6 h-auto rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
           <div>
-            <button onClick={() => setAllDeleteModal(true)} className="mb-4 w-4/12 rounded-md bg-black py-1.5 text-xs text-blue-50 hover:bg-gray-600">전체 삭제</button>
+            <button onClick={() => setAllDeleteModal(true)} className="mb-4 w-4/12 rounded-md bg-black py-1.5 text-xs text-blue-50 hover:bg-gray-600">장바구니 비우기</button>
             {allDeleteModal ? (
               <>
                 <div
@@ -153,7 +160,7 @@ const AddToCart = () => {
                       {/*body*/}
                       <div className="relative p-6 flex-auto">
                         <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                          정말로 삭제하시겠습니까?
+                          장바구니를 비우시겠습니까?
                         </p>
                       </div>
                       {/*footer*/}
@@ -190,7 +197,9 @@ const AddToCart = () => {
               <p className="text-sm text-gray-700">including VAT</p>
             </div>
           </div>
-          <button className="mt-6 w-full rounded-md bg-black py-1.5 font-medium text-blue-50 hover:bg-gray-600">Check out</button>
+          <Link to='/payment'>
+            <button className="mt-6 w-full rounded-md bg-black py-1.5 font-medium text-blue-50 hover:bg-gray-600">Check out</button>
+          </Link>
         </div>
       </div>
     </div>
