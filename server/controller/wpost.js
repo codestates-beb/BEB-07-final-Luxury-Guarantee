@@ -3,23 +3,28 @@ const { LuxTokenContract, web3 } = require("../web3s/web3")
 
 module.exports = {
     wpost: async (req, res) => {
-        if (!req.body.userId || !req.body.category || !req.body.title || !req.body.content) {
-            return res
+        if (!req.body.userId || !req.body.itemId || !req.body.category || !req.body.title || !req.body.content || !req.body.itemName) {
+            res
                 .send("not enough body params")
                 .status(400).end();
         }
-        const { userId, category, title, content } = req.body;
-        const post = await prisma.user.update({
+        const { userId, category, title, content, image_url, itemName } = req.body;
+        await prisma.user.update({
             where: { id: userId },
             data: {
                 post: {
                     create: {
                         category: category,
                         title: title,
-                        content: content
+                        content: content,
+                        image_url: req.body.image_url,
+                        itemName: req.body.itemName
                     }
                 }
             }
+        })
+        const itemInfo = await prisma.luxury_goods.findUnique({
+            where: { id: req.body.itemId }
         })
 
         const wallets = await prisma.user.findUnique({
@@ -28,8 +33,10 @@ module.exports = {
         const accounts = await web3.eth.getAccounts();
         const serverAd = accounts[0];
 
+
+
         if (req.body.category === "review") {
-            await LuxTokenContract.methods.transfer(wallets.address, 100).send({ from: serverAd });
+            await LuxTokenContract.methods.transfer(wallets.address, itemInfo.price * 0.01).send({ from: serverAd });
 
             const user_token = await LuxTokenContract.methods.balanceOf(wallets.address).call();
 
@@ -37,6 +44,11 @@ module.exports = {
                 where: { id: req.body.userId },
                 data: { tokenAmount: user_token }
             });
+
+            await prisma.luxury_goods.update({
+                where: { id: req.body.itemId },
+                data: { isReview: true }
+            })
         }
         return res.status(200).send("write post success");
     }

@@ -29,29 +29,32 @@ import LuxurySellUser from "./pages/LuxurySellUser";
 
 import ReviewDetail from "./pages/ReviewDetail";
 import Exchange from "./pages/Exchange";
+import SearchResult from "./pages/SearchResult";
+import PaymentMany from "./pages/PaymentMany";
 
 function App() {
   return (
 
-    <div className="App min-w-[1300px]">
+    <div className="App">
       <Header />
       <Routes>
         <Route path='/' element={<MainPage />}></Route>
         <Route path='/*' element={<NotFound />}></Route>
-        <Route path='/cart' element={<AddToCart />}></Route>
+        <Route path='/cart/:id' element={<AddToCart />}></Route>
         <Route path='/category' element={<Category />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/luxurydetail/:id' element={<LuxuryDetail />}></Route>
-        <Route path='/luxurygalleryAcc' element={<LuxuryGalleryAcc />}></Route>
-        <Route path='/luxurygalleryMan' element={<LuxuryGalleryMan />}></Route>
-        <Route path='/luxurygalleryWomen' element={<LuxuryGalleryWomen />}></Route>
+        <Route path='/luxurygallery/ACC' element={<LuxuryGalleryAcc />}></Route>
+        <Route path='/luxurygallery/MAN' element={<LuxuryGalleryMan />}></Route>
+        <Route path='/luxurygallery/WOMEN' element={<LuxuryGalleryWomen />}></Route>
         <Route path='/luxurysell/:id' element={<LuxurySell />}></Route>
         <Route path='/luxuryresister' element={<LuxuryResister />}></Route>
         <Route path='/mypage' element={<MyPage />}></Route>
-        <Route path='/payment' element={<Payment />}></Route>
+        <Route path='/payment/:id' element={<Payment />}></Route>
+        <Route path='/payment' element={<PaymentMany />}></Route>
         <Route path='/post' element={<Post />}></Route>
         <Route path='/review' element={<Review />}></Route>
-        <Route path='/reviewpost' element={<ReviewPost />}></Route>
+        <Route path='/reviewpost/:id' element={<ReviewPost />}></Route>
         <Route path='/reviewdetail/:id' element={<ReviewDetail />}></Route>
         <Route path='/faq' element={<FAQ />}></Route>
         <Route path='/recell' element={<Recell />}></Route>
@@ -60,8 +63,10 @@ function App() {
         <Route path='/signupuser' element={<SignupUser />}></Route>
         <Route path='/likelist' element={<Like />}></Route>
         <Route path='/luxuryselluser/:id' element={<LuxurySellUser />}></Route>
-        <Route path='/FAQPost' element={<FAQPost />}></Route>
+        <Route path='/faqpost' element={<FAQPost />}></Route>
         <Route path='/exchange' element={<Exchange />}></Route>
+        <Route path='/searchresult' element={<SearchResult />}></Route>
+
       </Routes>
       <Footer />
     </div>

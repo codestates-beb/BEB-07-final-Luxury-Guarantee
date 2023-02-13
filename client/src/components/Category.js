@@ -15,9 +15,9 @@ const Category = () => {
         <Button variant="gradient" className=" text-white text-[30px] pt-0 pb-0">Brand</Button>
       </MenuHandler>
       <MenuList>
-        <MenuItem className=" text-black text-[30px] mt-5 mb-5"><Link to="/LuxuryGalleryMan">MAN</Link></MenuItem>
-        <MenuItem className=" text-black text-[30px] mt-5 mb-5"><Link to="/LuxuryGalleryWomen">WOMEN</Link></MenuItem>
-        <MenuItem className=" text-black text-[30px] mt-5 mb-5"><Link to="/LuxuryGalleryAcc">ACC</Link></MenuItem>
+        <MenuItem className=" text-black text-[30px] mt-5 mb-5"><Link to="/LuxuryGallery/MAN">MAN</Link></MenuItem>
+        <MenuItem className=" text-black text-[30px] mt-5 mb-5"><Link to="/LuxuryGallery/WOMEN">WOMEN</Link></MenuItem>
+        <MenuItem className=" text-black text-[30px] mt-5 mb-5"><Link to="/LuxuryGallery/ACC">ACC</Link></MenuItem>
       </MenuList>
     </Menu>
   );

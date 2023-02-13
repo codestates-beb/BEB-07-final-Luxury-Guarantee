@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import isSigned from '../app/isSigned'
-
 import axios from 'axios';
 import apiUrl from "../utils/api";
 
 //결제 페이지
-const Payment = () => {
+const PaymentMany = () => {
     const [userInfo, setUserInfo] = useState('');
     const [itemInfo, setItemInfo] = useState('');
+    const [totalPrice, setTotalPrice] = useState('');
     const [alertMessage, setAlertMessage] = useState('');
-    const params = useParams();
 
     useEffect(() => {
-        const id = params.id;
         const userData = isSigned();
         const userId = userData.id;
         if (!userData.isSigned) {
@@ -27,31 +24,42 @@ const Payment = () => {
 
                 })
         }
-        const getData = async () => {
+
+        const getCartData = async () => {
             try {
-                const res = await axios.get(`${apiUrl}/luxurydetail/${id}`)
-                if (res.data.length === 0) {
-                    alert('존재하지 않는 상품입니다.');
-                    document.location.href = '/';
+
+                const res = await axios.get(`${apiUrl}/cart/${isSigned().id}`)
+                if (res.data.items.length === 0) {
+                    alert('잘못된 접근입니다.');
+                    document.location.href = `/cart/${isSigned().id}`;
                 }
-                setItemInfo(res.data)
+                setItemInfo(res.data.items)
+
+                const getPrice = document.getElementsByClassName('price')
+                const priceArray = Array.from(getPrice).map(e => Number(e.outerText))
+                let sum = 0;
+                priceArray.forEach((e) => {
+                    sum += e;
+                });
+                setTotalPrice(sum)
+
             } catch (e) {
                 console.log(e)
             }
         }
-        getData();
-    }, [params]);
+        getCartData();
+    }, [totalPrice]);
 
-    const directBuy = () => {
-        axios.post(`${apiUrl}/directbuy`, {
+    const manybuy = () => {
+        axios.post(`${apiUrl}/manybuy`, {
             userId: userInfo.id,
-            goodsId: itemInfo.id,
+            cartIds: itemInfo,
         })
             .then(res => {
-                console.log(res)
                 if (res.data === 'not enough token from buy_user') {
                     setAlertMessage('*토큰 잔액이 부족합니다.')
-                } else {
+                }
+                else {
                     alert('구매가 완료되었습니다. 마이페이지에서 확인해주세요.')
                     document.location.href = '/mypage'
                 }
@@ -61,23 +69,41 @@ const Payment = () => {
     return (
 
         <div className="w-full bg-white border-t border-b border-gray-200 px-5 py-10 text-gray-800">
+
             <div className="w-full">
+
                 <div className="-mx-3 md:flex items-start">
+
+
+
                     <div className="px-3 md:w-7/12 lg:pr-10">
+
                         <div className="w-full mx-auto text-gray-800 font-light mb-6 border-b border-gray-200 pb-6">
-                            <div className="w-full flex items-center">
-                                <div className="overflow-hidden rounded-lg w-48 h-48 bg-gray-50 border border-gray-200">
-                                    <img src={itemInfo.image_url} alt="" />
-                                </div>
-                                <div className="flex-grow pl-8">
-                                    <button className="font-semibold uppercase text-gray-600">{itemInfo.name}</button>
-                                    <p className="text-gray-400">x 1</p>
-                                </div>
-                                <div>
-                                    <span className="font-semibold text-gray-400 text-sm">LUX</span>
-                                    <span className="font-semibold text-gray-600 text-xl ml-1">${itemInfo.price}</span><span className="font-semibold text-gray-600 text-sm">.00</span>
-                                </div>
-                            </div>
+
+
+
+                            {itemInfo && itemInfo.map((e) => {
+                                return (
+                                    <div key={e.id} className="w-full flex items-center border-b-2 ">
+                                        <div className="overflow-hidden rounded-lg w-48 h-48 bg-gray-50 border-t-2 border-r-2 
+                                        border-l-2
+                                        border-gray-200">
+                                            <img src={e.image_url} alt="" />
+                                        </div>
+                                        <div className="flex-grow pl-8">
+                                            <button className="font-semibold uppercase text-gray-600">{e.name}</button>
+                                            <p className="text-gray-400">x 1</p>
+                                        </div>
+                                        <div>
+                                            <span className=" font-semibold text-gray-400 text-sm">LUX</span><span className='font-semibold text-gray-600 text-xl ml-1'>$</span>
+                                            <span className="price
+                                            font-semibold text-gray-600 text-xl ml-1">{e.price}</span>
+                                            <span className="font-semibold text-gray-600 text-sm">.00</span>
+                                        </div>
+                                    </div>
+                                )
+                            })}
+
                         </div>
                         <div className="mb-6 pb-6 border-b border-gray-200">
                             <div className="-mx-2 flex items-end justify-end">
@@ -99,7 +125,7 @@ const Payment = () => {
                                 </div>
                                 <div className="pl-3">
                                     <span className="font-semibold text-gray-400 text-sm">LUX</span>
-                                    <span className="font-semibold ml-1">${itemInfo.price - itemInfo.price * 0.01}</span>
+                                    <span className="font-semibold ml-1">${totalPrice - totalPrice * 0.01}</span>
                                 </div>
                             </div>
                             <div className="w-full flex items-center">
@@ -108,7 +134,7 @@ const Payment = () => {
                                 </div>
                                 <div className="pl-3">
                                     <span className="font-semibold text-gray-400 text-sm">LUX</span>
-                                    <span className="font-semibold ml-1">${itemInfo.price * 0.01}</span>
+                                    <span className="font-semibold ml-1">${totalPrice * 0.01}</span>
                                 </div>
                             </div>
                         </div>
@@ -118,11 +144,16 @@ const Payment = () => {
                                     <span className="text-gray-600">Total</span>
                                 </div>
                                 <div className="pl-3">
-                                    <span className="font-semibold text-gray-400 text-sm">LUX</span> <span className="font-semibold">${itemInfo.price}</span>
+                                    <span className="font-semibold text-gray-400 text-sm">LUX</span> <span className="font-semibold">${totalPrice}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
+
+
+
                     <div className="px-3 md:w-5/12">
                         <div className="w-full mx-auto rounded-lg bg-white border border-gray-200 p-3 text-gray-800 font-light mb-6">
                             <div className="w-full flex mb-3 items-center">
@@ -224,7 +255,7 @@ const Payment = () => {
                             </div>
                         </div>
                         <div>
-                            <button className="block w-full max-w-xs mx-auto bg-black hover:bg-gray-700 focus:bg-black text-white rounded-lg px-3 py-2 font-semibold" onClick={directBuy}><i className="mdi mdi-lock-outline mr-1"></i> PAY NOW</button>
+                            <button className="block w-full max-w-xs mx-auto bg-black hover:bg-gray-700 focus:bg-black text-white rounded-lg px-3 py-2 font-semibold" onClick={manybuy}><i className="mdi mdi-lock-outline mr-1"></i> PAY NOW</button>
                         </div>
                     </div>
                 </div>
@@ -233,4 +264,4 @@ const Payment = () => {
     )
 }
 
-export default Payment;
+export default PaymentMany;

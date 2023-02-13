@@ -23,6 +23,7 @@ model user {
     post        posts[]
     Cart        cart[]
     likes       like[]
+    limit       Int
 }
 
 model cart {
@@ -35,12 +36,12 @@ model cart {
 }
 
 model like {
-    id         Int    @unique @default(autoincrement())
-    goodsId    Int
-    image_url  String
-    price      Int
-    likeowner  user   @relation(fields: [userId], references: [id])
-    userId     Int
+    id        Int    @unique @default(autoincrement())
+    goodsId   Int
+    image_url String
+    price     Int
+    likeowner user   @relation(fields: [userId], references: [id])
+    userId    Int
 }
 
 model luxury_goods {
@@ -63,6 +64,7 @@ model luxury_goods {
     content     String?
     isResell    Boolean? @default(false)
     isSelling   Boolean? @default(false)
+    isReview    Boolean? @default(false)
     owner       user     @relation(fields: [userId], references: [id])
     userId      Int
     ipfsurl     String?
@@ -77,5 +79,7 @@ model posts {
     content   String
     createdAt DateTime @default(now())
     userId    Int
+    image_url String?
+    itemName  String?
     owner     user     @relation(fields: [userId], references: [id])
 }

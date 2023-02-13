@@ -9,17 +9,17 @@ module.exports = {
         }
 
         const goods = await prisma.luxury_goods.findUnique({
-            where: { id: req.body.goodsId }
+            where: { id: Number(req.body.goodsId) }
         })
 
         const users = await prisma.user.findUnique({
-            where: { id: req.body.userId },
+            where: { id: Number(req.body.userId) },
             include: {
                 Cart: true
             }
         })
         for (let i = 0; i < users.Cart.length; i++) {
-            if (users.Cart[i].id === req.body.goodsId) {
+            if (users.Cart[i].goodsId === req.body.goodsId) {
                 return res
                     .send("already in cart")
                     .status(400).end();

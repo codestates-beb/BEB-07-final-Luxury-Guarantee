@@ -2,33 +2,61 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import apiUrl from "../utils/api";
+import isSigned from '../app/isSigned';
+import likeheart from '../pages/img/likeheart.png';
+import emptyheart from "../pages/img/emptyheart.png";
 
 //리셀 페이지
 
 const Recell = () => {
-    const [itemList, setItemList] = useState("");
-
+    const [itemList, setItemList] = useState([]);
     useEffect(() => {
-        axios.get(`${apiUrl}/reselllist`)
+        axios.post(`${apiUrl}/resellitemlist`,{
+            userId: isSigned().id
+        })
             .then(res => {
-                setItemList(res.data)
+                const data = res.data;
+                setItemList(data);
             })
-
     }, []);
+
+    const handleAddLike = async (id) => {
+        await axios.post(`${apiUrl}/likeadd`, {
+            userId: isSigned().id,
+            goodsId: id
+        })
+            .then(res => {
+                window.location.reload();
+            });
+    };
+
+    const handleDeleteLike = async (id) => {
+        await axios.post(`${apiUrl}/likedelete`, {
+            userId: isSigned().id,
+            goodsId: id
+        })
+            .then(res => {
+                window.location.reload();
+            });
+    }
 
     if (itemList.length === 0) {
         return (
-            <h1>판매중인 아이템이 없습니다.</h1>
+            <div className="h-screen bg-gray-100 pt-20">
+                <h1 className="mb-10 text-center text-2xl font-bold">Resell</h1>
+                <i className="fa-solid fa-shirt flex justify-center mb-10 text-9xl text-gray-300"></i>
+                <p className='text-center'>리셀 중인 상품이 없습니다.</p>
+            </div>
         )
     }
     return (
-        <section className="bg-gray-900">
+        <section className="bg-white">
             <div className="container px-6 py-8 mx-auto">
                 <div className="lg:flex lg:-mx-2">
 
                     <div className="mt-6 lg:mt-0 lg:px-2 lg:w-4/5 ">
                         <div className="flex items-center justify-between text-sm tracking-widest uppercase ">
-                            <p className="text-gray-300">{itemList.length} Items</p>
+                            <p className="text-gray-500">{itemList.length} Items</p>
                             <div className="flex items-center">
                                 <p className="text-gray-300">Sort</p>
                                 <select className="font-medium  bg-transparent text-gray-500 focus:outline-none">
@@ -43,22 +71,30 @@ const Recell = () => {
 
 
                         <div className="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                            {itemList && itemList.map((e) => {
+                        {itemList && itemList.map((e) => {
                                 return (
-                                    <div key={e.id}>
-                                        <Link className="flex flex-col items-center justify-center w-full max-w-lg mx-auto" to={`/luxurydetail/${e.id}`}><img className="object-cover w-full rounded-md h-72 xl:h-80" alt='my-item' src={e.image_url}  >
-
-                                        </img>
-                                            <h4 className="mt-2 text-lg font-medium text-gray-700 dark:text-gray-200">{e.name}</h4>
-                                            <p className="text-blue-500">{e.price} LUX</p></Link>
-
-
-                                        <button className="flex items-center justify-center w-full px-2 py-2 mt-4 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700">
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 mx-1" viewBox="0 0 20 20" fill="currentColor">
-                                                <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
-                                            </svg>
-                                            <span className="mx-1">Add to cart</span>
-                                        </button>
+                                    <div className='grid justify-items-center border-solid border-2 mt-3 mb-3' key={e.id}>
+                                        <Link className="flex flex-col items-center justify-center w-full max-w-lg mx-auto border-b-2 " to={`/luxurydetail/${e.id}`}><img className="object-cover w-full rounded-md h-72 xl:h-80 " alt='my-item' src={e.image_url}  >
+                                        </img></Link>
+                                        <div className='flex items-center ml-3 mt-3 '>
+                                            <div className='grid justify-items-center
+                                            '>
+                                                <h4 className="mt-2 text-lg font-medium text-gray-700">{e.name}</h4>
+                                                <p className="text-blue-500">{e.price} LUX</p>
+                                            </div>
+                                            <div className='relative left-20'>
+                                                <button>
+                                                    {e.isLike === true ? 
+                                                    (<img onClick={() => {
+                                                        handleDeleteLike(e.id)
+                                                    }} className="w-8" src={likeheart} alt="none" />) : 
+                                                    (<img onClick={() => {
+                                                        handleAddLike(e.id)
+                                                    }} className="w-8" src={emptyheart} alt="none" />)}
+                                                </button>
+                                                <p className='ml-2.5'>{e.likecnt}</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 )
                             })}

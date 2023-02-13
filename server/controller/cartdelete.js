@@ -2,14 +2,13 @@ const prisma = require("../prisma/prisma");
 
 module.exports = {
     cartdeletemany: async (req, res) => {
-        if (!req.body.cartIds) {
+        if (!req.body.userId) {
             return res
                 .send("not enough body params")
                 .status(400).end();
-        }
-        for (let i = 0; i < req.body.cartIds.length; i++) {
-            await prisma.user.delete({
-                where: {id: req.body.cartIds[i]}
+        } else {
+            await prisma.cart.deleteMany({
+                where: { userId: req.body.userId }
             })
         }
         return res.status(200).send("cartdelete success");
@@ -20,10 +19,11 @@ module.exports = {
             return res
                 .send("not enough body params")
                 .status(400).end();
+        } else {
+            await prisma.cart.delete({
+                where: { id: req.body.cartId }
+            })
         }
-        await prisma.user.delete({
-            where: {id: req.body.cartId}
-        })
         return res.status(200).send("cartdelete success");
     }
 }

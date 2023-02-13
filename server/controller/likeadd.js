@@ -2,7 +2,7 @@ const prisma = require("../prisma/prisma");
 
 module.exports = {
     likeadd: async (req, res) => {
-        if(!req.body.userId || !req.body.goodsId) {
+        if (!req.body.userId || !req.body.goodsId) {
             return res.send("not enough body params").status(400).end();
         }
         const goods = await prisma.luxury_goods.findUnique({
@@ -22,7 +22,7 @@ module.exports = {
         })
 
         const aa = await prisma.luxury_goods.update({
-            where: {id: req.body.goodsId},
+            where: { id: req.body.goodsId },
             data: {
                 likecnt: {
                     increment: 1

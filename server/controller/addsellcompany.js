@@ -22,12 +22,16 @@ module.exports = {
                 .status(400).end();
         }
 
+        const luxuryItem = await prisma.luxury_goods.findUnique({
+            where: { id: req.body.id }
+        })
+
         const users = await prisma.user.findUnique({
-            where: { id: valid.userId }
+            where: { id: luxuryItem.userId }
         })
         const token_valid = await LuxTokenContract.methods.balanceOf(users.address).call();
 
-        if (Number(token_valid) < goods_valid.price) {
+        if (Number(token_valid) < req.body.price * 0.05) {
             return res.send("not enough token").status(400).send();
         }
 
@@ -43,17 +47,15 @@ module.exports = {
                 isSelling: true
             }
         })
-
-        const ethers = web3.utils.fromWei(await web3.eth.getBalance(address))
-        if(ethers === 0) await web3.eth.sendTransaction({ from: serverAd, to: users.address, value: 1800000000000000 });
-        else await web3.eth.sendTransaction({ from: serverAd, to: users.address, value: 731700000000000 });
-
         const accounts = await web3.eth.getAccounts();
         const serverAd = accounts[0];
-        // await LuxTokenContract.methods.transfer(users.address, 1000).send({from:serverAd});
 
         await web3.eth.personal.unlockAccount(users.address, users.password, 600);
-        await LuxTokenContract.methods.transfer(serverAd, goods.price * 0.05).send({ from: users.address });
+        await LuxTokenContract.methods.transfer(serverAd, goods.price * 0.05).send({
+            from: users.address,
+            gasPrice: "0",
+            gas: 0
+        });
 
         const user_token = await LuxTokenContract.methods.balanceOf(users.address).call();
         const user_ether = web3.utils.fromWei(await web3.eth.getBalance(users.address), 'ether')

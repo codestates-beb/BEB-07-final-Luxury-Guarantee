@@ -48,7 +48,8 @@ module.exports = {
                 isCompany: true,
                 address: address,
                 tokenAmount: tokens,
-                ethAmount: ethers
+                ethAmount: ethers,
+                limit: 0
             },
         });
         return res.status(201).send({
@@ -86,7 +87,8 @@ module.exports = {
                 isCompany: false,
                 address: address,
                 tokenAmount: tokens,
-                ethAmount: ethers
+                ethAmount: ethers,
+                limit: 0
             },
         });
         return res.status(201).send({

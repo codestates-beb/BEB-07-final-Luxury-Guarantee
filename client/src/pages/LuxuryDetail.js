@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import apiUrl from "../utils/api";
+import isSigned from '../app/isSigned';
 
 //명품 상세페이지
 
 const LuxuryDetail = () => {
   const [itemInfo, setItemInfo] = useState('');
   const params = useParams();
+  const [alertMessage, setAlertMessage] = useState('');
 
   useEffect(() => {
     const id = params.id;
+
     const getData = async () => {
       try {
         const res = await axios.get(`${apiUrl}/luxurydetail/${id}`)
@@ -26,13 +29,31 @@ const LuxuryDetail = () => {
     getData();
   }, [params]);
 
+  const handleAddToCart = () => {
+    axios.post(`${apiUrl}/cart`, {
+      userId: isSigned().id,
+      goodsId: itemInfo.id
+    })
+      .then(res => {
+        if (res.data === 'already in cart') {
+          setAlertMessage('이미 장바구니에 담긴 상품입니다.')
+        } else {
+          document.location.href = `/cart/${isSigned().id}`
+
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
   if (!itemInfo) {
     return null;
   }
 
   return (
-    <div>
-      <div className='left-div float-left w-1/3 mr-10'>
+    <div className="flex flex-center ">
+      <div className=' left-div float-left w-1/3 mr-10'>
         <img alt='' src={itemInfo.image_url} className='border-solid border-2 mt-3 mb-3'></img>
       </div>
       <div className='right-div ml-10'>
@@ -47,8 +68,11 @@ const LuxuryDetail = () => {
         <span className='text-2xl'>{itemInfo.description}</span>
         <br></br>
         <br></br>
-        <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3'>구매하기</button>
-        <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3 ml-5'>장바구니에 담기</button>
+        <Link to={`../payment/${itemInfo.id}`}>
+          <button className='bg-black hover:bg-gray-600 text-white font-bold py-2 px-4 rounded m-1'>구매하기</button>
+        </Link>
+        <button onClick={handleAddToCart} className='bg-black hover:bg-gray-600 text-white font-bold py-2 px-4 rounded m-1'>장바구니에 담기</button>
+        <p className='text-red-500 mt-3'>{alertMessage}</p>
       </div>
     </div>
 

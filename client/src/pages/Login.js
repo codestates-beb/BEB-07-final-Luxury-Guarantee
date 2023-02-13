@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import apiUrl from "../utils/api";
 import axios from 'axios';
+import Loading from '../components/Loading';
 
 //로그인
 const Login = () => {
-
+    const [loading, setLoading] = useState(false);
     const [userId, setUserId] = useState("");
     const [password, setPassword] = useState("");
     const [alertMessage, setAlertMessage] = useState("");
@@ -18,6 +19,7 @@ const Login = () => {
     }
 
     const onSubmitHandler = () => {
+        setLoading(true);
         axios.post(`${apiUrl}/signin`, {
             userId: userId,
             password: password,
@@ -25,7 +27,7 @@ const Login = () => {
             .then(res => {
                 if (res.data === "Login information does not match") {
                     setAlertMessage('아이디 또는 패스워드를 잘못 입력하셨습니다.');
-
+                    setLoading(false);
                 } else {
                     const signData = res.data.message;
                     signData['isSigned'] = true
@@ -37,8 +39,8 @@ const Login = () => {
 
     return (
         <div className='flex justify-center mt-6 mb-6'>
-            <div className="flex flex-col w-full max-w-md px-4 py-8 bg-white rounded-lg shadow dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10">
-                <div className="self-center mb-6 text-xl font-light text-gray-600 sm:text-2xl dark:text-white">
+            <div className="flex flex-col w-full max-w-md px-4 py-8 bg-white rounded-lg shadow sm:px-6 md:px-8 lg:px-10 border-2">
+                <div className="self-center mb-6 text-xl font-light text-gray-600 sm:text-2xl ">
                     Login
                 </div>
 
@@ -66,11 +68,11 @@ const Login = () => {
 
 
                         </div>
-                        <p className="alert-message text-white" > {alertMessage} </p>
+                        <p className="alert-message mt-2" > {alertMessage} </p>
                     </div>
                     <div className="flex items-center mb-6 -mt-4">
                         <div className="flex ml-auto">
-                            <Link to="/" className="inline-flex text-xs font-thin text-gray-500 sm:text-sm dark:text-gray-100 hover:text-gray-700 dark:hover:text-white">
+                            <Link to="/" className="inline-flex text-xs font-thin text-gray-500 sm:text-sm hover:text-gray-700">
                                 Forgot Your Password?
                             </Link>
 
@@ -80,14 +82,14 @@ const Login = () => {
 
 
                     <div className="flex w-full">
-                        <button onClick={onSubmitHandler} className="py-2 px-4  bg-black hover:bg-black focus:ring-gray-500 focus:ring-offset-gray-600 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+                        {loading ? <Loading /> : <button onClick={onSubmitHandler} className="py-2 px-4  bg-black focus:ring-gray-500 focus:ring-offset-gray-600 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
                             Login
-                        </button>
+                        </button>}
 
                     </div>
                 </div>
                 <div className="flex items-center justify-center mt-6">
-                    <Link to="/signupmain" className="inline-flex items-center text-xs font-thin text-center text-gray-500 hover:text-gray-700 dark:text-gray-100 dark:hover:text-white">
+                    <Link to="/signupmain" className="inline-flex items-center text-xs font-thin text-center text-gray-500 hover:text-gray-700">
                         <span className="ml-2">
                             You don&#x27;t have an account?
                         </span>

@@ -18,10 +18,18 @@ const Header = () => {
       </div>
       <div className='absolute top-5 left-[80%] h-[119px] w-[153px]  text-white text-3xl flex space-x-6'>
 
-        <Link to="/mypage"><i className="fa-regular fa-user"></i></Link>
 
-        <Link to="/likelist"><i className="fa-solid fa-heart"></i></Link>
-        <Link to="/cart"><i className="fa-solid fa-cart-shopping"></i></Link>
+        {userData.isSigned === true ?
+
+          (<><Link to="/mypage"><i className="fa-regular fa-user"></i></Link>
+            <Link to="/likelist"><i className="fa-solid fa-heart"></i></Link>
+            <Link to={`/cart/${userData.id}`}><i className="fa-solid fa-cart-shopping"></i></Link>
+            <Link to="/faq">
+              <i className="fa-solid fa-question"></i></Link>
+          </>)
+          : (<></>)
+        }
+
       </div>
 
       <div className="sub-menu mx-auto mb-3 w-[55%]">
@@ -67,24 +75,19 @@ const Header = () => {
                   Membership
                 </Link>
               ) : (
-                <Link to="post" className="category-item text-white p-[30px] text-[30px]">
-                  Post
+                <Link to="/exchange" className="category-item text-white p-[30px] text-[30px]">
+                  Exchange
                 </Link>
               )
             }
 
           </li>
           <li>
-            {userData.isSigned === true ?
-              (
-                <Link to="/exchange" className="category-item text-white p-[30px] text-[30px]">
-                  Exchange
-                </Link>
-              ) : (
-                <></>
-              )
-            }
+            <Link to="post" className="category-item text-white p-[30px] text-[30px]">
+              Post
+            </Link>
           </li>
+
         </ul>
       </div>
       <hr className="mx-auto h-[3px] w-11/12 rounded-sm bg-gray-dark" />

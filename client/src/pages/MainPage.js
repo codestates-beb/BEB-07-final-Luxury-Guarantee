@@ -1,5 +1,5 @@
 import React from 'react';
-import mainIMG from './img/main.jpg';
+import mainIMG from './img/main2.png';
 
 const MainPage = () => { 
 

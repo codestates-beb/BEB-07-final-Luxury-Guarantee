@@ -1,5 +1,6 @@
 const prisma = require("../prisma/prisma");
 const { MyLuxuryContract, LuxTokenContract, web3 } = require("../web3s/web3");
+require('dotenv').config({ path: '../.env' });
 
 module.exports = {
     directbuy: async (req, res) => {
@@ -33,17 +34,30 @@ module.exports = {
                 .status(400).end();
         }
 
-        const accounts = await web3.eth.getAccounts();
-        const serverAd = accounts[0];
-        // await web3.eth.sendTransaction({from:serverAd, to:sell_user.address, value:web3.utils.toWei(String(1), "ether")});
-        // await LuxTokenContract.methods.transfer(buy_user.address, 1000).send({from:serverAd});
-
         await web3.eth.personal.unlockAccount(buy_user.address, buy_user.password, 600);
         await web3.eth.personal.unlockAccount(sell_user.address, sell_user.password, 600);
 
-        //보내는 계정의 지갑에 이더가 있어야 트랜잭션을 날릴 수 있음. (transfer둘다)
-        await LuxTokenContract.methods.transfer(sell_user.address, goods.price).send({ from: buy_user.address });
-        await MyLuxuryContract.methods.transferFrom(sell_user.address, buy_user.address, goods.tokenId).send({ from: sell_user.address, gas: '1000000' });
+        await LuxTokenContract.methods.transfer(sell_user.address, goods.price).send({
+            from: buy_user.address,
+            gasPrice: "0",
+            gas: 1000000
+        });
+
+        await MyLuxuryContract.methods.approve(buy_user.address, goods.tokenId).send({
+            from: sell_user.address,
+            gasPrice: "0",
+            gas: 1000000
+        });
+
+        if (await MyLuxuryContract.methods.ownerOf(goods.tokenId).call() !== sell_user.address) {
+            throw new Error("The ownership of the token has already transferred.");
+        }
+
+        await MyLuxuryContract.methods.transferFrom(sell_user.address, buy_user.address, goods.tokenId).send({
+            from: sell_user.address,
+            gasPrice: "0",
+            gas: 1000000
+        });
 
         const buy_token = await LuxTokenContract.methods.balanceOf(buy_user.address).call();
         const buy_ether = await web3.eth.getBalance(buy_user.address);
@@ -52,7 +66,12 @@ module.exports = {
 
         await prisma.luxury_goods.update({
             where: { id: req.body.goodsId },
-            data: { userId: buy_user.id }
+            data: {
+                userId: buy_user.id,
+                isSelling: false,
+                isResell: false,
+                isReview: false
+            }
         });
 
         await prisma.user.update({
