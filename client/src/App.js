@@ -35,7 +35,7 @@ import PaymentMany from "./pages/PaymentMany";
 function App() {
   return (
 
-    <div className="App min-w-[1300px]">
+    <div className="App">
       <Header />
       <Routes>
         <Route path='/' element={<MainPage />}></Route>
