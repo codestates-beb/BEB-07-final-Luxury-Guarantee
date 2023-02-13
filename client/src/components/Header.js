@@ -19,9 +19,14 @@ const Header = () => {
       <div className='absolute top-5 left-[80%] h-[119px] w-[153px]  text-white text-3xl flex space-x-6'>
 
         <Link to="/mypage"><i className="fa-regular fa-user"></i></Link>
-
         <Link to="/likelist"><i className="fa-solid fa-heart"></i></Link>
         <Link to={`/cart/${userData.id}`}><i className="fa-solid fa-cart-shopping"></i></Link>
+        {userData.isSigned === true ?
+          (<Link to="/faq">
+            <i className="fa-solid fa-question"></i></Link>)
+          : (<></>)
+        }
+
       </div>
 
       <div className="sub-menu mx-auto mb-3 w-[55%]">
