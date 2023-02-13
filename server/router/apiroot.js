@@ -25,6 +25,8 @@ const { likeadd } = require("../controller/likeadd");
 const { likedelete } = require("../controller/likedelete");
 const { likelist } = require("../controller/likelist");
 const { tokenTransfer } = require("../controller/transfer")
+const { itemlist } = require("../controller/itemlist");
+const { resellitemlist } = require("../controller/itemlist");
 
 router.get("/", function (req, res) {
     return res.status(200).send("index router, hello world");
@@ -57,6 +59,8 @@ router.post("/cartdeleteone", cartdeleteone);
 router.post("/likeadd", likeadd);
 router.post("/likedelete", likedelete);
 router.post("/tokentransfer", tokenTransfer)
+router.post("/itemlist", itemlist);
+router.post("/resellitemlist", resellitemlist);
 
 
 module.exports = router;

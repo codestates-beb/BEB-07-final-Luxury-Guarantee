@@ -9,16 +9,16 @@ import emptyheart from "../pages/img/emptyheart.png";
 //명품 갤러리
 
 const LuxuryGalleryMan = () => {
-    const [itemList, setItemList] = useState("");
-
+    const [itemList, setItemList] = useState([]);
     useEffect(() => {
-        axios.get(`${apiUrl}/luxurylist`)
+        axios.post(`${apiUrl}/itemlist`,{
+            userId: isSigned().id
+        })
             .then(res => {
                 const data = res.data;
-                const accList = data.filter(e => e.category === 'MAN');
-                setItemList(accList)
+                const accList = data.filter(e => e.category === "MAN");
+                setItemList(accList);
             })
-
     }, []);
 
     const handleAddLike = async (id) => {
@@ -73,7 +73,7 @@ const LuxuryGalleryMan = () => {
 
 
                         <div className="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                            {itemList && itemList.map((e) => {
+                            {itemList && itemList.slice(0).reverse().map((e) => {
                                 return (
                                     <div className='grid justify-items-center border-solid border-2 mt-3 mb-3' key={e.id}>
                                         <Link className="flex flex-col items-center justify-center w-full max-w-lg mx-auto border-b-2 " to={`/luxurydetail/${e.id}`}><img className="object-cover w-full rounded-md h-72 xl:h-80 " alt='my-item' src={e.image_url}  >
@@ -86,13 +86,15 @@ const LuxuryGalleryMan = () => {
                                             </div>
                                             <div className='relative left-20'>
                                                 <button>
-                                                    {e.likecnt !== 0 ? (<img onClick={() => {
+                                                    {e.isLike === true ? 
+                                                    (<img onClick={() => {
                                                         handleDeleteLike(e.id)
-                                                    }} className="w-8" src={likeheart} alt="none" />) : (<img onClick={() => {
+                                                    }} className="w-8" src={likeheart} alt="none" />) : 
+                                                    (<img onClick={() => {
                                                         handleAddLike(e.id)
                                                     }} className="w-8" src={emptyheart} alt="none" />)}
                                                 </button>
-                                                <p>{e.likecnt}</p>
+                                                <p className='ml-2.5'>{e.likecnt}</p>
                                             </div>
                                         </div>
                                     </div>
