@@ -68,7 +68,8 @@ module.exports = {
             where: { id: req.body.goodsId },
             data: {
                 userId: buy_user.id,
-                isSelling: false
+                isSelling: false,
+                isReview: false
             }
         });
 
