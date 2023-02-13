@@ -2,19 +2,43 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import apiUrl from "../utils/api";
+import isSigned from '../app/isSigned';
+import likeheart from '../pages/img/likeheart.png';
+import emptyheart from "../pages/img/emptyheart.png";
 
 //리셀 페이지
 
 const Recell = () => {
-    const [itemList, setItemList] = useState("");
-
+    const [itemList, setItemList] = useState([]);
     useEffect(() => {
-        axios.get(`${apiUrl}/reselllist`)
+        axios.post(`${apiUrl}/resellitemlist`,{
+            userId: isSigned().id
+        })
             .then(res => {
-                setItemList(res.data)
+                const data = res.data;
+                setItemList(data);
             })
-
     }, []);
+
+    const handleAddLike = async (id) => {
+        await axios.post(`${apiUrl}/likeadd`, {
+            userId: isSigned().id,
+            goodsId: id
+        })
+            .then(res => {
+                window.location.reload();
+            });
+    };
+
+    const handleDeleteLike = async (id) => {
+        await axios.post(`${apiUrl}/likedelete`, {
+            userId: isSigned().id,
+            goodsId: id
+        })
+            .then(res => {
+                window.location.reload();
+            });
+    }
 
     if (itemList.length === 0) {
         return (
@@ -47,14 +71,30 @@ const Recell = () => {
 
 
                         <div className="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                            {itemList && itemList.map((e) => {
+                        {itemList && itemList.map((e) => {
                                 return (
-                                    <div key={e.id} className='border-2'>
-                                        <Link className="flex flex-col items-center justify-center w-full max-w-lg mx-auto" to={`/luxurydetail/${e.id}`}><img className="object-cover w-full rounded-md h-72 xl:h-80 border-b-2" alt='my-item' src={e.image_url}  >
-
-                                        </img>
-                                            <h4 className="mt-2 text-lg font-medium text-gray-700">{e.name}</h4>
-                                            <p className="text-blue-500">{e.price} LUX</p></Link>
+                                    <div className='grid justify-items-center border-solid border-2 mt-3 mb-3' key={e.id}>
+                                        <Link className="flex flex-col items-center justify-center w-full max-w-lg mx-auto border-b-2 " to={`/luxurydetail/${e.id}`}><img className="object-cover w-full rounded-md h-72 xl:h-80 " alt='my-item' src={e.image_url}  >
+                                        </img></Link>
+                                        <div className='flex items-center ml-3 mt-3 '>
+                                            <div className='grid justify-items-center
+                                            '>
+                                                <h4 className="mt-2 text-lg font-medium text-gray-700">{e.name}</h4>
+                                                <p className="text-blue-500">{e.price} LUX</p>
+                                            </div>
+                                            <div className='relative left-20'>
+                                                <button>
+                                                    {e.isLike === true ? 
+                                                    (<img onClick={() => {
+                                                        handleDeleteLike(e.id)
+                                                    }} className="w-8" src={likeheart} alt="none" />) : 
+                                                    (<img onClick={() => {
+                                                        handleAddLike(e.id)
+                                                    }} className="w-8" src={emptyheart} alt="none" />)}
+                                                </button>
+                                                <p className='ml-2.5'>{e.likecnt}</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 )
                             })}

@@ -9,18 +9,17 @@ import emptyheart from "../pages/img/emptyheart.png";
 //명품 갤러리
 
 const LuxuryGalleryWomen = () => {
-    const [itemList, setItemList] = useState("");
-
+    const [itemList, setItemList] = useState([]);
     useEffect(() => {
-        axios.get(`${apiUrl}/luxurylist`)
+        axios.post(`${apiUrl}/itemlist`,{
+            userId: isSigned().id
+        })
             .then(res => {
                 const data = res.data;
-                const accList = data.filter(e => e.category === 'WOMEN');
-                setItemList(accList)
+                const accList = data.filter(e => e.category === "WOMEN");
+                setItemList(accList);
             })
-
     }, []);
-
 
     const handleAddLike = async (id) => {
         await axios.post(`${apiUrl}/likeadd`, {
@@ -87,13 +86,15 @@ const LuxuryGalleryWomen = () => {
                                             </div>
                                             <div className='relative left-20'>
                                                 <button>
-                                                    {e.likecnt !== 0 ? (<img onClick={() => {
+                                                    {e.isLike === true ? 
+                                                    (<img onClick={() => {
                                                         handleDeleteLike(e.id)
-                                                    }} className="w-8" src={likeheart} alt="none" />) : (<img onClick={() => {
+                                                    }} className="w-8" src={likeheart} alt="none" />) : 
+                                                    (<img onClick={() => {
                                                         handleAddLike(e.id)
                                                     }} className="w-8" src={emptyheart} alt="none" />)}
                                                 </button>
-                                                <p>{e.likecnt}</p>
+                                                <p className='ml-2.5'>{e.likecnt}</p>
                                             </div>
                                         </div>
                                     </div>
