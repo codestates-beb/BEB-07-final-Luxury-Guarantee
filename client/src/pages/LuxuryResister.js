@@ -9,6 +9,7 @@ const LuxuryResister = () => {
     const [loading, setLoading] = useState(false);
     const [imageSrc, setImageSrc] = useState('');
     const [inputValue, setInputValue] = useState({ category: 'MAN' });
+    const [alertMessage, setAlertMessage] = useState('');
 
     const handleChange = (e) => {
         setInputValue({
@@ -60,9 +61,19 @@ const LuxuryResister = () => {
             userId: isSigned().id,
         })
             .then(res => {
-                console.log(res)
-                document.location.href = '/mypage'
+                if (res.data === 'serial exists') {
+                    setAlertMessage('이미 등록된 상품입니다.')
+                    setLoading(false)
+                } else if (res.data === 'not enough body params') {
+                    setAlertMessage('입력되지 않은 항목이 있습니다.')
+                    setLoading(false)
+                }
+                else {
+                    document.location.href = '/mypage'
+                }
             })
+
+
     }
 
 
@@ -164,7 +175,7 @@ const LuxuryResister = () => {
 
                 <input name='description' onChange={handleChange} value={inputValue.description || ""} className='rounded-lg border-transparent flex-1 appearance-none border border-gray-600 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-700 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent' ></input>
                 <br></br>
-
+                <p className='text-red-500 mb-5'>{alertMessage}</p>
 
                 {loading ? <Loading /> : <button className='lux-resister bg-black hover:bg-black text-white font-bold py-2 px-4 rounded ' onClick={onSubmitHandler}>Create</button>}
 

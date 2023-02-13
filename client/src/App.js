@@ -44,9 +44,9 @@ function App() {
         <Route path='/category' element={<Category />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/luxurydetail/:id' element={<LuxuryDetail />}></Route>
-        <Route path='/luxurygalleryAcc' element={<LuxuryGalleryAcc />}></Route>
-        <Route path='/luxurygalleryMan' element={<LuxuryGalleryMan />}></Route>
-        <Route path='/luxurygalleryWomen' element={<LuxuryGalleryWomen />}></Route>
+        <Route path='/luxurygallery/ACC' element={<LuxuryGalleryAcc />}></Route>
+        <Route path='/luxurygallery/MAN' element={<LuxuryGalleryMan />}></Route>
+        <Route path='/luxurygallery/WOMEN' element={<LuxuryGalleryWomen />}></Route>
         <Route path='/luxurysell/:id' element={<LuxurySell />}></Route>
         <Route path='/luxuryresister' element={<LuxuryResister />}></Route>
         <Route path='/mypage' element={<MyPage />}></Route>
