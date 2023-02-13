@@ -69,7 +69,8 @@ module.exports = {
             data: {
                 userId: buy_user.id,
                 isSelling: false,
-                isReview: false,
+                isResell: false,
+                isReview: false
             }
         });
 
