@@ -2,8 +2,8 @@ import React from 'react';
 
 const Footer = () => {
         return (
-                <div className='h-full w-full bg-black flex items-stretch '>
-                        <div className='h-[580px] w-[480px] self-auto '>
+                <div className='h-full w-full bg-black flex items-stretch'>
+                        <div className='self-auto '>
                                 <div className='text-[32px] text-white p-[20px]'><span>About</span></div>
                                 <div className='text-[16px] text-white p-[20px]'>We,the Luxury Guarantee, are a non-profit association of luxury brands investing in technologies
                                         to enhance the customer experience and build a virtuous future for luxury.
@@ -16,7 +16,7 @@ const Footer = () => {
                         <br></br>
                         <br></br>
                         <br></br>
-                        <div className='h-[580px] w-[480px] self-auto'>
+                        <div className='self-auto'>
                                 <div className='text-[32px] text-white  p-[20px]'>Solutions</div>
                                 <div className='text-[16px] text-white p-[20px]'>The Platform uses Quorum permissioned blockchain
                                         technology at its core. Quorum maintains a common
@@ -35,7 +35,7 @@ const Footer = () => {
                         <br></br>
                         <br></br>
                         <br></br>
-                        <div className='h-[580px] w-[480px] self-auto'>
+                        <div className='self-auto'>
                                 <div className='text-[32px] text-white p-[20px]'>Membership</div>
                                 <div className='text-[16px] text-white p-[20px]'>Luxury Guarantee General
                                         Luxury Guarantee is a self-managed offering for brands that care about decentralization and want control over data. The Luxury Guarantee’s software is run directly by the brand and the brand participates  in the blockchain governance.
@@ -52,7 +52,7 @@ const Footer = () => {
                         <br></br>
                         <br></br>
                         <br></br>
-                        <div className='h-[580px] w-[480px] self-auto'>
+                        <div className='self-auto'>
                                 <div className='text-[32px] text-white p-[20px]'>Resources</div>
                                 <div className='text-[16px] text-white p-[20px]'>Leveraging Blockchain for Supply Chain Transparency in the Luxury Sector.
                                         Using Blockchain to Enhance Luxury Supply Chain Traceability.
