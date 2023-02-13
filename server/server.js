@@ -23,3 +23,19 @@ app.use(express.urlencoded({
 }));
 
 app.use('/', apiRouter);
+
+if (require('./https_config').options.exist) {
+    const https = require('https');
+    const options = require('./https_config').options;
+    const httpsPort = 8443;
+    https.createServer(options, app).listen(httpsPort, () => {
+        console.log(`server is listening at PORT : ${httpsPort}`);
+    });
+} else {
+    app.listen(app.get('port'), () => {
+        console.log(`server is listening at PORT : ${app.get('port')}`);
+    });
+}
+
+
+
