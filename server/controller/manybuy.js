@@ -79,7 +79,8 @@ module.exports = {
                 where: { id: goods.id },
                 data: {
                     userId: buy_user.id,
-                    isSelling: false
+                    isSelling: false,
+                    isReview: false
                 }
             });
 

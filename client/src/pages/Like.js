@@ -38,6 +38,16 @@ const LuxuryGallery = () => {
             });
     };
 
+    if (likeList.length === 0) {
+        return (
+            <div className="h-screen bg-gray-100 pt-20">
+                <h1 className="mb-10 text-center text-2xl font-bold">Like</h1>
+                <i className="fa-solid fa-heart flex justify-center mb-10 text-9xl text-gray-300"></i>
+                <p className='text-center'>찜한 상품이 없습니다.</p>
+            </div>
+        )
+    }
+
     return (
         <section className="bg-white ">
             <div className="container px-6 py-8 mx-auto">

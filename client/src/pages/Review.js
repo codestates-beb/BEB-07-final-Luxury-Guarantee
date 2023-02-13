@@ -20,6 +20,16 @@ const Review = () => {
         });
     }, []);
 
+    if (review.length === 0) {
+        return (
+            <div className="h-screen bg-gray-100 pt-20">
+                <h1 className="mb-10 text-center text-2xl font-bold">Review</h1>
+                <i className="fa-solid fa-comment flex justify-center mb-10 text-9xl text-gray-300"></i>
+                <p className='text-center'>등록된 리뷰가 없습니다.</p>
+            </div>
+        )
+    }
+
     return (
 
         <div className="w-full p-12 bg-white">
@@ -31,7 +41,6 @@ const Review = () => {
                     <p className="text-2xl ml-14 font-light text-gray-400">
                         리뷰를 해보아요!
                     </p>
-                    {review.length === 0 ? (<p className='ml-14 mt-3'>등록된 리뷰가 없습니다.</p>) : (<></>)}
                 </div>
                 <div className="text-end">
                     <form className="flex flex-col justify-center w-3/4 max-w-sm space-y-3 md:flex-row md:w-full md:space-x-3 md:space-y-0">

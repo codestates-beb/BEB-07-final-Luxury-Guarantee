@@ -18,7 +18,11 @@ const Recell = () => {
 
     if (itemList.length === 0) {
         return (
-            <h1>판매중인 아이템이 없습니다.</h1>
+            <div className="h-screen bg-gray-100 pt-20">
+                <h1 className="mb-10 text-center text-2xl font-bold">Resell</h1>
+                <i className="fa-solid fa-shirt flex justify-center mb-10 text-9xl text-gray-300"></i>
+                <p className='text-center'>리셀 중인 상품이 없습니다.</p>
+            </div>
         )
     }
     return (
