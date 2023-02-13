@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import apiUrl from '../utils/api';
+import Loading from '../components/Loading';
+
 //개인용 회원가입 페이지
 const SignupUser = () => {
-
+    const [loading, setLoading] = useState(false);
     const [Id, setId] = useState("");
     const [IdVaild, setIdValid] = useState("");
     const [Name, setName] = useState("");
@@ -68,6 +70,7 @@ const SignupUser = () => {
             alert("비밀번호가 일치하지 않습니다.")
         }
         else {
+            setLoading(true);
             axios.post(`${apiUrl}/newuser`, {
                 userId: Id,
                 nickname: Name,
@@ -77,9 +80,11 @@ const SignupUser = () => {
                 .then(res => {
                     if (res.data === "same id exist") {
                         setIdValid("사용중인 아이디입니다.")
+                        setLoading(false);
                     }
                     else if (res.data === "same nickname exist") {
                         setNameValid("사용중인 닉네임입니다.")
+                        setLoading(false);
                     }
                     else {
                         const signData = res.data.message;
@@ -95,11 +100,11 @@ const SignupUser = () => {
     return (
         <div className='flex justify-center mb-10 mt-10'>
 
-            <div className="flex flex-col max-w-md px-4 py-8 bg-white rounded-lg shadow dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10">
-                <div className="self-center mb-2 text-xl font-light text-gray-800 sm:text-2xl dark:text-white">
+            <div className="flex flex-col max-w-md px-4 py-8 bg-white rounded-lg shadow sm:px-6 md:px-8 lg:px-10 border-2">
+                <div className="self-center mb-2 text-xl font-light text-gray-800 sm:text-2xl ">
                     Create a new account
                 </div>
-                <span className="justify-center text-sm text-center text-gray-500 flex-items-center dark:text-gray-400">
+                <span className="justify-center text-sm text-center text-gray-500 flex-items-center ">
                     Already have an account ?
                     <Link to="/login" className="text-sm ml-1 text-blue-500 underline hover:text-blue-700">
                         Sign in
@@ -109,33 +114,33 @@ const SignupUser = () => {
                     <div className="flex flex-col mb-3">
                         <div className=" relative">
                             <input type="text" value={Name} onChange={onCheckName} id="create-account-username" className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" name="username" placeholder="NickName" />
-                            <p className='text-white text-base mt-2'>{NameValid}</p>
+                            <p className='text-xs mt-2'>{NameValid}</p>
                         </div>
 
                     </div>
                     <div className="flex flex-col mb-3">
                         <div className=" relative ">
                             <input value={Id} onChange={onCheckId} id="create-account-email" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" placeholder="Id" />
-                            <p className='text-white text-base mt-2'>{IdVaild}</p>
+                            <p className='text-xs mt-2'>{IdVaild}</p>
                         </div>
 
                     </div>
                     <div className="flex flex-col mb-3">
                         <div className=" relative ">
                             <input type="password" value={Password} onChange={onCheckPassword} className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" placeholder="PassWord" />
-                            <p className='text-white text-xs mt-2'>{PasswordValid}</p>
+                            <p className='text-xs mt-2'>{PasswordValid}</p>
                         </div>
                     </div>
                     <div className="flex flex-col">
                         <div className=" relative ">
                             <input type="password" className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent" placeholder="ConfirmPassWord" value={passwordConfirm} onChange={onCheckPasswordConfirm} />
-                            <p className='text-white text-xs mt-2'>{passwordConfirmMessage}</p>
+                            <p className='text-xs mt-2'>{passwordConfirmMessage}</p>
                         </div>
                     </div>
                     <div className="flex w-full mt-4">
-                        <button onClick={onSubmitHandler} className="py-2 px-4  bg-black hover:bg-black focus:ring-black focus:ring-offset-black text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+                        {loading ? <Loading /> : <button onClick={onSubmitHandler} className="py-2 px-4  bg-black hover:bg-black focus:ring-black focus:ring-offset-black text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
                             Submit
-                        </button>
+                        </button>}
                     </div>
 
                 </div>

@@ -47,25 +47,25 @@ const Review = () => {
             <div className="grid grid-cols-4 gap-12 md:grid-cols-2 xl:grid-cols-3">
                 {review.slice(0).reverse().map((review) => {
                     return (
-                        <div key={review.id} className="m-auto overflow-hidden rounded-lg shadow-lg cursor-pointer h-90 w-60 md:w-80">
+                        <div key={review.id} className="m-auto overflow-hidden rounded-lg shadow-lg cursor-pointer h-90 w-60 md:w-80 border-2 ">
                             <Link to={`/reviewdetail/${review.id}`} className="block w-full h-full">
                                 <img alt="" src={review.image_url} className="object-cover w-full max-h-40" />
-                                <div className="w-full p-4 bg-white dark:bg-gray-800">
+                                <div className="w-full p-4 bg-white">
                                     <p className="font-medium text-indigo-500 text-md">
                                         {/* 상품명 */}
                                     </p>
-                                    <p className="mb-2 text-xl font-medium text-gray-800 dark:text-white">
+                                    <p className="mb-2 text-xl font-medium text-gray-800">
                                         {review.title}
                                     </p>
-                                    <p className="font-light text-gray-400 dark:text-gray-300 text-md">
+                                    <p className="font-light text-gray-400 text-md">
                                         {review.content}
                                     </p>
                                     <div className="flex items-center mt-4">
                                         <div className="flex flex-col justify-between text-sm">
-                                            <p className="text-gray-800 dark:text-white">
+                                            <p className="text-gray-800 ">
                                                 {userId}
                                             </p>
-                                            <p className="text-gray-400 dark:text-gray-300">
+                                            <p className="text-gray-400">
                                                 {review.createdAt.split("T")[0]}
                                             </p>
                                         </div>

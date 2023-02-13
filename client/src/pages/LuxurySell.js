@@ -3,12 +3,15 @@ import { useParams } from 'react-router-dom';
 import isSigned from '../app/isSigned'
 import axios from 'axios';
 import apiUrl from "../utils/api";
+import Loading from '../components/Loading';
+
 
 
 //명품 판매 정보등록 (기업전용)
 
 
 const LuxurySell = () => {
+    const [loading, setLoading] = useState(false);
     const [itemInfo, setItemInfo] = useState('');
     const [inputValue, setInputValue] = useState('');
     const [isToken, setIsToken] = useState('');
@@ -45,18 +48,21 @@ const LuxurySell = () => {
     };
 
     const onSubmitHandler = () => {
+        setLoading(true);
         axios.post(`${apiUrl}/addsellcompany`, {
             id: Number(params.id),
             content: inputValue.content,
             price: Number(inputValue.price)
         })
             .then(res => {
-                console.log(res);
                 if (res.data === 'not enough token') {
                     setIsToken("보유하신 토큰의 양이 부족합니다.");
+                    setLoading(false);
                 }
                 else {
-                    document.location.href = '/';
+                    alert('판매 등록이 완료되었습니다.')
+                    const getCategory = itemInfo.map(e => e.category)
+                    document.location.href = `/LuxuryGallery/${getCategory}`;
                 }
 
             })
@@ -90,7 +96,7 @@ const LuxurySell = () => {
                 <br></br>
                 <textarea className='border-solid border-2 h-48 w-80 ' name='content' onChange={handleChange} value={inputValue.content || ""} />
                 <br></br>
-                <button className='bg-black hover:bg-gray-600 text-white font-bold py-2 px-4 rounded m-1' onClick={onSubmitHandler}>판매 등록</button>
+                {loading ? <Loading /> : <button className='bg-black hover:bg-gray-600 text-white font-bold py-2 px-4 rounded m-1' onClick={onSubmitHandler}>판매 등록</button>}
             </div>
         </div>
 

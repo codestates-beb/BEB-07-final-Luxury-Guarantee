@@ -71,11 +71,12 @@ const LuxuryGalleryAcc = () => {
                         <div className="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                             {itemList && itemList.map((e) => {
                                 return (
-                                    <div className='grid justify-items-center' key={e.id}>
-                                        <Link className="flex flex-col items-center justify-center w-full max-w-lg mx-auto" to={`/luxurydetail/${e.id}`}><img className="object-cover w-full rounded-md h-72 xl:h-80" alt='my-item' src={e.image_url} >
+                                    <div className='grid justify-items-center border-solid border-2 mt-3 mb-3' key={e.id}>
+                                        <Link className="flex flex-col items-center justify-center w-full max-w-lg mx-auto border-b-2 " to={`/luxurydetail/${e.id}`}><img className="object-cover w-full rounded-md h-72 xl:h-80 " alt='my-item' src={e.image_url}  >
                                         </img></Link>
-                                        <div className='flex items-center ml-3'>
-                                            <div className='grid justify-items-center'>
+                                        <div className='flex items-center ml-3 mt-3 '>
+                                            <div className='grid justify-items-center
+                                            '>
                                                 <h4 className="mt-2 text-lg font-medium text-gray-700">{e.name}</h4>
                                                 <p className="text-blue-500">{e.price} LUX</p>
                                             </div>
