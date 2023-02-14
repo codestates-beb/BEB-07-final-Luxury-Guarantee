@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const path = require('path');
 const { companySignUp, userSignUp } = require('../controller/signUp');
 const { signIn } = require('../controller/signIn');
 
@@ -29,8 +30,9 @@ const { itemlist } = require("../controller/itemlist");
 const { resellitemlist } = require("../controller/itemlist");
 
 router.get("/", function (req, res) {
-    return res.status(200).send("index router, hello world");
+    res.sendFile(path.join(__dirname, '../../client/build/index.html'));
 });
+
 
 router.get("/postlist", postlist);
 router.get("/postdetail/:id", postdetail);

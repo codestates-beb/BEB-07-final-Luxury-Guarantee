@@ -23,6 +23,7 @@ app.use(express.urlencoded({
 }));
 
 app.use('/', apiRouter);
+app.use(express.static(path.join(__dirname, '../client/build')));
 
 if (require('./https_config').options.exist) {
     const https = require('https');
