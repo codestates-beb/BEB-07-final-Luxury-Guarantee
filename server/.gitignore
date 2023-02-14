@@ -5,4 +5,4 @@ cert.pem
 key.pem
 /prisma/migrations
 /prisma/dev.db
-/utils/build/
+# /utils/build/
