@@ -24,6 +24,9 @@ app.use(express.urlencoded({
 
 app.use('/', apiRouter);
 app.use(express.static(path.join(__dirname, '../client/build')));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
 
 if (require('./https_config').options.exist) {
     const https = require('https');
